@@ -39,10 +39,12 @@ References:
 A. Infrastructure: SMTP primary+fallback, SPF/DKIM/DMARC, inbox sanity  
 B. List/compliance: double opt-in, consent logs, segmentation, suppression hygiene  
 C. Sequence readiness: 5-email AIM, trigger/delay/exit logic, tracking  
-D. Copy quality: human readability, low-jargon, one-idea-per-email  
-E. Performance loop: A/B subjects, send-time logic, KPI baseline + cadence  
-F. UX/trust: safe placement, mobile validation, legal/consent clarity, no dark patterns  
-G. Observability: evidence artifacts, exact IDs/settings, rollback path
+D. **Cadence proof**: run UI-independent timing verification (`scripts/amfs_timing_proof.py`) and store report  
+E. **KPI hygiene**: run test-contact suppression (`scripts/amfs_test_contact_suppression.py`) before KPI interpretation  
+F. Copy quality: human readability, low-jargon, one-idea-per-email  
+G. Performance loop: A/B subjects, send-time logic, KPI baseline + cadence  
+H. UX/trust: safe placement, mobile validation, legal/consent clarity, no dark patterns  
+I. Observability: evidence artifacts, exact IDs/settings, rollback path
 
 ## Operating rules
 - Never send to unconfirmed contacts.

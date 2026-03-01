@@ -40,6 +40,7 @@ Generate one enterprise-grade post per selected site:
 - FAQ section (entity-rich, unique answers)
 - trust footer (method, disclosure where needed, updated date)
 - visual/HTML break elements at least every **~200 words** to prevent wall-of-text scanning drop-off
+- affiliate product box enrichment: resolve accurate Amazon product URL/title/image via `scripts/amazon_product_resolver.py`
 
 ## 5) SEO/AEO/GEO implementation (mandatory)
 - title tag (50-65 chars)
@@ -85,5 +86,6 @@ Use: `scripts/slug_pattern_guard.py`
 3. per-site content brief
 4. top-3 SERP gap + top20 missing terms/entities report
 5. generated post package (title/H1/meta/slug/body)
-6. publish verification report
-7. blockers + next best action
+6. amazon product-box resolution report (url/title/image + source)
+7. publish verification report
+8. blockers + next best action
