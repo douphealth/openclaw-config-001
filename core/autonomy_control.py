@@ -6,6 +6,7 @@ SCRIPTS = [
     ("CEO", "/home/openclaw/.openclaw/workspace/scripts/ceo_mode_control.py"),
     ("EMAIL", "/home/openclaw/.openclaw/workspace/scripts/email_autonomy_control.py"),
     ("MASTER", "/home/openclaw/.openclaw/workspace/scripts/master_orchestrator_control.py"),
+    ("TREND_BLOG", "/home/openclaw/.openclaw/workspace/scripts/trend_blog_automation_control.py"),
 ]
 
 
