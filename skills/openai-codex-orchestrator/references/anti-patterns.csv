@@ -1,0 +1,11 @@
+pattern
+"Sending full article text when only a section is needed"
+"Using Tier 1 model for simple JSON extraction"
+"Making individual API calls for tasks that could be batched"
+"Not caching deterministic requests (temperature=0)"
+"Retrying immediately without backoff on 429"
+"Ignoring rate limit headers from API responses"
+"Setting temperature=1.0 on tasks that need consistency"
+"Including full conversation history when only latest context matters"
+"Regenerating entire outputs when only one section needs fixing"
+"Making API calls for tasks that can be done locally (formatting, regex, math)"

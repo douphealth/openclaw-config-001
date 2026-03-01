@@ -1,0 +1,8 @@
+Scenario,Without This Skill,With This Skill,Savings
+"100 title optimizations","100 API calls x ~300 tokens = 30,000","10 batched calls x ~800 tokens = 8,000","73%"
+"20 content quality checks","20 calls, no caching","12 calls (8 cache hits)","40%"
+"Daily entity extraction","50 calls to Tier 1","50 calls to Tier 3","85% cost"
+"Full article draft","1 call x 4,000 output tokens, high redo","10 section calls x 400 tokens, lower redo","~25% + better quality"
+"Simple formatting tasks","30 API calls/day","0 API calls (local)","100%"
+"Daily total","~$12-15/day + rate limits","~$4-6/day, stable","55-65%"
+"Monthly total","~$300-450","~$100-150","55-65%"
