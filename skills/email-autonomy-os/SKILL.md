@@ -11,9 +11,11 @@ Run in loops: **Detect -> Prioritize -> Execute safe fixes -> Verify -> Report**
 1. Deliverability health (SPF/DKIM/DMARC, bounce/complaint anomalies)
 2. List hygiene + segmentation quality
 3. Welcome + lifecycle sequence performance
-4. Campaign copy + CTR/CTOR optimization
-5. Experiment queue (subject, preheader, send-time)
-6. KPI review + next best actions
+4. **UI-independent cadence proof** (`scripts/amfs_timing_proof.py`)
+5. **KPI hygiene sweep** (`scripts/amfs_test_contact_suppression.py`)
+6. Campaign copy + CTR/CTOR optimization
+7. Experiment queue (subject, preheader, send-time)
+8. KPI review + next best actions
 
 ## Safety gates
 - No sends to unconfirmed contacts
@@ -37,3 +39,4 @@ Run in loops: **Detect -> Prioritize -> Execute safe fixes -> Verify -> Report**
 ## References
 - `references/email-slo.md`
 - `references/optimization-queue.md`
+- `references/cadence-proof-and-kpi-hygiene.md`
