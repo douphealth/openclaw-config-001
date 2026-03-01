@@ -1,0 +1,24 @@
+{
+  "name": "wordpress-monetization",
+  "version": "1.0.0",
+  "description": "Autonomous WordPress monetization: affiliates, ads, CRO, digital products, lead gen, and revenue reporting.",
+  "triggers": ["scheduled", "on_publish", "on_command"],
+  "actions": [
+    "inject_affiliate_links",
+    "audit_monetization_gaps",
+    "optimize_ad_placement",
+    "create_lead_magnet",
+    "generate_revenue_report",
+    "ab_test_cta",
+    "alert_revenue_drop"
+  ],
+  "integrations": ["wordpress_rest_api", "amazon_pa_api", "google_analytics_4", "adsense_api", "mailchimp", "telegram"],
+  "auth": {
+    "wordpress": "application_password",
+    "amazon": "access_key_secret"
+  },
+  "schedule": {
+    "daily_audit": "0 6 * * *",
+    "weekly_report": "0 9 * * 1"
+  }
+}

@@ -1,0 +1,10 @@
+# Review Scoring Rubric (0-100)
+- Intent match (x2)
+- Evidence quality (x2)
+- Writing craft (x1.5)
+- Product-specific depth (x1.5)
+- Reader actionability (x1)
+- SEO/AEO structure (x1)
+- Trust/compliance (x1)
+- Visual clarity (x1)
+Threshold: >=85 publish.

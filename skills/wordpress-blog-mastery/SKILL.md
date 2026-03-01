@@ -1,147 +1,172 @@
-| name | description | version |
-|------|-------------|--------|
-| wordpress-blog-mastery | The definitive WordPress blog writing system. Covers the complete lifecycle from topic ideation through research, outlining, drafting, revision, SEO integration, visual planning, conversion architecture, internal linking intelligence, and publish-grade verification for every content type. Includes a full HTML/CSS component library for beautiful modern post design. Produces content that reads as expert-written, ranks in search, gets cited by AI, converts readers, and looks stunning on every device. Use when writing any blog post, article, guide, review, comparison, tutorial, or editorial content for a WordPress site. | 4.0 |
-
-# WordPress Blog Mastery v4.0
-
-Enterprise-grade content orchestration engine for SOTA blog post creation, optimization, and lifecycle management. Combines high-fidelity article drafting, semantic-refresh logic, multi-pass editorial gates, internal linking intelligence, and a professional HTML/CSS component library.
-
-## Core Philosophical Pillars
-
-1. **Serves the Reader:** Answers their question better than anything else available.
-2. **Demonstrates Expertise:** Through specificity, experience signals, and honest analysis.
-3. **Earns Trust:** By being transparent about limitations, methodology, and commercial relationships.
-4. **Delivers a Premium Reading Experience:** Through intentional visual design, modern HTML structure, and friction-free navigation.
-
+---
+name: wordpress-blog-mastery
+description: Definitive WordPress blog writing system for enterprise-grade, conversion-safe, AI-visible content. Use when writing, rewriting, improving, or auditing WordPress blog posts of any type (review, comparison, best-of, how-to, explainer, listicle, case study, editorial, news, comprehensive guide). Includes content-type routing, evidence-first research, writing-craft quality gates, internal-linking intelligence, scroll-depth post architecture, and a modern reusable HTML/CSS component library.
 ---
 
-## PART I: INTERNAL LINKING INTELLIGENCE ENGINE
+# WordPress Blog Mastery v4
 
-Internal links are not an afterthought; they are the primary mechanism for site structure, authority distribution, and reader retention.
+Execute in order: **Research → Architecture → Draft → Enhance UX → Revise → Publish → Monitor**.
 
-### 1.1 Internal Link Planning - Link Map Construction
+## A) Content-Type Routing (mandatory)
+Run `scripts/content_type_router.py` first. Use detected type to select section architecture and evidence density.
 
-Before writing, build the link map for this post:
+## B) Research + Evidence
+- Build brief: `scripts/content_brief_generator.py`
+- Build evidence slots: `scripts/evidence_bank_builder.py`
+- Enforce dated/verified source references.
 
-| Quantity Guideline | Post Length | Internal Links OUT | Internal Links IN |
-|--------------------|-------------|--------------------|-------------------|
-| Short | < 1,500 words | 4-6 | 2-3 |
-| Medium | 1,500 - 3,000 words | 6-10 | 3-5 |
-| Long | 3,000 - 5,000 words | 10-15 | 5-8 |
-| Epic | > 5,000 words | 15-20 | 8-12 |
+## C) Internal Linking Intelligence Engine (new)
+Run `scripts/internal_linking_intelligence.py` with current post + candidate targets.
+It returns:
+- link count targets by content type
+- recommended placements by section intent
+- anchor diversity controls
+- anti-over-optimization guardrails
+- cluster-aware hub/spoke routing suggestions
 
-**Hard Limits:**
-- Never exceed 1 internal link per 150 words (prevents spam signals).
-- Never have fewer than 3 internal links on any published post (prevents orphan risk).
-- Never link to the same target URL more than twice in one post.
-- Never add more than 3 links in a single paragraph.
+Load `references/internal-linking-intelligence.md` when planning links.
 
-### 1.2 Semantic Anchor Text Engineering
+## D) Perfect Post Structure Architecture (new)
+Run `scripts/post_structure_architect.py` to generate a scroll-depth-aware section plan:
+- above-the-fold hook + answer-first
+- 25% scroll checkpoint
+- 50% retention module
+- 75% synthesis + action block
+- end-of-post FAQ + trust footer
 
-| Rule | Explanation | Example |
-|------|-------------|---------|
-| **Descriptive & Contextual** | Anchor must describe the destination AND fit the sentence naturally. | "...our guide to choosing the right [WordPress hosting]..." |
-| **No Naked URLs** | Never use raw URLs as anchor text. | [FAIL] "...see https://example.com/hosting" |
-| **No Generic Anchors** | Never use "click here", "read more", "this article". | [FAIL] "[Click here] to learn more." |
-| **Include Semantic Variants** | Use synonyms and related phrases naturally. | "WordPress caching solutions", "speed optimization plugins" |
-| **Optimal Length** | 3-8 words. Under 3 is vague; over 8 dilutes signal. | "[protein powder buying guide]" (4 words) |
+Load `references/perfect-post-structure.md` for type-specific templates.
 
-### 1.3 Link Placement Intelligence (Scroll Depth Map)
+## E) SOTA Visual HTML Component Library (new)
+Use `assets/html-component-library.md` to apply production-ready components:
+- hero/summary/quick-answer modules
+- comparison tables + pros/cons cards
+- step blocks, checkpoints, callouts, decision trees
+- FAQ accordion, trust footer, disclosure blocks
+- mobile-safe spacing and typography presets
 
-| Placement Zone | Link Type | Rationale |
-|----------------|-----------|-----------|
-| **Intro (0-15%)** | Hub/Pillar Page | Establishes cluster relationship early; highest crawl priority. |
-| **Core Content (15-70%)** | Sibling/Supporting | Contextual relevance; links when subtopics naturally connect. |
-| **Mid-Content (40-70%)** | "Learn More" Paths | Deep-dives for engaged readers. |
-| **Conclusion (70-90%)** | Next-Step Content | Guides reader to the next logical action. |
-| **Related Reading (90-100%)** | Curated 3-5 Links | Final retention opportunity before exit. |
+Rule: components must improve comprehension/decision support, not decoration.
 
----
+## F) Writing Craft + Readability
+- Ban filler patterns: `scripts/banned_pattern_scanner.py`
+- Analyze readability: `scripts/readability_analyzer.py`
+- Generate hooks: `scripts/hook_template_generator.py`
+- Require natural semantic coverage for entities/subtopics tied to intent (no keyword stuffing).
 
-## PART II: PERFECT POST STRUCTURE ARCHITECTURE
+## F.1) Mandatory SERP Gap Analysis for every post
+- Compare current draft against top-3 ranking pages for the target query.
+- Extract top 20 missing high-value terms/entities.
+- Integrate naturally only where they improve usefulness, completeness, and clarity.
+- Re-run quality gate after integration.
+- Use: `scripts/serp_gap_top3.py` (added to this skill).
 
-### 13-Zone Scroll-Depth-Aware Structural Spine
+## F.2) Mandatory Internal Link Quality for every post
+- Add rich contextual internal links with descriptive anchors (3–8 words).
+- Place links in high-value sections (early section + core bodies + next steps).
+- Ban generic anchors and forced links.
+- Validate before publish with `scripts/internal_link_quality_gate.py`.
 
-1.  **SEO HEAD:** invisible to reader (Title tag, Meta description, Schema markup JSON-LD).
-2.  **HERO ZONE (0-5%):** H1 intent-aligned, Byline, Author, Date, Read Time.
-3.  **HOOK (5-10%):** 100-150 words. Mirror situation, establish credibility, promise value.
-4.  **ANSWER-FIRST BLOCK (10-12%):** 40-70 words. Direct answer to primary query (AI extraction target).
-5.  **QUICK VERDICT SUMMARY (12-15%):** Quick Picks table or numbered steps summary.
-6.  **TABLE OF CONTENTS (15-17%):** Clickable links (for posts >2,000 words).
-7.  **CONTEXT & METHODOLOGY (17-22%):** How we tested/researched.
-8.  **CORE CONTENT (22-75%):** The meat. Evidence, examples, visual modules every 500-800 words.
-9.  **SYNTHESIS & VERDICT (75-82%):** Clear recommendation, honest limitations.
-10. **ACTION SECTION (82-88%):** Specific next steps, decision framework.
-11. **FAQ (88-95%):** 6-10 entity-rich questions with unique answers.
-12. **RELATED READING (95-97%):** 3-5 curated links with brief descriptions.
-13. **TRUST FOOTER (97-100%):** Editorial methodology, affiliate disclosure, author credentials.
+## G) Quality Gate (publish blocker)
+Run `scripts/quality_gate.py`.
+Thresholds:
+- >=90 publish-ready
+- 85–89 revise weak dimensions
+- <85 continue revision loop
 
----
+## H) Publish Checklist
+Run `scripts/publish_checklist_validator.py`.
+Require canonical/schema/mobile/disclosure/link integrity pass.
 
-## PART III: SOTA HTML VISUAL COMPONENT LIBRARY
+## I) References
+- `references/content-type-architectures.md`
+- `references/internal-linking-intelligence.md`
+- `references/perfect-post-structure.md`
+- `references/visual-placement-logic.md`
+- `references/hook-engineering-playbook.md`
+- `references/evidence-integration-patterns.md`
+- `references/readability-engineering.md`
+- `references/conversion-architecture.md`
+- `references/revision-protocol.md`
+- `references/quality-scoring-rubric.md`
+- `references/banned-patterns.md`
+- `references/sota-content-template.md`
 
-Transform flat WordPress posts into premium editorial experiences. All components are:
-- **Mobile-first** (work perfectly on 375px screens).
-- **Lightweight** (Pure CSS/HTML, no heavy frameworks).
-- **Accessible** (proper ARIA roles).
-- **Dark-mode aware.**
+## J) Output Contract
+For each post, produce:
+1) brief JSON
+2) evidence bank JSON
+3) structure plan JSON
+4) internal link plan JSON
+5) draft markdown/html
+6) quality report JSON
+7) publish checklist report JSON
+8) 30-day monitoring actions
 
-### Component 2: Answer-First Block (The AI Answer Target)
-Visually distinct block for featured snippets.
-```html
-<div class="oc-answer-block" role="region" aria-label="Quick Answer">
-  <div class="oc-answer-blockicon" aria-hidden="true"></div>
-  <div class="oc-answer-blockcontent">
-    <p class="oc-answer-blocklabel">Quick Answer</p>
-    <p>[Direct, factual 40-70 word answer here.]</p>
-  </div>
-</div>
-```
 
-### Component 3: Quick Verdict / Top Picks Table
-```html
-<div class="oc-picks" role="region" aria-label="Top Picks Summary">
-  <div class="oc-picksgrid">
-    <div class="oc-pickscard oc-pickscard--winner">
-      <span class="oc-picksbadge">Best Overall</span>
-      <h3>[Product Name]</h3>
-      <p class="oc-pickswhy">[Punchy reason why]</p>
-      <a href="[URL]" class="oc-pickslink">Read full review</a>
-    </div>
-    <!-- Additional cards -->
-  </div>
-</div>
-```
+## K) Pre-Publish Quality Gate (complete)
+### Content Quality
+- [ ] Quality score >=85/100
+- [ ] Zero banned writing patterns
+- [ ] All claims grounded or qualified
+- [ ] Read-aloud test passed on intro + conclusion
+- [ ] Evidence density meets content-type minimum
+- [ ] Voice/tone calibrated for niche
 
----
+### Post Structure
+- [ ] Hero zone complete (author/date/read-time/updated)
+- [ ] Hook 100-150 words
+- [ ] Answer-first block 40-70 words
+- [ ] Quick summary block present
+- [ ] TOC present when >2,000 words
+- [ ] Methodology/context section present
+- [ ] Retention hook between major sections
+- [ ] FAQ 6-10 unique answers
+- [ ] Related reading 3-5 curated links
+- [ ] Trust footer complete
 
-## PART IV: EXECUTION & QUALITY METRICS
+### Internal Linking
+- [ ] Hub link present early
+- [ ] Link count in range by length
+- [ ] Anchors descriptive, varied, 3-8 words
+- [ ] No generic anchors / exact-match repetition
+- [ ] No section >500 words without internal link
+- [ ] 2-3 links in top 30% of content
+- [ ] Targets return 200
+- [ ] Orphan prevention inbound links queued
 
-### 7 Core Workflows
+### Visual Design
+- [ ] Visual component every 400-600 words
+- [ ] Required components for content type present
+- [ ] Mobile 375px no wall-of-text
+- [ ] Image alt text + lazy-load below fold
+- [ ] Tables mobile-scrollable with decision column
+- [ ] No layout shift; dark mode sanity
 
-1. **Full-Article Draft Mode:** Generate SOTA post (2500–4000 words) with Hormozi/Ferriss style.
-2. **Multi-Pass Editorial Gate:** Elevate article to 95+ score through Fact-Check, Structure, and Tone passes.
-3. **Semantic Refresh Mode:** Update old (>12 month) articles with new entities and entities.
-4. **Evidence Audit + Refresh:** Verify all claims for high-traffic posts.
-5. **Graph Update Mode:** Recommend links to prevent orphan content clusters.
-6. **Image Embed + Alt-Text Mode:** Integrated visual asset cues.
-7. **Conversion Handoff Mode:** Flag affiliate opportunities for conversion optimization.
+### SEO/Technical
+- [ ] Title/H1/meta/slug/canonical/schema valid
+- [ ] No robots conflicts; OG/Twitter set
+- [ ] CWV budget remains stable post-components
 
-### Visual Rhythm Rule
-Every 400-600 words of body text **must** be broken by a visual component (image, table, list, or callout). **At no point** on a 375px viewport should the reader see more than 3 consecutive paragraphs without a visual break.
+### Monetization (if applicable)
+- [ ] Disclosure near first affiliate link
+- [ ] Affiliate rel attrs: sponsored nofollow noopener
+- [ ] CTA language contextual/non-manipulative
+- [ ] Commercial blocks integrated editorially
 
----
+## L) Additional references and scripts
+References:
+- references/internal-linking-playbook.md
+- references/semantic-anchor-text-guide.md
+- references/post-structure-blueprints.md
+- references/html-component-library.md
+- references/visual-rhythm-guide.md
+- references/mobile-design-checklist.md
+- references/dark-mode-testing.md
 
-## Integration with Other Skills
-
-- **seo-intelligence:** Provides keyword data and SERP competitor analysis.
-- **wordpress-visual-assets:** Provides image URLs and alt-text.
-- **conversion-optimizer:** Handles affiliate link insertion and product box design.
-- **automation-ops:** Schedules distribution and publishing.
-- **content-architect:** Defines pillar/cluster strategy.
-
-## Automation Scripts (References)
-- `qualitygate.py`: Multi-dimensional quality scoring.
-- `internallinkmapper.py`: Builds link map from site inventory.
-- `anchortextgenerator.py`: Generates 3 semantic candidates per link.
-- `mobilevisualdensitychecker.py`: Verifies no 3 consecutive text blocks without visual break.
+Scripts:
+- scripts/internal_link_mapper.py
+- scripts/anchor_text_generator.py
+- scripts/anchor_text_auditor.py
+- scripts/orphan_page_detector.py
+- scripts/visual_component_assembler.py
+- scripts/mobile_visual_density_checker.py
+- scripts/internal_link_audit.py
