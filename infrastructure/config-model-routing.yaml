@@ -1,0 +1,122 @@
+# Dual-Model Coordinator Architecture Configuration
+# Improvement 1: Separate cheap coordinator from expensive executor models
+# Estimated cost savings: 74-84% on daily API usage
+
+version: "2.0"
+architecture: dual-model
+last_updated: "2026-03-02"
+
+# ==========================
+# MODEL TIERS
+# ==========================
+
+models:
+  coordinator:
+    provider: openrouter
+    model: google/gemini-2.0-flash-exp:free  # Ultra-cheap coordinator
+    cost_per_million_input: 0.0  # Free tier
+    cost_per_million_output: 0.0
+    purpose:
+      - routing
+      - triage  
+      - heartbeat
+      - memory_reads
+      - status_checks
+      - skill_selection
+      - priority_scoring
+      - simple_formatting
+    max_tokens: 4000
+    temperature: 0.1
+    
+  executor:
+    provider: openrouter
+    model: anthropic/claude-sonnet-4  # Premium model for real work
+    cost_per_million_input: 3.0
+    cost_per_million_output: 15.0
+    purpose:
+      - content_drafting
+      - complex_analysis
+      - code_generation
+      - creative_writing
+      - nuanced_seo_strategy
+      - entity_extraction_complex
+      - competitor_content_analysis
+    max_tokens: 16000
+    temperature: 0.3
+
+# ==========================
+# ROUTING RULES
+# ==========================
+
+routing_rules:
+  # Tasks that NEVER need expensive model
+  coordinator_only:
+    - heartbeat_check
+    - status_file_update
+    - memory_read
+    - skill_routing_decision
+    - priority_scoring
+    - file_formatting
+    - json_yaml_transformation
+    - simple_classification
+    - report_template_filling
+    - cache_check
+    - url_health_check_interpretation
+    
+  # Tasks that ALWAYS use expensive model
+  executor_only:
+    - content_drafting
+    - content_quality_analysis
+    - creative_hook_writing
+    - complex_seo_strategy
+    - entity_extraction_complex
+    - competitor_content_analysis
+    - code_generation_novel
+    
+  # Tasks that START with coordinator, ESCALATE if needed
+  escalation:
+    - task: title_optimization
+      start_model: coordinator
+      escalate_when: quality_score < 7.0 after 2 attempts
+    - task: content_brief_creation
+      start_model: coordinator
+      escalate_when: SERP analysis requires nuanced interpretation
+    - task: incident_diagnosis
+      start_model: coordinator
+      escalate_when: root cause not identified within 3 checks
+
+# ==========================
+# COST TRACKING
+# ==========================
+
+cost_tracking:
+  log_every_request: true
+  daily_budget_alert: 1.00  # Alert if exceeds $1/day
+  monthly_budget_alert: 10.00
+  
+  session_cost_breakdown:
+    cold_start_coordinator: 700  # tokens
+    heartbeat_coordinator: 500   # tokens per check
+    warm_start_coordinator: 700  # tokens
+    session_close_coordinator: 450  # tokens
+    
+  escalation_tracking:
+    log_file: "data/evolution/escalation-log.yaml"
+    fields:
+      - task_type
+      - started_on
+      - escalated_to
+      - reason
+      - executor_result
+      - lesson_learned
+
+# ==========================
+# PERFORMANCE TARGETS
+# ==========================
+
+targets:
+  daily_token_reduction: 78%  # From 250K to 55K
+  daily_cost_reduction: 84%   # From $0.75 to $0.12
+  heartbeat_cost_reduction: 99.4%
+  warm_start_cost_reduction: 98.2%
+  maintain_quality: true  # No degradation on tasks that matter
