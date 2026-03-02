@@ -1,0 +1,286 @@
+# OpenClaw Skills Manifest Index
+# Improvement 2: Lazy Loading Architecture
+# Estimated token savings: 88% on skill routing (152,000 → 17,600 tokens/day)
+
+schema_version: "2.0"
+last_updated: "2026-03-02"
+manifest_size_tokens: 500  # vs 9,500 for all SKILL.md files
+
+# This is the ONLY file read during skill routing scans
+# Full SKILL.md files are loaded ONLY when a skill is activated
+
+# ==========================
+# CORE CONSOLIDATED SKILLS
+# ==========================
+
+skills:
+  - id: wordpress-technical-health
+    file: skills/wordpress-technical-health/SKILL.md
+    triggers:
+      - site audit
+      - fix site
+      - CWV
+      - performance
+      - incident
+      - site down
+      - security
+      - plugin conflict
+      - canonical
+      - robots
+      - sitemap
+      - schema validation
+    domains:
+      - health
+      - performance
+      - security
+      - indexation
+      - incident
+    priority_handles:
+      - P0
+      - P1
+    has_scripts: true
+    estimated_tokens: 1200
+
+  - id: wordpress-content-engine
+    file: skills/wordpress-content-engine/SKILL.md
+    triggers:
+      - write content
+      - blog post
+      - article
+      - content refresh
+      - content brief
+      - editorial
+      - title optimization
+      - content consolidation
+      - retire content
+    domains:
+      - content
+      - editorial
+      - publishing
+    priority_handles:
+      - P1
+      - P2
+    has_scripts: true
+    estimated_tokens: 1500
+
+  - id: wordpress-seo-intelligence
+    file: skills/wordpress-seo-intelligence/SKILL.md
+    triggers:
+      - keyword
+      - entity
+      - cluster
+      - cannibalization
+      - topical authority
+      - AEO
+      - GEO
+      - SERP
+      - ranking
+      - snippet
+      - AI visibility
+    domains:
+      - seo
+      - keywords
+      - entities
+      - serp
+    priority_handles:
+      - P1
+      - P2
+    has_scripts: true
+    estimated_tokens: 1400
+
+  - id: wordpress-monetization
+    file: skills/wordpress-monetization/SKILL.md
+    triggers:
+      - revenue
+      - affiliate
+      - monetization
+      - CRO
+      - conversion
+      - disclosure
+      - ads
+      - EPC
+      - RPM
+    domains:
+      - monetization
+      - affiliate
+      - ads
+      - cro
+    priority_handles:
+      - P0
+      - P1
+      - P2
+    has_scripts: true
+    estimated_tokens: 1100
+
+  - id: wordpress-email-engine
+    file: skills/wordpress-email-engine/SKILL.md
+    triggers:
+      - email
+      - newsletter
+      - welcome sequence
+      - SMTP
+      - deliverability
+      - opt-in
+      - subscriber
+    domains:
+      - email
+      - automation
+      - deliverability
+    priority_handles:
+      - P1
+      - P2
+    has_scripts: false
+    estimated_tokens: 900
+
+  - id: wordpress-visual-assets
+    file: skills/wordpress-visual-assets/SKILL.md
+    triggers:
+      - image
+      - visual
+      - infographic
+      - media SEO
+      - alt text
+      - screenshot
+    domains:
+      - visual
+      - media
+      - images
+    priority_handles:
+      - P2
+      - P3
+    has_scripts: true
+    estimated_tokens: 800
+
+  - id: portfolio-growth-ops
+    file: skills/portfolio-growth-ops/SKILL.md
+    triggers:
+      - portfolio
+      - multi-site
+      - sprint
+      - prioritize
+      - growth plan
+      - resource allocation
+      - recovery mode
+      - all sites
+    domains:
+      - portfolio
+      - orchestration
+      - planning
+      - recovery
+    priority_handles:
+      - P0
+      - P1
+      - P2
+    has_scripts: true
+    estimated_tokens: 1300
+
+  - id: quality-assurance
+    file: skills/quality-assurance/SKILL.md
+    triggers:
+      - verify claims
+      - grounding
+      - quality check
+      - regression test
+      - fact check
+    domains:
+      - quality
+      - compliance
+      - grounding
+    priority_handles:
+      - P1
+    has_scripts: true
+    estimated_tokens: 1000
+
+  - id: analytics-intelligence
+    file: skills/analytics-intelligence/SKILL.md
+    triggers:
+      - analytics
+      - GSC data
+      - GA4
+      - traffic report
+      - anomaly
+      - KPI
+      - forecast
+    domains:
+      - analytics
+      - data
+      - reporting
+      - anomaly
+    priority_handles:
+      - P1
+      - P2
+    has_scripts: true
+    estimated_tokens: 1100
+
+# ==========================
+# ROUTING PROTOCOL
+# ==========================
+
+routing_protocol:
+  step_1:
+    action: Load MANIFEST.yaml
+    tokens: 500
+    frequency: always
+    
+  step_2:
+    action: Match task to skills
+    method: trigger_keywords + domain_tags
+    result: 1-3 candidate skills
+    
+  step_3:
+    action: Load ONLY matched SKILL.md files
+    average_skills_per_session: 1.2
+    average_tokens: 1300
+    
+  step_4:
+    action: Execute using loaded skill instructions
+    
+  never_do:
+    - Read all SKILL.md files during routine operations
+    - Full scan only during daily deep audit OR skill file modification
+
+# ==========================
+# TOKEN IMPACT
+# ==========================
+
+token_impact:
+  current_all_skills: 9500  # tokens
+  with_manifest:
+    hourly_routing_scan:
+      old: 9500
+      new: 500
+      savings: 94.7%
+    warm_start:
+      old: 9500
+      new: 1300  # 500 manifest + 800 active skills
+      savings: 86.3%
+    daily_routing_4_scans:
+      old: 38000
+      new: 2000
+      savings: 94.7%
+    daily_warm_starts_12:
+      old: 114000
+      new: 15600
+      savings: 86.3%
+    daily_total_routing_only:
+      old: 152000
+      new: 17600
+      savings: 88.4%
+
+# ==========================
+# ACTIVATION TRACKING
+# ==========================
+
+activation_tracking:
+  log_file: data/evolution/skill-activation-log.yaml
+  track:
+    - skill_id
+    - timestamp
+    - trigger_matched
+    - execution_time
+    - tokens_consumed
+    - success_status
+  analyze_monthly:
+    - Identify underutilized skills
+    - Optimize trigger patterns
+    - Refine domain mappings
