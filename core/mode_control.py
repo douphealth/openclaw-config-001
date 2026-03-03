@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Unified mode control for all OpenClaw subsystems.
 Usage: python3 mode_control.py <subsystem> <pause|resume|status>
-Subsystems: ceo, email, master, trend_blog, social
+Subsystems: ceo, email, master, trend_blog, social, all
 """
 import argparse, datetime, json, sys
 from pathlib import Path
