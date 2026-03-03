@@ -1,22 +1,23 @@
-# One-Click Recovery (OpenClaw Config)
+# One-Click Recovery
 
-```bash
-# 1) Clone
-cd ~/.openclaw/workspace
-git clone https://github.com/douphealth/openclaw-config.git recovered-openclaw-config
+## Steps
 
-# 2) Use enterprise branch
-git -C recovered-openclaw-config checkout enterprise-curated
+1. Clone:
+   cd ~/.openclaw/workspace
+   git clone https://github.com/douphealth/openclaw-config.git recovered-config
 
-# 3) Sync skills + core scripts into active workspace
-rsync -a recovered-openclaw-config/skills/ ~/.openclaw/workspace/skills/
-rsync -a recovered-openclaw-config/core/ ~/.openclaw/workspace/scripts/
+2. Use enterprise branch:
+   cd recovered-config && git checkout enterprise-curated
 
-# 4) Verify key controls
-python3 ~/.openclaw/workspace/scripts/autonomy_control.py status
-python3 ~/.openclaw/workspace/scripts/trend_blog_automation_control.py status
-```
+3. Sync to active workspace:
+   rsync -a skills/ ~/.openclaw/workspace/skills/
+   rsync -a core/ ~/.openclaw/workspace/scripts/
+
+4. Verify:
+   python3 ~/.openclaw/workspace/openclaw-config/core/mode_control.py all status
+   openclaw doctor --non-interactive
 
 ## Notes
-- Secrets are intentionally not stored in git; restore `.secrets/*.env` separately.
-- Recommended branch for production restore: `enterprise-curated`.
+- Secrets are NOT in git. Restore .secrets/*.env manually.
+- Recommended branch: enterprise-curated
+- After recovery: python3 ~/.openclaw/workspace/scripts/build_skill_index.py
