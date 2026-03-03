@@ -80,14 +80,4 @@ Strategic engine for semantic search dominance, entity orchestration, and visibi
 - Relying solely on SERP-scraping without GSC performance data.
 - Ignoring mobile vs desktop intent differences.
 
-## Scripts
-- `scripts/gsc_gap_analyzer.py`: Automated Search Console traffic audit.
-- `scripts/neuronwriter_connector.py`: Interface for semantic entity retrieval.
-- `scripts/internal_link_spider.py`: Cluster-level link map generator.
-- `scripts/geo_aeo_monitor.py`: Brand mention tracker for AI Overviews.
 
-## References
-- `references/neuronwriter-best-practices.md`
-- `references/aeo-geo-checklist.md`
-- `references/internal-linking-patterns.md`
-- `references/intent-classification-model.md`

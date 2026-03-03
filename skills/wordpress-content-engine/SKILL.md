@@ -80,14 +80,4 @@ Advanced orchestration engine for high-signal, semantically-rich content generat
 - Ignoring existing post context during a \"refresh\".
 - Publishing without automated link/entity validation.
 
-## Scripts
-- `scripts/generate_content_brief.py`: Convert SEO intent to content blueprints.
-- `scripts/quality_gate.py`: Automated 15-point editorial audit.
-- `scripts/bulk_refresh_manager.py`: Batch processor for semantic updates.
-- `scripts/entity_injection_engine.py`: Precise natural language entity placement.
 
-## References
-- `references/sota-template.md`
-- `references/editorial-checklist.md`
-- `references/tone-and-voice-guide.md`
-- `references/cluster-model-patterns.md`

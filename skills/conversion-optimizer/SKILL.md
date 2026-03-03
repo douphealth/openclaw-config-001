@@ -79,14 +79,4 @@ Scientific engine for behavioral alignment and conversion funnel maximization.
 - Over-using scarcity triggers (Reducing brand trust).
 - Aligning high-friction CTAs with top-of-funnel informational intent.
 
-## Scripts
-- `scripts/cro_hypothesis_generator.py`: Data-backed test planning.
-- `scripts/ab_test_analyzer.py`: Statistical significance calculator.
-- `scripts/friction_point_scanner.py`: Detects layout issues blocking conversion.
-- `scripts/trigger_audit_tool.py`: Scans for psychological engagement factors.
 
-## References
-- `references/conversion-psychology-framework.md`
-- `references/stages-of-awareness-model.md`
-- `references/high-performance-copy-patterns.md`
-- `references/cro-testing-standard-operating-procedure.md`

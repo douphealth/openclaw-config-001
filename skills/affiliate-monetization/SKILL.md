@@ -80,14 +80,4 @@ Strategic engine for high-yield affiliate conversion and product-centric revenue
 - Ignoring \"Out of Stock\" alerts on top-performing pages.
 - Placing CTAs too far below the fold.
 
-## Scripts
-- `scripts/affiliate_link_rescuer.py`: Automated dead link replacement.
-- `scripts/table_generator_pro.py`: Responsive product comparison builder.
-- `scripts/compliance_enforcer.py`: Disclosure and link attribute auditor.
-- `scripts/amazon_paapi_sync.py`: Real-time pricing and stock sync.
 
-## References
-- `references/monetization-playbook.md`
-- `references/affiliate-compliance-standard.md`
-- `references/high-conversion-cta-patterns.md`
-- `references/product-data-schemas.md`

@@ -51,3 +51,10 @@ Memory is the compounding advantage. Degraded memory = repeated failures.
 -   Every supersession needs evidence anchor (message ID / timestamp).
 -   No mental notes — externalize everything to files.
 -   Episodic logs → memory/YYYY-MM-DD.md (→ AGENTS.md §Documentation).
+
+## Structured Memory Store
+- Facts + Events stored in `state/memory_store.db` (sqlite)
+- Query: `python3 core/memory_query.py facts --limit 20`
+- Route new items: `python3 core/memory_router.py --kind fact --key <key> --value <value>`
+- Compact old daily logs: `python3 core/memory_compact.py --days 5`
+- Lint: `python3 core/memory_hygiene_lint.py`

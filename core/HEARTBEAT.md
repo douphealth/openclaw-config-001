@@ -1,21 +1,28 @@
-# HEARTBEAT.md - Execution Logs & State Sync
+# HEARTBEAT.md — Runtime Health & Session Log
 
-# schema
-_version: 2.0
-_last_updated: 2026-02-28
+_version: 2.1 | updated: 2026-03-03
 
 ## Purpose
-Track high-frequency state changes and execution loops for OpenClaw.
+Track session state, active errors, and subsystem health. Updated every significant execution.
 
-## Active Session: 2026-02-28
-- **08:30Z:** Core file initialization (IDENTITY, AGENTS, MEMORY, USER, TOOLS).
-- **08:35Z:** GitHub repository structure established.
-- **08:40Z:** Consolidating skills (24 -> 9).
+## Current Session
+- **Started:** (set at session start)
+- **Mode:** (safe|aggressive|degraded)
+- **Active Errors:** (none | list)
+
+## Subsystem Health
+| Subsystem | Status | Last Check |
+|-----------|--------|------------|
+| Gateway | (check systemctl) | |
+| Codex Auth | (check preflight) | |
+| Mission Control | (check /api/health) | |
+| GitHub Sync | (check git push --dry-run) | |
+| Social Pipeline | (check mode_control.py social status) | |
+
+## Session Log
+<!-- Append entries: [timestamp] action → outcome -->
 
 ## Sync Protocol
-- **Interval:** Every significant tool output or file change.
-- **Method:** `git commit -m "[HEARTBEAT] <summary>"`
-- **Verification:** Match with `STATUS.md` indicators.
-
-## Error Log
-- *None in current session.*
+- Update on every significant tool output or file change
+- Commit: `git commit -m "[HEARTBEAT] <summary>"`
+- Verify against STATUS.md indicators

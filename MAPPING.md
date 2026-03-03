@@ -1,55 +1,33 @@
-# Skill Mapping
+# Skill Routing Map
 
-## SEO Intelligence
+_updated: 2026-03-03
 
-- wordpress-seo-intelligence
-- competitor-intelligence
-- technical-seo-health
+## Routing Priority
+1. skill-router (priority 1000) — always matches first, resolves to single primary skill
+2. Primary skills (priority 100) — 17 domain leaders
+3. Secondary skills (priority 50) — 37 specialized/supporting
+4. Fallback skills (priority 10) — 18 legacy/generic
 
-## Content Orchestration
+## Quick Lookup
+| Domain | Primary Skill | Key Scripts |
+|--------|--------------|-------------|
+| Content | wordpress-blog-mastery | 19 scripts, 22 references |
+| Reviews | product-review-mastery | 10 scripts, 6 references |
+| Trends | enterprise-trend-blog-automation | 7 scripts, 3 references |
+| Keywords | keyword-intelligence-os | 2 scripts, 7 references |
+| SEO Audit | on-page-seo-auditor | scoring-rubric reference |
+| SEO Data | seo-dataforseo | 6 API scripts |
+| Email Ops | email-autonomy-os | 3 references |
+| Email Knowledge | email-best-practices | 11 resources |
+| Monetization | affiliate-compliance-os | — |
+| CRO | conversion-optimizer | — |
+| Social | social-media-empire-os | 5 scripts |
+| Monitoring | multisite-watchdog | — |
+| Claims | grounding-compliance-os | — |
+| Brand | octolens | 5 scripts |
+| AI Gateway | openai-codex-orchestrator | 17 scripts, 12 references |
+| Orchestration | portfolio-command-center | — |
+| Git | git-sync | — |
 
-- wordpress-blog-mastery
-- wordpress-visual-assets
-- content-architect
-- automation-ops
-
-## Growth & Monetization
-
-- growth-os-tiering
-- affiliate-monetization
-- conversion-optimizer
-
----
-
-## Consolidated (Legacy Reference)
-
-### Deprecated Skills
-The following skills have been consolidated into the primary 9-skill architecture:
-
-- **wordpress-content-engine** → Merged into `wordpress-blog-mastery` (v4.0)
-- **wordpress-technical-health** → Merged into `technical-seo-health`
-
-### Rationale
-
-**wordpress-blog-mastery** (v4.0) absorbs `wordpress-content-engine` functionality while adding:
-- Multi-pass editorial gates (accuracy, tone, structure, schema compliance)
-- Semantic refresh logic for evergreen content optimization
-- Enterprise-grade quality metrics (98%+ accuracy, 95+ quality score)
-- Advanced internal linking graph intelligence
-- Full workflow orchestration (7 core workflows)
-
-**wordpress-visual-assets** (v3.0) is newly introduced for complete visual content coverage:
-- Featured image generation + optimization
-- In-article graphics, comparison charts, product boxes
-- Alt-text generation + SEO filename optimization
-- Brand alignment audits
-- SERP image optimization
-
-### Integration Architecture
-
-1. **SEO Intelligence** provides keyword data, SERP analysis, ranking signals
-2. **wordpress-blog-mastery** generates/optimizes articles (H1-H16 hierarchy, schema)
-3. **wordpress-visual-assets** creates/optimizes images (featured, in-article, product boxes)
-4. **content-architect** defines pillar/cluster strategy
-5. **automation-ops** handles publishing, distribution, scheduling
-6. **Growth & Monetization** skills monetize and scale successful content
+## Full Index
+See `state/skill_index.json` (72 skills, auto-rebuilt daily)

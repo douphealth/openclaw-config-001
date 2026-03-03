@@ -244,17 +244,4 @@ Run quarterly or after any concern:
 - Ignoring CWV on mobile (most traffic is mobile).
 - Adding security plugins without measuring performance impact.
 
-## Scripts
-- `scripts/wp_management_audit.py`: URL-level audit (HTTP, canonical, JSON-LD, meta).
-- `scripts/schema_validator.py`: Template-specific schema validation.
-- `scripts/performance_budget_check.py`: CWV budget enforcement via PageSpeed API.
-- `scripts/security_audit.py`: Automated security checklist scanner.
 
-## References
-- `references/audit-checklists.md`
-- `references/schema-patterns.md`
-- `references/incident-response-playbook.md`
-- `references/stabilization-checklist.md`
-- `references/performance-budgets.md`
-- `references/security-hardening-checklist.md`
-- `references/plugin-conflict-matrix.md`

@@ -78,14 +78,4 @@ Offensive engine for SERP landscape dominance and competitor entity deconstructi
 - Relying on 3rd party tool metrics (DR/DA) over actual entity coverage.
 - Failing to notice SERP feature shifts (e.g., from Text to Video).
 
-## Scripts
-- `scripts/competitor_entity_audit.py`: Multi-domain entity comparison.
-- `scripts/serp_feature_tracker.py`: Automated AIO/PAA monitoring.
-- `scripts/content_change_detector.py`: Notifies on competitor page updates.
-- `scripts/sov_calculator.py`: Calculates Share of Voice for keyword clusters.
 
-## References
-- `references/niche-competitor-matrix.md`
-- `references/serp-feature-optimization-guide.md`
-- `references/entity-mapping-templates.md`
-- `references/defensive-content-playbook.md`
