@@ -1,51 +1,89 @@
-﻿version: 1
+version: 2
 repo: douphealth/openclaw-config-001
-mode: transitional-curation
+mode: production-curated
+updated: 2026-03-06
+
 production_skills:
   - name: openai-codex-orchestrator
-    path: skills/openai-codex-orchestrator
+    path: skills-approved/openai-codex-orchestrator
     production: true
     role: orchestrator
+    status: active
+
   - name: blog-master
-    path: skills/blog-master
+    path: skills-approved/blog-master
     production: true
     role: content-orchestrator
+    status: active
+
   - name: wordpress
-    path: skills/wordpress
+    path: skills-approved/wordpress
     production: true
     role: cms-executor
+    status: active
+
   - name: seo-research-master
-    path: skills/seo-research-master
+    path: skills-approved/seo-research-master
     production: true
     role: research
+    status: active
+
   - name: technical-seo-checker
-    path: skills/technical-seo-checker
+    path: skills-approved/technical-seo-checker
     production: true
     role: audit
+    status: active
+
   - name: keyword-intelligence-os
-    path: skills/keyword-intelligence-os
+    path: skills-approved/keyword-intelligence-os
     production: true
     role: keyword-intel
+    status: active
+
   - name: wp-reliability-ops
-    path: skills/wp-reliability-ops
+    path: skills-approved/wp-reliability-ops
     production: true
     role: reliability
+    status: active
+
   - name: git-sync
-    path: skills/git-sync
+    path: skills-approved/git-sync
     production: true
     role: repo-sync
+    status: active
+
   - name: grounding-compliance-os
-    path: skills/grounding-compliance-os
+    path: skills-approved/grounding-compliance-os
     production: true
     role: compliance
+    status: active
+
   - name: automation-ops
-    path: skills/automation-ops
+    path: skills-approved/automation-ops
     production: true
     role: automation
+    status: active
+
 policies:
   secrets_in_git: false
   release_checksums: true
   backup_encryption_required: true
+  approved_skills_only: true
+  archive_before_delete: true
+
+routing:
+  active_path: skills-approved/
+  archive_path: skills-archive/
+  legacy_path: skills/
+
+ci:
+  workflow: .github/workflows/validate.yml
+  runs_on: ubuntu-latest
+  triggers: [push, pull_request]
+
 notes:
-  - "Legacy skills remain under skills/ until fully curated."
-  - "Only production_skills above are approved for live use."
+  - Production skills are in skills-approved/ only
+  - All other skills archived in skills-archive/
+  - Legacy skills/ folder preserved for reference
+  - Run make validate before every release
+  - CI runs automatically on every push to main
