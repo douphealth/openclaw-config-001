@@ -1,20 +1,42 @@
-# === CREDENTIALS — NEVER COMMIT ===
+﻿# Secrets
 .secrets/
 *.env
-**/vault/
 **/.env.*
+**/vault/
+*.pem
+*.key
+*.p12
+*.pfx
+*.ovpn
 
-# === RUNTIME STATE (regenerated each session) ===
+# Existing runtime / state patterns
 core/STATUS.md
 world-model/**/*.json
 
-# === BUILD/CACHE ARTIFACTS ===
+# Build / package / backups
+dist/
+releases/
+*.tar.gz
+*.tgz
+*.zip
+*.age
+*.enc
+*.sha256
+
+# Runtime / logs / state
+logs/
+tmp/
+.cache/
+state/
+workspace-export/
+*.log
+
+# Python / Node
 __pycache__/
 *.pyc
 .venv/
 node_modules/
+
+# OS junk
 .DS_Store
 Thumbs.db
-
-# === LARGE EPISODIC LOGS (archive separately after 90 days) ===
-# memory/*.md IS tracked — prune manually

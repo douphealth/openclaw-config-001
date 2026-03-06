@@ -1,0 +1,51 @@
+﻿version: 1
+repo: douphealth/openclaw-config-001
+mode: transitional-curation
+production_skills:
+  - name: openai-codex-orchestrator
+    path: skills/openai-codex-orchestrator
+    production: true
+    role: orchestrator
+  - name: blog-master
+    path: skills/blog-master
+    production: true
+    role: content-orchestrator
+  - name: wordpress
+    path: skills/wordpress
+    production: true
+    role: cms-executor
+  - name: seo-research-master
+    path: skills/seo-research-master
+    production: true
+    role: research
+  - name: technical-seo-checker
+    path: skills/technical-seo-checker
+    production: true
+    role: audit
+  - name: keyword-intelligence-os
+    path: skills/keyword-intelligence-os
+    production: true
+    role: keyword-intel
+  - name: wp-reliability-ops
+    path: skills/wp-reliability-ops
+    production: true
+    role: reliability
+  - name: git-sync
+    path: skills/git-sync
+    production: true
+    role: repo-sync
+  - name: grounding-compliance-os
+    path: skills/grounding-compliance-os
+    production: true
+    role: compliance
+  - name: automation-ops
+    path: skills/automation-ops
+    production: true
+    role: automation
+policies:
+  secrets_in_git: false
+  release_checksums: true
+  backup_encryption_required: true
+notes:
+  - "Legacy skills remain under skills/ until fully curated."
+  - "Only production_skills above are approved for live use."
