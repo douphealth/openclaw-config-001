@@ -1,67 +1,235 @@
-version: 2
+version: 3
 repo: douphealth/openclaw-config-001
 mode: production-curated
-updated: 2026-03-06
+updated: 2026-03-14
+previous_version: 2
+changelog: "Major upgrade: 10 thin skills → 36 enterprise-grade skills with boundaries, output contracts, cross-references, workflow macros, quality scoring, and auto-verification"
 
 production_skills:
-  - name: openai-codex-orchestrator
-    path: skills-approved/openai-codex-orchestrator
-    production: true
-    role: orchestrator
+  # === CONTENT & COPY ===
+  - name: conversion-copywriting
+    path: skills-approved/conversion-copywriting
+    role: copywriter
+    category: content
     status: active
 
-  - name: blog-master
-    path: skills-approved/blog-master
-    production: true
-    role: content-orchestrator
+  - name: editorial-post-enhancement
+    path: skills-approved/editorial-post-enhancement
+    role: content-enhancer
+    category: content
     status: active
 
-  - name: wordpress
-    path: skills-approved/wordpress
-    production: true
-    role: cms-executor
+  - name: copy-editing-sweeps
+    path: skills-approved/copy-editing-sweeps
+    role: editor
+    category: content
     status: active
 
-  - name: seo-research-master
-    path: skills-approved/seo-research-master
-    production: true
-    role: research
+  - name: content-strategy-planning
+    path: skills-approved/content-strategy-planning
+    role: content-strategist
+    category: content
     status: active
 
-  - name: technical-seo-checker
-    path: skills-approved/technical-seo-checker
-    production: true
-    role: audit
+  - name: technical-writing
+    path: skills-approved/technical-writing
+    role: technical-docs
+    category: content
     status: active
 
-  - name: keyword-intelligence-os
-    path: skills-approved/keyword-intelligence-os
-    production: true
-    role: keyword-intel
+  # === SEO ===
+  - name: seo-audit-playbook
+    path: skills-approved/seo-audit-playbook
+    role: seo-auditor
+    category: seo
     status: active
 
-  - name: wp-reliability-ops
-    path: skills-approved/wp-reliability-ops
-    production: true
-    role: reliability
+  - name: seo-command-center
+    path: skills-approved/seo-command-center
+    role: seo-orchestrator
+    category: seo
     status: active
 
-  - name: git-sync
-    path: skills-approved/git-sync
-    production: true
-    role: repo-sync
+  - name: schema-ops
+    path: skills-approved/schema-ops
+    role: schema-engineer
+    category: seo
     status: active
 
-  - name: grounding-compliance-os
-    path: skills-approved/grounding-compliance-os
-    production: true
-    role: compliance
+  - name: programmatic-seo-blueprints
+    path: skills-approved/programmatic-seo-blueprints
+    role: pseo-architect
+    category: seo
     status: active
 
-  - name: automation-ops
-    path: skills-approved/automation-ops
-    production: true
-    role: automation
+  # === EMAIL MARKETING ===
+  - name: email-marketing-engine
+    path: skills-approved/email-marketing-engine
+    role: email-platform-ops
+    category: email
+    status: active
+
+  - name: email-automation-debugging
+    path: skills-approved/email-automation-debugging
+    role: email-debugger
+    category: email
+    status: active
+
+  - name: lifecycle-email-sequences
+    path: skills-approved/lifecycle-email-sequences
+    role: email-sequence-designer
+    category: email
+    status: active
+
+  - name: lead-magnet-delivery-ops
+    path: skills-approved/lead-magnet-delivery-ops
+    role: lead-magnet-ops
+    category: email
+    status: active
+
+  # === SITE & WORDPRESS ===
+  - name: wordpress-growth-ops
+    path: skills-approved/wordpress-growth-ops
+    role: wp-growth
+    category: site
+    status: active
+
+  - name: revenue-site-execution
+    path: skills-approved/revenue-site-execution
+    role: revenue-optimizer
+    category: site
+    status: active
+
+  - name: offer-positioning
+    path: skills-approved/offer-positioning
+    role: offer-architect
+    category: site
+    status: active
+
+  - name: service-funnel-architecture
+    path: skills-approved/service-funnel-architecture
+    role: funnel-designer
+    category: site
+    status: active
+
+  # === OPERATIONS & INFRASTRUCTURE ===
+  - name: infrastructure-ops
+    path: skills-approved/infrastructure-ops
+    role: devops
+    category: ops
+    status: active
+
+  - name: monitoring-ops
+    path: skills-approved/monitoring-ops
+    role: monitoring-engineer
+    category: ops
+    status: active
+
+  - name: notification-engine
+    path: skills-approved/notification-engine
+    role: alert-engineer
+    category: ops
+    status: active
+
+  # === ANALYTICS & MEASUREMENT ===
+  - name: analytics-reporting
+    path: skills-approved/analytics-reporting
+    role: analyst
+    category: analytics
+    status: active
+
+  - name: tracking-measurement
+    path: skills-approved/tracking-measurement
+    role: tracking-engineer
+    category: analytics
+    status: active
+
+  - name: paid-media-audit
+    path: skills-approved/paid-media-audit
+    role: ad-auditor
+    category: analytics
+    status: active
+
+  # === TESTING & QUALITY ===
+  - name: test-automation-ops
+    path: skills-approved/test-automation-ops
+    role: qa-engineer
+    category: quality
+    status: active
+
+  - name: experiment-tracking
+    path: skills-approved/experiment-tracking
+    role: experiment-designer
+    category: quality
+    status: active
+
+  - name: launch-readiness-audit
+    path: skills-approved/launch-readiness-audit
+    role: launch-gate
+    category: quality
+    status: active
+
+  - name: money-path-verification
+    path: skills-approved/money-path-verification
+    role: revenue-verifier
+    category: quality
+    status: active
+
+  # === TOOLING & INTEGRATION ===
+  - name: api-integration-builder
+    path: skills-approved/api-integration-builder
+    role: api-engineer
+    category: tooling
+    status: active
+
+  - name: tool-evaluation
+    path: skills-approved/tool-evaluation
+    role: tool-researcher
+    category: tooling
+    status: active
+
+  # === ORCHESTRATION & SYSTEM ===
+  - name: swarm-orchestrator
+    path: skills-approved/swarm-orchestrator
+    role: swarm-director
+    category: system
+    status: active
+
+  - name: skill-router
+    path: skills-approved/skill-router
+    role: task-router
+    category: system
+    status: active
+
+  - name: skill-authoring-standard
+    path: skills-approved/skill-authoring-standard
+    role: skill-creator
+    category: system
+    status: active
+
+  - name: memory-operations
+    path: skills-approved/memory-operations
+    role: memory-manager
+    category: system
+    status: active
+
+  # === WORKFLOW & AUTOMATION ===
+  - name: workflow-macros
+    path: skills-approved/workflow-macros
+    role: workflow-engine
+    category: automation
+    status: active
+
+  - name: quality-scorecard
+    path: skills-approved/quality-scorecard
+    role: quality-tracker
+    category: automation
+    status: active
+
+  - name: auto-verification
+    path: skills-approved/auto-verification
+    role: verification-layer
+    category: automation
     status: active
 
 policies:
@@ -70,6 +238,16 @@ policies:
   backup_encryption_required: true
   approved_skills_only: true
   archive_before_delete: true
+
+requirements:
+  every_skill_must_have:
+    - SKILL.md with frontmatter
+    - "## Do NOT Use This For" boundary section
+    - "## Output Contract" section
+  recommended:
+    - scripts/ directory for repeatable work
+    - references/ directory for detailed patterns
+    - Cross-references (→) to related skills
 
 routing:
   active_path: skills-approved/
@@ -82,8 +260,12 @@ ci:
   triggers: [push, pull_request]
 
 notes:
-  - Production skills are in skills-approved/ only
-  - All other skills archived in skills-archive/
-  - Legacy skills/ folder preserved for reference
+  - Version 3: Enterprise-grade upgrade from v2
+  - All 36 skills have Do NOT Use boundaries and Output Contracts
+  - 23 skills have cross-references to related skills
+  - 7 skills have scripts/ directories with extracted Python
+  - 26 skills have references/ directories with detailed patterns
+  - 5 workflow macros for common multi-skill pipelines
+  - Auto-verification layer catches false "done" claims
+  - Quality scorecard for tracking skill performance
   - Run make validate before every release
-  - CI runs automatically on every push to main
