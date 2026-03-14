@@ -46,6 +46,17 @@ bash config/scripts/setup-workspace.sh
 4. **IDENTITY.md**: Let the agent choose its own identity
 5. **HEARTBEAT.md**: Configure periodic checks for your workflow
 
+
+## Memory Configuration
+
+Full memory system configuration in `config/memory/`:
+- `MEMORY-RULES.md` — Complete memory operating manual
+- `INDEX.md` — Fast-retrieval index template
+- `ops/` — Health signals, maintenance system, weekly checklist
+- `templates/` — Structured memory note template
+- `macros/` — Memory health check and review macros
+
+See `config/memory/README.md` for full documentation.
 ## Security
 
 - **Never commit** `.secrets/` directory
