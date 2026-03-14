@@ -49,6 +49,22 @@ All 36 skills follow enterprise standards:
 - Install / daemon bootstrap: `openclaw onboard --install-daemon`
 - Health checks: `openclaw gateway status`, `openclaw doctor`
 
+
+
+## Workspace Configuration
+
+Enterprise-grade config files in `config/`:
+- `AGENTS.md` — Root operating instructions (269 lines)
+- `SOUL.md` — Agent personality and values
+- `USER.md` — User profile template
+- `TOOLS.md` — Infrastructure cheat sheet template
+- `IDENTITY.md` — Agent identity template
+- `MEMORY.md` — Long-term memory template
+- `HEARTBEAT.md` — Periodic check instructions
+
+Quick setup: `bash config/scripts/setup-workspace.sh`
+
+See `config/README.md` for full documentation.
 ## Version History
 - **v3** (2026-03-14): Major upgrade — 10 thin skills → 36 enterprise-grade with boundaries, output contracts, cross-references, workflow macros, quality scoring, auto-verification
 - **v2** (2026-03-06): Initial production curation — 10 skills in skills-approved/
