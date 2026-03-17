@@ -33,6 +33,7 @@ List every asset (site, domain, service) and its criticality level. Not everythi
 |---|---|---|
 | Uptime / availability | HTTP status, latency, failures | Down >1min, repeated 5xx, latency >3s |
 | Technical health | SSL expiry, DNS records, CDN, error rate | SSL <14 days, DNS mismatch, CDN failure |
+| Search visibility | GSC/Bing clicks, impressions, CTR, page-two opportunities, sitemap/indexation anomalies | Clicks down >20%, CTR <2% on page-one pages, batch indexation drop |
 | Rankings | daily/weekly deltas on priority keywords | Drop >3 positions on top-10 keywords |
 | Mentions / social | volume spikes, sentiment shifts, competitor events | Spike >2 sigma, unusual negative surge |
 | Multisite watchdog | aggregated health across portfolio | Any critical asset degraded |

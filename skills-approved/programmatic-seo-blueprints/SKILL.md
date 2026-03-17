@@ -569,6 +569,7 @@ See `references/affiliate-programmatic-patterns.md` for full templates and Pytho
 ### Indexation Rate Tracking
 
 ```python
+# Prefer normalized GSC/Bing search-visibility packs first
 # Track indexation per page model using Google Search Console API
 # or by checking site:domain.com inurl:/compare/ patterns
 
@@ -737,4 +738,6 @@ When working on this skill, read these reference files as needed:
 ## Do NOT Use This For
 - Tasks better handled by a more specific skill — check skill-router
 - One-off quick questions that don't need a skill
+- Tasks in a different domain — route to the correct skill first
+-off quick questions that don't need a skill
 - Tasks in a different domain — route to the correct skill first

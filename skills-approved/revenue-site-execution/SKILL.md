@@ -59,6 +59,7 @@ Use `offer-positioning`, `service-funnel-architecture`, or `lead-magnet-delivery
 - live-path proof beats assumptions
 - prefer API / REST / direct checks before browser-only work
 - avoid low-value blog polish on revenue-priority sites before funnel proof exists
+- when traffic loss or indexation is part of the blocker, use GSC/Bing pack evidence before choosing the fix path
 
 ## Resources
 Read when needed:
@@ -79,3 +80,4 @@ Read when needed:
 **Evidence:** site-specific context plus before/after or money-path proof
 **Decision:** prioritized action taken, blocked, or ready for verification
 **Next:** verify business impact, continue to next blocker, or hand off to the correct specialist skill
+ff to the correct specialist skill

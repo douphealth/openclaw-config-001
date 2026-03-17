@@ -295,6 +295,7 @@ python3 scripts/validate-schema.py --inline '{"@context":"https://schema.org","@
 - `references/schema-templates.md` — Full JSON-LD templates for every type
 - `references/affiliate-schema-guide.md` — Affiliate-specific implementation patterns
 - `references/rich-result-optimization.md` — Rich result optimization strategies
+- `..\seo-command-center\references\search-visibility-data-pack.md` — use GSC/Bing data to prioritize schema work by CTR, impression, and enhancement opportunity
 - `scripts/validate-schema.py` — Schema validation script (run before deployment)
 
 ## Output Contract
