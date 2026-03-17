@@ -278,15 +278,27 @@ python3 scripts/validate-schema.py --inline '{"@context":"https://schema.org","@
 - BreadcrumbList (every page)
 - Organization (every page, or once site-wide)
 
-**Files:**
+## Do NOT Use This For
+- General SEO auditing or site diagnosis (→ seo-audit-playbook)
+- Content strategy or keyword research (→ content-strategy-planning)
+- Writing or editing on-page content (→ editorial-post-enhancement)
+- Setting up conversion tracking (→ tracking-measurement)
+
+## Checks
+- Every schema block MUST pass Google Rich Results Test before deployment
+- Use ISO 8601 dates, absolute URLs, and properly formatted currencies
+- Product schema requires `offers` with price, currency, availability, and URL for rich results
+- AggregateRating requires real review data — never fabricate ratings
+- Multiple schema types on one page should use @graph or linked @id references
+
+## Resources
 - `references/schema-templates.md` — Full JSON-LD templates for every type
 - `references/affiliate-schema-guide.md` — Affiliate-specific implementation patterns
 - `references/rich-result-optimization.md` — Rich result optimization strategies
-- `scripts/validate-schema.py` — Schema validation script
-
+- `scripts/validate-schema.py` — Schema validation script (run before deployment)
 
 ## Output Contract
 **Artifact**: Schema markup implementation
 **Evidence**: Schema validator output, rich result eligibility
 **Decision**: Schema deployed and validated
-**Next**: Monitor rich result appearance
+**Next**: Monitor rich result appearance in search results

@@ -1,88 +1,78 @@
 ---
 name: api-integration-builder
-description: Use when connecting external APIs, building webhook handlers, setting up OAuth flows, creating API wrappers, or integrating third-party services into OpenClaw workflows.
+description: Use when connecting external APIs, building webhook handlers, setting up OAuth flows, creating API wrappers, or integrating third-party services into OpenClaw workflows with reliable auth, error handling, and verification.
 ---
 
 # API Integration Builder
 
 ## Purpose
-Rapidly build reliable API integrations for OpenClaw workflows with proper auth, error handling, and rate limiting.
+Build reliable API integrations for OpenClaw workflows with correct authentication, sane retry behavior, clear documentation, and proof that the integration actually works.
 
 ## Use this when
-- Connecting to external REST or GraphQL APIs
-- Building webhook receivers or handlers
-- Setting up OAuth2 flows for third-party services
-- Creating API wrappers that other skills can call
-- Debugging failed API calls
+- connecting to external REST or GraphQL APIs
+- building webhook receivers or handlers
+- setting up OAuth2 or token-based third-party auth
+- creating API wrappers or integration helpers
+- debugging failed API calls or unreliable integrations
 
-**Do NOT use this skill for:** WordPress REST API work (→ `wordpress-growth-ops`), email API setup and delivery pipelines (→ `email-marketing-engine`), or general debugging and technical documentation (→ `technical-writing`).
+## Do NOT use this for
+- ordinary WordPress REST work when WordPress execution is the main task (→ `wordpress-growth-ops`)
+- email platform buildout as the main task (→ `email-marketing-engine`)
+- generic technical writing without actual integration work (→ `technical-writing`)
 
 ## Do this
+1. Define the integration goal, source system, destination system, and success condition.
+2. Identify the integration type: REST, GraphQL, webhook, OAuth2, polling, or hybrid.
+3. Define the auth method and where secrets/tokens will live.
+4. Build the smallest working request or handler first.
+5. Add error handling, retries, idempotency or deduplication where needed.
+6. Verify with a real successful request/event.
+7. Document the integration so it can be reused safely.
 
-### 1. Identify the integration type
-| Type | Pattern | When |
-|------|---------|------|
-| REST | `curl`/`fetch` with JSON | Most CRUD APIs |
-| GraphQL | POST with query string | Schema-driven APIs |
-| Webhook | HTTP server or OpenClaw hook | Event-driven |
-| OAuth2 | Browser flow + token storage | User-authed APIs |
+## Auth and secret rules
+- Keep secrets in `.secrets/` or approved secret storage, never hardcoded in `SKILL.md` or checked-in scripts.
+- Do not retry 401/403 blindly; fix auth first.
+- Check token expiry/refresh behavior before assuming the integration is stable.
 
-### 2. Authentication setup
-- **API key**: Store in `.secrets/<service>.env`, load with `source`, never hardcode.
-- **OAuth2**: Use `scripts/check-api.sh` to verify token; refresh if 401.
-- **JWT**: Decode with `python3 -c "import jwt; ..."`, check expiry before requests.
+## Error-handling rules
+- Retry 429 and relevant 5xx responses with backoff.
+- Respect `Retry-After` when present.
+- Log enough request/response context to debug failures safely.
+- Add timeouts; do not allow silent hangs.
+- For write operations, think about duplicate submission risk before retrying.
 
-### 3. Build the request
-For REST (bash):
-```bash
-curl -s -w "\n%{http_code}" \
-  -H "Authorization: Bearer $API_KEY" \
-  -H "Content-Type: application/json" \
-  "$ENDPOINT"
-```
+## Verification rule
+Good proof includes:
+- successful authenticated request
+- expected response shape or created side effect
+- webhook receipt/handler proof
+- documented known limits or assumptions
 
-For Python:
-```python
-import requests
-r = requests.get(url, headers={"Authorization": f"Bearer {key}"}, timeout=30)
-r.raise_for_status()
-```
+Do not call an integration done from code alone without at least one real proof path.
 
-### 4. Handle errors
-- Retry on 429 (rate limit) with `Retry-After` header.
-- Retry on 5xx up to 3 times with exponential backoff.
-- Log 4xx errors with request body for debugging.
-- Never retry 401/403 — fix auth first.
-
-### 5. Rate limiting
-- Check `X-RateLimit-Remaining` / `Retry-After` headers.
-- For bulk operations, add 100–200ms delay between requests.
-- Use `scripts/check-api.sh` to probe rate limits before bulk runs.
-
-### 6. Document the integration
-Create a `references/<service>-api.md` with:
-- Base URL and version
-- Auth method and token location
-- Key endpoints used
-- Rate limit details
-- Error code meanings
+## Documentation rule
+Create or update a reference when the integration is non-trivial:
+- base URL/version
+- auth method
+- secret/token location
+- key endpoints/events used
+- rate limits / retry notes
+- failure modes / special cases
 
 ## Resources
-- `scripts/check-api.sh` — Test endpoint auth, status, rate limits
-- `references/` — Per-service API docs you create
+- `scripts/check-api.sh` when present for probing auth/status/rate limits
+- `references/` for per-service API notes you create or update
 
-## Checks / common mistakes
-- Forgetting to source `.env` before curl commands
-- Not handling 429 — causes silent data loss
-- Hardcoding secrets in SKILL.md or scripts
-- Assuming all APIs return JSON — check Content-Type
-- Missing timeout on requests — causes hangs
+## Checks and common mistakes
+- hardcoding secrets
+- assuming all APIs return JSON
+- ignoring rate limits until bulk runs fail
+- retrying write operations without idempotency thinking
+- building the full wrapper before proving one working request
+- forgetting webhook signature validation when relevant
 
 ## Output contract
-Working integration script or code block + `references/<service>-api.md` documenting the integration.
-
-## Output Contract
-**Artifact**: Skill-specific deliverable (report, fix, config, or document)
-**Evidence**: Proof that the work was completed correctly
-**Decision**: What was decided or recommended
-**Next**: Follow-up action or monitoring period
+**Artifact:** working integration code, wrapper, handler, or documented request pattern
+**Evidence:** successful auth/request proof, response or side-effect proof, and documented limits/assumptions
+**Decision:** integration approach selected, working, blocked, or needs follow-up
+**Next:** operationalize, monitor, extend endpoints, or hand off implementation details

@@ -1,59 +1,62 @@
 ---
 name: launch-readiness-audit
-description: Use when deciding whether a site, funnel, product, landing page, checkout, lead flow, delivery system, or service path is actually ready to launch or relaunch. Triggers on requests for launch checks, go-live reviews, preflight audits, readiness assessments, launch proof, or “is this ready yet?”.
+description: Use when deciding whether a site, funnel, product, landing page, checkout, lead flow, delivery system, or service path is actually ready to launch or relaunch based on critical-path proof rather than optimism.
 ---
 
 # Launch Readiness Audit
 
-## Do NOT Use This For
-- verifying a specific checkout path (use money-path-verification)
-SEO auditing (use seo-audit-playbook)
-
 ## Purpose
-Assess whether a launch is truly ready, with evidence instead of wishful thinking.
+Assess whether a launch is truly ready with evidence-based go / no-go judgment instead of wishful thinking or cosmetic confidence.
 
 ## Use this when
-Use this skill when the task is broader than one bug fix and requires a release/no-release judgment.
+- deciding whether a site, funnel, page, product, or flow is ready to launch or relaunch
+- performing preflight audits or readiness reviews
+- checking whether offer, path, tracking, delivery, and follow-up are all ready enough to go live
+- turning a broad “is this ready yet?” into a clear launch decision
 
-Use `money-path-verification` for proving one path; use this skill when the decision spans offer, path, tracking, and fulfillment together.
+## Do NOT use this for
+- proving one specific path end-to-end (→ `money-path-verification`)
+- pure SEO diagnosis (→ `seo-audit-playbook`)
+- fixing broken tracking implementation directly (→ `tracking-measurement`)
+
+## Readiness model
+Check these layers:
+1. launch goal is clear
+2. primary critical path works
+3. offer/page/message is usable enough
+4. tracking/measurement is sufficient for launch
+5. delivery / follow-up / fulfillment works
+6. major blockers are separated from cosmetic polish
 
 ## Do this
 1. Identify the primary business goal of the launch.
 2. Define the critical path that must work.
-3. Check copy/offer readiness, path functionality, measurement, and delivery/follow-up.
+3. Check each readiness layer with proof where possible.
 4. Separate blockers from nice-to-haves.
-5. Require proof for all critical launch conditions.
+5. Default to “needs work” unless critical-path proof is present.
 6. Return a clear status: ready, needs work, or blocked.
 
 ## Core rules
-- Default to needs work unless critical-path proof is present.
 - Nice design is not launch readiness.
 - Tracking, fulfillment, and follow-up count as launch scope when they affect monetization.
 - A launch decision should include remaining risk, not just current progress.
-
-## Output
-Default output should include:
-- launch goal
-- critical path
-- ready items
-- blockers
-- open risks
-- go / no-go recommendation
-- next fixes in order
+- If critical proof is missing, say that plainly.
 
 ## Resources
 Read when needed:
 - `references/readiness-stack.md`
 - `references/portfolio-launch-hotspots.md`
 
+Use `money-path-verification` when the launch decision depends on proving a specific path in full.
 
-## Output Contract
-**Artifact**: Go/no-go checklist with evidence
-**Evidence**: Pass/fail for each checkpoint
-**Decision**: Launch decision with confidence level
-**Next**: Fix blockers or proceed
 ## Checks and common mistakes
-- Do not confuse “page is live” with “launch is ready.”
-- Do not call ready when delivery or automation is still uncertain.
-- Do not hide launch risk in vague language.
-- Do not spend time polishing secondary assets while blockers remain.
+- confusing “page is live” with “launch is ready”
+- calling ready when delivery or automation is still uncertain
+- hiding launch risk in vague language
+- spending time polishing secondary assets while blockers remain
+
+## Output contract
+**Artifact:** launch readiness report or go/no-go checklist
+**Evidence:** pass/fail or proven/unproven status for each critical checkpoint
+**Decision:** ready, needs work, or blocked, with confidence level
+**Next:** fix blockers in order, proceed to launch, or run deeper path verification

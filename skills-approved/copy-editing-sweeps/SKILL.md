@@ -5,61 +5,107 @@ description: Use when improving existing marketing copy through systematic editi
 
 # Copy Editing Sweeps
 
-## Do NOT Use This For
-- writing new content from scratch (use conversion-copywriting)
-full article enhancement with SEO (use editorial-post-enhancement)
-
 ## Purpose
-Improve existing copy without losing its core message by editing in focused passes.
+Improve existing copy without losing its core message by editing in focused, sequential passes.
 
 ## Use this when
-Use this skill when there is already a draft and the job is to improve it.
+- there is already a draft and the job is to improve it (not start from scratch)
+- asked to tighten language, remove fluff, or sharpen conversion copy
+- reviewing copy for clarity, proof gaps, or weak specificity
+- polishing a page before publish without changing positioning
 
-Do **not** use this skill when the page needs a new positioning or a full rewrite from zero; use `conversion-copywriting` first.
-Use `editorial-post-enhancement` when the task is a full blog-post upgrade with slug/title/meta, internal links, media, FAQ styling, and publishing polish.
+## Do NOT use this for
+- writing new content from scratch (→ `conversion-copywriting`)
+- full article enhancement with SEO, internal links, and metadata (→ `editorial-post-enhancement`)
+- strategic repositioning or new offer framing (→ `offer-positioning`)
 
 ## Do this
+
 Run focused sweeps in this order:
-1. clarity
-2. voice and tone consistency
-3. so-what / benefit depth
-4. proof
-5. specificity
-6. emotion and stakes
-7. risk reduction near CTA
 
-For short tasks, do a compressed version of the same sequence.
+### Sweep 1: Clarity
+- Remove confusion and overpacked sentences.
+- One idea per sentence. If a sentence needs "and" twice, split it.
+- Kill jargon unless the audience uses it naturally.
+- Read every sentence and ask: "Would someone skim-reading this get it?"
 
-## Sweep intent
-- **Clarity:** remove confusion and overpacked sentences
-- **Voice:** keep the tone consistent and on-brand
-- **So what:** connect claims to consequences for the reader
-- **Proof:** support important claims or soften them
-- **Specificity:** replace vague abstractions with concrete detail
-- **Emotion:** increase felt relevance without melodrama
-- **Risk reduction:** reduce hesitation at action points
+### Sweep 2: Voice and tone consistency
+- Check the tone matches the brand voice throughout.
+- Flag shifts in formality, persona, or energy level.
+- Keep the original voice unless it's actively hurting the piece.
+
+### Sweep 3: So-what / benefit depth
+- For every claim, ask: "So what? Why does the reader care?"
+- Connect features to consequences.
+- Add missing benefit statements.
+
+### Sweep 4: Proof
+- Support important claims with data, examples, testimonials, or case references.
+- If proof isn't available, soften the claim (change "guarantees" to "helps," add "typically" or "in most cases").
+- Never invent proof to fill a gap.
+
+### Sweep 5: Specificity
+- Replace vague abstractions with concrete detail.
+- "Save time" → "Cut weekly reporting from 4 hours to 20 minutes"
+- "Many customers" → "2,300+ teams across 40 countries"
+- Numbers, names, timeframes, and specifics beat adjectives.
+
+### Sweep 6: Emotion and stakes
+- Increase felt relevance without melodrama.
+- Name the pain the reader actually feels.
+- Show the cost of inaction or the gain of action.
+
+### Sweep 7: Risk reduction near CTA
+- Add guarantees, social proof, or objection handling near action points.
+- Reduce friction language ("no credit card required," "cancel anytime").
+- Make the next step feel safe and obvious.
+
+## Example: SaaS landing page before/after
+
+**Before (hero section):**
+> "Our platform helps teams collaborate better and achieve more with powerful tools designed for modern workflows."
+
+**After sweeps 1-5 applied:**
+> "Ship projects 2x faster with async standups, real-time docs, and automated sprint reports — no meeting required. Used by 1,800+ engineering teams."
+
+What changed:
+- Clarity: "collaborate better" → specific actions (standups, docs, reports)
+- So-what: "achieve more" → "ship projects 2x faster"
+- Specificity: "powerful tools" → three concrete features, "modern workflows" removed as vague
+- Proof: added "1,800+ engineering teams"
+- Voice: tightened without changing personality
+
+**Before (CTA section):**
+> "Get started today and see the difference."
+
+**After sweeps 6-7 applied:**
+> "Start free — no credit card, no setup call. Full access for 14 days."
+
+What changed:
+- Emotion: "see the difference" is empty → replaced with concrete access details
+- Risk reduction: added "no credit card, no setup call"
+- Specificity: "get started" → "full access for 14 days"
 
 ## Output
 Default output should include:
-- top issues found
-- revised copy
-- optional notes on why the biggest changes improved the piece
+- top issues found (grouped by sweep)
+- revised copy (full revised text, not just fragments)
+- notes on the biggest changes and why they improved the piece
 
 ## Resources
-Read when needed:
-- `references/plain-english.md`
-- `references/quick-pass-checklist.md`
+- `references/plain-english.md` — clarity and readability guidelines
+- `references/quick-pass-checklist.md` — abbreviated checklist for short tasks
 
-
-## Output Contract
-**Artifact**: Edited copy with tracked changes
-**Evidence**: Line-by-line improvement rationale
-**Decision**: Editorial approval
-**Next**: Publish or further review
 ## Checks and common mistakes
-- Do not rewrite just to sound different.
-- Do not erase the original voice unless it is actively hurting the piece.
-- Do not strengthen claims beyond available proof.
-- Do not edit only for grammar if persuasion is the real issue.
-- Do not stop after the first decent pass; weak clarity and weak proof often survive superficial edits.
-- For editorial posts, check for missing contextual internal links, uneven internal-link distribution, weak answer-first structure, absent or low-value references, flat visual formatting, weak FAQ presentation, missing FAQ coverage, missing semantically relevant entities, duplicate title usage, weak slug, missing focus keyphrase, missing SEO metadata, weak examples, and missing action-plan guidance before calling the piece strong.
+- Rewriting just to sound different (change should be purposeful)
+- Erasing the original voice unless it's actively hurting the piece
+- Strengthening claims beyond available proof
+- Editing only for grammar when persuasion is the real issue
+- Stopping after one pass — weak clarity and weak proof often survive superficial edits
+- For editorial posts with SEO intent, also check: missing internal links, weak answer-first structure, absent FAQ coverage, weak metadata (→ `editorial-post-enhancement` for full editorial treatment)
+
+## Output contract
+**Artifact:** Edited copy with all changes applied (full revised text)
+**Evidence:** Before/after comparison for the top 3-5 changes with rationale for each
+**Decision:** Approved for publish, needs another pass, or flagged for strategic rewrite (→ `conversion-copywriting`)
+**Next:** Publish, run through `editorial-post-enhancement` if SEO polish needed, or A/B test major changes via `experiment-tracking`

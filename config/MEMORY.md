@@ -1,43 +1,40 @@
-# MEMORY.md — Long-Term Curated Memory
+# MEMORY.md - Long-Term Curated Memory
 
 _Curated truths, not raw logs. Daily files are for raw notes. This is for what matters._
 
-## ⚠️ Security Rules
+## Security Rules
 
-- **ONLY load in main session** (direct chats with human)
+- **ONLY load in main session** (direct chats with the human)
 - **DO NOT load in shared contexts** (Discord, group chats, multi-user sessions)
-- Contains personal context — never leak to strangers
+- Contains personal context — never leak it to strangers
 - Never store credentials here (use `.secrets/`)
 
 ## Structure
 
 ### Architecture Decisions
-_(Key technical decisions and their rationale)_
+_(Key technical decisions and rationale)_
 
 ### Lessons Learned
-_(Hard-won truths from experience)_
+_(Durable truths from experience)_
 
-### Site Knowledge
-_(What you know about each site/project — move detailed info to entity files)_
+### Projects & Systems
+_(Important current state worth keeping long-term)_
 
 ### Preferences & Patterns
 _(What works, what doesn't, preferred approaches)_
 
----
-
-## Template: How to Use This File
+## Rules
 
 When adding entries:
-1. **Date it**: `_YYYY-MM-DD_ — description"
-2. **Be concise**: One line beats a paragraph
-3. **Durable only**: If it won't matter in a month, put it in daily notes instead
-4. **Link to details**: Reference entity files for deep info
+1. Date them
+2. Keep them concise
+3. Store durable truths only
+4. Put transient details in `memory/YYYY-MM-DD.md`
 
 When reviewing:
 1. Remove outdated entries
-2. Consolidate related entries
-3. Update entity files with current state
-4. Keep this file under 200 lines
+2. Consolidate duplicates
+3. Keep this file lean
 
 _See `memory/YYYY-MM-DD.md` for daily context._
-_See `memory/entities/` for detailed site/project/people state._
+_See `memory/entities/` for detailed people/project/system state._

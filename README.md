@@ -29,13 +29,15 @@ This repository is the non-secret source of truth for:
 - `MANIFEST.yaml`
 - `CHANGELOG.md`
 
-## Skill Architecture (v3)
-All 36 skills follow enterprise standards:
+## Skill Architecture (v3.2)
+All 36 skills hardened with enterprise standards:
 - **Boundaries**: Every skill declares what it should NOT be used for
 - **Output Contracts**: Every skill defines what "done" means (artifact, evidence, decision, next)
+- **Concrete Examples**: Every skill includes real-world before/after scenarios
 - **Cross-references**: Skills point to related skills for seamless handoffs
 - **Scripts**: 7 skills have extracted Python scripts for repeatable work
-- **References**: 26 skills have detailed reference patterns
+- **References**: 30 skills have detailed reference patterns, checklists, and templates
+- **Verification Hooks**: All skills include explicit proof expectations
 
 ### Key Infrastructure Skills
 - `skill-router` — Master routing guide (any task → optimal skill)
@@ -66,5 +68,7 @@ Quick setup: `bash config/scripts/setup-workspace.sh`
 
 See `config/README.md` for full documentation.
 ## Version History
+- **v3.2** (2026-03-17): Skill hardening pass — added concrete examples, verification hooks, and reference files to all 36 skills. Enabled memory search. Net -830 lines with higher quality. 6 new reference files added.
+- **v3.1** (2026-03-16): Enterprise-grade workspace configuration — config templates, setup scripts
 - **v3** (2026-03-14): Major upgrade — 10 thin skills → 36 enterprise-grade with boundaries, output contracts, cross-references, workflow macros, quality scoring, auto-verification
 - **v2** (2026-03-06): Initial production curation — 10 skills in skills-approved/

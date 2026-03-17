@@ -74,8 +74,15 @@ Pair with `email-automation-debugging` when the unresolved risk is signup-to-ema
 - Do not mark a path done from front-end appearance alone.
 - Do not hide uncertainty; state it plainly.
 
+## Do NOT Use This For
+- Designing or building a new funnel path (→ service-funnel-architecture)
+- Email automation setup or debugging (→ email-automation-debugging)
+- Tracking implementation or event design (→ tracking-measurement)
+- Content or page copy improvements (→ conversion-copywriting)
+- Full launch readiness assessment (→ launch-readiness-audit)
+
 ## Output Contract
-**Artifact**: Skill-specific deliverable (report, fix, config, or document)
-**Evidence**: Proof that the work was completed correctly
-**Decision**: What was decided or recommended
-**Next**: Follow-up action or monitoring period
+**Artifact**: End-to-end verification report with proven/failed/unverified steps and evidence captured
+**Evidence**: Screen captures, API responses, or record creation proofs for each critical step
+**Decision**: Path is verified, partially verified, or blocked with specific gap identified
+**Next**: Implement fixes for unverified steps, then re-verify

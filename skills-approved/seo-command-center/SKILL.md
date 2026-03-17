@@ -1,87 +1,108 @@
 ---
 name: seo-command-center
-description: Unified SEO operations hub for orchestrating audits, keyword research, content optimization, technical SEO, competitor analysis, and schema deployment across specialized skills. Use when a user asks for comprehensive SEO work that spans multiple areas, site-wide audits, or cross-cutting SEO operations. For deep dives into single areas, route to the specialized skills below.
+description: Use when a request requires cross-cutting SEO work spanning multiple specialized skills — audits, content planning, editorial optimization, schema, programmatic SEO, or monitoring. Routes to the smallest SEO workflow that fits. Triggers on site-wide SEO plans, multi-domain SEO strategy, "do our SEO" requests, or when the right next SEO skill is unclear.
 ---
 
-# SEO Command Center — Routing Hub
+# SEO Command Center
 
-Orchestrates cross-cutting SEO work by routing to specialized skills.
+## Purpose
+Coordinate cross-cutting SEO work by routing to the smallest effective combination of specialized SEO skills instead of treating SEO as one vague bucket.
 
-## WHEN TO USE
+## Use this when
+- the request spans multiple SEO domains (technical + content + schema, etc.)
+- a site-wide or cross-cutting SEO plan is needed
+- keyword strategy, audits, editorial optimization, schema, and monitoring may all be relevant
+- the right next SEO skill is not obvious from the request alone
+- someone says "do our SEO" or "SEO audit" without specifying scope
 
-Master SEO skill for work that spans multiple areas:
-- Comprehensive SEO audits → orchestrates **seo-audit-playbook**
-- Keyword research & content planning → orchestrates **content-strategy-planning**
-- Content optimization → orchestrates **editorial-post-enhancement**
-- Programmatic SEO design → orchestrates **programmatic-seo-blueprints**
-- Schema deployment → orchestrates **schema-ops**
-- Cross-cutting SEO work that spans multiple skills
-- SEO health monitoring and reporting
-- Competitor intelligence
-- Rank tracking and visibility analysis
+## Do NOT use this for
+- single-page SEO tasks that clearly fit one specialized skill (route directly)
+- direct content writing (→ `editorial-post-enhancement` or `conversion-copywriting`)
+- routine monitoring-only work (→ `monitoring-ops`)
 
-**For deep dives into single areas**, use the specialized skill directly instead.
+## Routing rules
 
-## DO NOT USE FOR
-- Single-page SEO tasks (→ seo-audit-playbook for audits, schema-ops for markup)
-- Content writing (→ editorial-post-enhancement or conversion-copywriting)
-
-## ROUTING TABLE
-
-| User Request | Route To |
+| Request type | Route to |
 |---|---|
-| Full site audit, cannibalization, technical crawl | seo-audit-playbook |
-| Keyword research, clustering, content gaps, editorial calendar | content-strategy-planning |
-| Article optimization, on-page scoring, headline improvements | editorial-post-enhancement |
-| Scaled page generation, template pages, directory pages | programmatic-seo-blueprints |
-| JSON-LD markup, rich snippets, schema validation | schema-ops |
-| Competitor gap analysis, SERP analysis | seo-audit-playbook + content-strategy-planning |
-| Internal linking, orphan pages, link depth | seo-audit-playbook |
-| Rank tracking, movement alerts | monitoring-ops |
+| Technical/site audit, crawl issues, cannibalization, internal linking | `seo-audit-playbook` |
+| Keyword research, clustering, content gaps, editorial roadmap | `content-strategy-planning` |
+| Article/page optimization and publish-quality upgrades | `editorial-post-enhancement` |
+| Structured data, rich snippets, JSON-LD markup | `schema-ops` |
+| Scaled template/page-system design, programmatic page generation | `programmatic-seo-blueprints` |
+| Rank tracking, movement alerts, SERP monitoring | `monitoring-ops` |
+| Revenue site funnel or monetization path fixes | `revenue-site-execution` |
 
-## ORCHESTRATION RULES
+## Do this
 
-- **ALWAYS check for cannibalization** before content recommendations
-- **ALWAYS provide evidence** for findings
-- **ALWAYS include actionable fix recommendations**
-- **NEVER report "SEO complete"** without crawling the site
-- **NEVER mix opinion with diagnosis**
+### 1. Define the SEO goal and scope
+- What site(s)? What pages? What's the business goal (traffic, leads, revenue)?
+- Is this a diagnosis (find problems) or execution (fix/improve) request?
 
-## OUTPUT TEMPLATE
+### 2. Route to one skill if possible
+If the request clearly fits one skill above, route directly and stop. Don't over-engineer.
 
-```
-## SEO Report: {domain}
-Date: {date}
+### 3. Build an ordered workflow if multi-skill
+If multiple skills are needed, define the minimum sequence:
 
-### Health Score: X/100 (Grade: B)
-- Technical: X/100
-- On-Page: X/100
-- Content: X/100
-- Authority: X/100
-- User Signals: X/100
+**Common workflow patterns:**
 
-### Top Issues
-1. [Issue] — Impact: [High/Med/Low] — Fix: [command/action]
+Pattern A — Site audit + content plan:
+1. `seo-audit-playbook` → find technical issues and cannibalization
+2. `content-strategy-planning` → build keyword/content roadmap based on audit findings
+3. `editorial-post-enhancement` → execute top-priority content items
 
-### Keyword Opportunities
-- X new keywords identified
-- X cannibalization risks
-- Priority content queue: [list]
+Pattern B — New site launch SEO:
+1. `content-strategy-planning` → keyword strategy and page structure
+2. `schema-ops` → structured data for all page types
+3. `monitoring-ops` → set up rank tracking from day one
 
-### Action Plan
-Immediate: [critical fixes]
-This week: [high priority]
-This month: [medium priority]
-```
+Pattern C — Ranking recovery:
+1. `seo-audit-playbook` → diagnose the drop (technical? content? algorithm?)
+2. Based on findings, route to the specific fix skill
+3. `monitoring-ops` → track recovery
 
+### 4. Require evidence at each step
+Each routed skill must return actionable findings with proof — not vague recommendations.
 
-## Output Contract
-**Artifact**: SEO orchestration plan with task assignments
-**Evidence**: Specialist routing, priority matrix
-**Decision**: Tasks assigned to specialists
-**Next**: Track completion
+### 5. Stop routing when scope narrows
+Once the task is specific enough for one skill, route and stop orchestrating.
 
-## Do NOT Use This For
-- Tasks better handled by a more specific skill — check skill-router
-- One-off quick questions that don't need a skill
-- Tasks in a different domain — route to the correct skill first
+## Example: "Our traffic dropped 40%, fix our SEO"
+
+**Scope analysis:** Unknown cause — could be technical, content, or algorithmic. Multi-skill workflow needed.
+
+**Workflow:**
+1. **`seo-audit-playbook`** — Full technical + content audit. Check: crawl errors, indexation drops, Core Web Vitals, cannibalization, recent content changes, backlink profile. Return: diagnosed cause(s) with evidence.
+2. **Based on findings:**
+   - If technical issues → `infrastructure-ops` for fixes, then `auto-verification`
+   - If content/cannibalization → `content-strategy-planning` for consolidation plan
+   - If thin content → `editorial-post-enhancement` for priority pages
+   - If schema issues → `schema-ops`
+3. **`monitoring-ops`** — Set up recovery tracking on affected keywords.
+
+**Routing decision:** Start with `seo-audit-playbook`. Do NOT jump to content creation before diagnosing the cause.
+
+## Core rules
+- Always check cannibalization before content expansion recommendations.
+- Do not call SEO work complete without real evidence (rankings, crawl data, indexation status).
+- Do not keep routing after the correct specialized skill is clear.
+- Keep orchestration lightweight — don't create SEO bureaucracy with unnecessary handoffs.
+
+## Resources
+- `references/seo-orchestration-rules.md` — detailed routing decision tree and workflow templates
+- `references/output-templates.md` — standardized output formats for cross-skill SEO workflows
+- `skill-router` — use when the request may cross into non-SEO domains (e.g., SEO + paid media + email)
+
+## Checks and common mistakes
+- Routing broad SEO requests into too many skills up front (scope creep)
+- Treating one page task like a site-wide program
+- Mixing diagnosis with implementation without clear handoff
+- Giving content recommendations before cannibalization review
+- Saying "SEO complete" when only one layer was checked
+- Not checking Google Search Console data before making indexation claims
+
+## Output contract
+**Artifact:** SEO routing decision or ordered SEO workflow with skill sequence and rationale
+**Evidence:** Scope assessment tied to site state and request type; routing justified by the routing rules table
+**Decision:** Exact SEO skill(s) to run, in order, with clear handoff points
+**Next:** Execute the selected skill(s) in sequence; verify outcomes where applicable; loop back if findings change the scope

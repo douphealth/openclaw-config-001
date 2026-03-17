@@ -14,7 +14,7 @@ Turn vague capability into a concrete, understandable offer people can actually 
 - The offer exists operationally but not persuasely
 - Messaging is generic, audience is unclear, or the value prop is fuzzy
 
-Do **not** use for: page-level copy (use `conversion-copywriting`), funnel structure (use `service-funnel-architecture`), or lead delivery setup (use `lead-magnet-delivery-ops`).
+
 
 ## Do this
 
@@ -97,8 +97,15 @@ Read when needed:
 - Do not add secondary offers before the primary one is sharp.
 - Do not use internal jargon — if the buyer wouldn't say it, don't write it.
 
+## Do NOT Use This For
+- Writing page-level copy or CTA text (→ conversion-copywriting)
+- Structuring funnels or page architecture (→ service-funnel-architecture)
+- Setting up lead capture or delivery (→ lead-magnet-delivery-ops)
+- Implementing tracking or analytics (→ tracking-measurement)
+- Running SEO audits (→ seo-audit-playbook)
+
 ## Output Contract
-**Artifact**: Skill-specific deliverable (report, fix, config, or document)
-**Evidence**: Proof that the work was completed correctly
-**Decision**: What was decided or recommended
-**Next**: Follow-up action or monitoring period
+**Artifact**: Positioning document with target buyer, value proposition canvas, offer summary, and CTA recommendation
+**Evidence**: Buyer language captured, differentiation at deepest truthful level, proof gaps identified
+**Decision**: Offer is ready for copywriting or is blocked until proof gaps filled
+**Next**: Hand off to conversion-copywriting or iterate on positioning based on feedback

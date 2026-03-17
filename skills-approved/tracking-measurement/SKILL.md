@@ -15,7 +15,7 @@ Make conversion and behavior tracking trustworthy enough to optimize from. If th
 - Setting up enhanced conversions, CAPI, or consent-aware tagging
 - Verifying "is this tracked correctly?"
 
-Do **not** use for: reporting on already-trusted data (use `analytics-reporting`), paid media strategy (use `paid-media-audit`), or general analytics questions.
+
 
 ## Do this
 
@@ -112,8 +112,15 @@ Read when needed:
 - Do not skip consent/privacy checks — they cause silent data loss.
 - Do not use different event naming conventions across platforms — pick one taxonomy and enforce it.
 
+## Do NOT Use This For
+- Reporting on already-trusted data (→ analytics-reporting)
+- Paid media strategy or audit (→ paid-media-audit)
+- Writing or editing content (→ editorial-post-enhancement)
+- Funnel architecture or offer positioning (→ service-funnel-architecture or offer-positioning)
+- Email automation setup (→ email-marketing-engine)
+
 ## Output Contract
-**Artifact**: Skill-specific deliverable (report, fix, config, or document)
-**Evidence**: Proof that the work was completed correctly
-**Decision**: What was decided or recommended
-**Next**: Follow-up action or monitoring period
+**Artifact**: Measurement map, event taxonomy, and prioritized fix list with root causes
+**Evidence**: Event firing verification, parameter validation, and discrepancy quantification
+**Decision**: What is tracked correctly, incorrectly, and not at all
+**Next**: Implement fixes, then validate each critical path end-to-end

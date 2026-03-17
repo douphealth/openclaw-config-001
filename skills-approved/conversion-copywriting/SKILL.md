@@ -15,13 +15,7 @@ Use this skill when the user needs:
 - clearer value propositions
 - tighter page messaging before design or CRO work
 
-Do **not** use this skill for:
-- email sequences → use `lifecycle-email-sequences`
-- editing an already decent draft line by line → use `copy-editing-sweeps`
-- broad content planning → use `content-strategy-planning`
-- offer-definition work before page writing → use `offer-positioning`
-- full service-path structure decisions → use `service-funnel-architecture`
-- full article upgrade/polish passes on an existing draft or live post → use `editorial-post-enhancement`
+
 
 ## Do this
 1. Identify the page type and the single primary conversion action.
@@ -87,8 +81,16 @@ Read when needed:
 **Decision**: Copy approved for implementation
 **Next**: A/B test if possible
 ## Checks and common mistakes
-- Do not write generic claims like “streamline your workflow” without specifics.
+- Do not write generic claims like "streamline your workflow" without specifics.
 - Do not let one section pitch multiple unrelated ideas.
 - Do not bury the CTA behind unnecessary scene-setting.
 - Do not use corporate sludge when plain English works.
 - Do not confuse brand voice with vagueness or filler.
+
+## Do NOT Use This For
+- Email sequences or drip campaigns (→ lifecycle-email-sequences)
+- Line-by-line editing of an existing draft (→ copy-editing-sweeps)
+- Broad content planning or editorial calendar (→ content-strategy-planning)
+- Offer definition or positioning work (→ offer-positioning)
+- Full article upgrade or polish on existing content (→ editorial-post-enhancement)
+- Funnel structure or page architecture decisions (→ service-funnel-architecture)

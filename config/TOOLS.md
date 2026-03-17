@@ -1,61 +1,81 @@
-# TOOLS.md — Infrastructure Cheat Sheet
+# TOOLS.md - Local Notes
 
-_Local notes for YOUR setup. Skills define how tools work. This file is for what's unique to your deployment._
+Skills define how tools work. This file is for setup-specific operational notes.
 
-## WordPress Sites
+## OpenClaw
 
-| Site | URL | WP REST API | Auth |
-|------|-----|-------------|------|
-| _site-name_ | _https://example.com_ | _/wp-json/wp/v2/_ | _App Password (see .secrets/)_ |
+- **Workspace:** `C:\Users\User\.openclaw\workspace`
+- **Config:** `C:\Users\User\.openclaw\openclaw.json`
+- **Skills root:** `C:\Users\User\.openclaw\workspace\skills`
+- **Secrets dir:** `C:\Users\User\.openclaw\workspace\.secrets`
+- **Gateway:** local scheduled task / local gateway install
+- **Primary model:** `openai-codex/gpt-5.4`
+- **Fallbacks:** `ollama/minimax-m2.1:cloud`, `openrouter/hunter-alpha`, `openrouter/nvidia/nemotron-3-super-120b-a12b:free`
 
-## Email Platforms
+## Secrets / Sensitive Material
 
-| Platform | Account | List IDs | Sender IDs | API Key Location |
-|----------|---------|----------|------------|------------------|
-| _Brevo_ | _email_ | _List: X, Template: Y_ | _Sender: Z_ | `.secrets/brevo-api-key` |
-| _Mailchimp_ | _email_ | _Audience: X_ | — | `.secrets/mailchimp-key` |
+- Keep API keys and credentials in `.secrets/`, not in memory or docs.
+- OpenClaw runtime secrets are now intended to live in `C:\Users\User\.openclaw\.env` and be referenced from config via `${ENV_VAR}` substitution.
+- `openclaw.json` should stay reference-based for secrets wherever supported, not plaintext.
+- Do not paste gateway tokens, bot tokens, app passwords, or provider keys into chats.
+- Prefer redacted-by-default documentation.
 
-## Servers & Infrastructure
+## Models / Providers
 
-| Host | IP | SSH Key | Purpose |
-|------|----|---------|---------|
-| _vps-1_ | _1.2.3.4_ | `~/.ssh/id_vps` | _Main VPS_ |
+- **OpenAI Codex:** OAuth
+- **OpenAI:** provider configured
+- **OpenRouter:** fallback provider expected here if used in config
+  - target key location should be externalized from config when feasible
+- **Ollama:** local fallback endpoint configured at `http://127.0.0.1:11434/v1`
 
-## APIs & Services
+## Channels
 
-| Service | Purpose | Auth Method | Docs |
-|---------|---------|-------------|------|
-| _OpenAI_ | _LLM_ | _API Key_ | _https://platform.openai.com/docs_ |
-| _Brevo_ | _Email_ | _API Key_ | _https://developers.brevo.com_ |
-| _Google Search Console_ | _SEO_ | _OAuth_ | _—_ |
+### Telegram
+- configured and paired
+- dedicated bot token expected per OpenClaw instance
+- pairing code is **not** the bot token
+- rotate exposed bot tokens in BotFather immediately if leaked
 
-## Cron Jobs
+### WhatsApp
+- logs previously showed stale-socket restarts and reconnection churn
+- if delivery seems flaky, inspect provider health before blaming the model layer
 
-| Schedule | Script | Purpose |
-|----------|--------|---------|
-| `0 */6 * * *` | `ops/scripts/drip-enroller.py` | Email drip enrollment |
-| `0 9 * * 1` | `ops/scripts/weekly-report.py` | Weekly analytics report |
+## Infrastructure Notes
 
-## TTS / Voice
+### Workspace / Runtime
+- Repo reference for imported curated skills: `workspace/repo_openclaw_config_001/`
+- Prefer managed edits in workspace skills over editing bundled skills
+- Treat repo reference as baseline and workspace as the active operating copy
 
-- **Engine**: _ElevenLabs / local TTS_
-- **Preferred voice**: _Name (description)_
-- **Default speaker**: _Room/device name_
+### Services / Recovery
+- If gateway health degrades, check scheduled task / local gateway install first
+- Verify actual running processes, not just CLI success text
+- If install/update fails with `EPERM` or `EBUSY`, suspect file locks or another live node/npm process
+- For persistent lock issues, restart the machine before deeper surgery
 
-## Cameras / IoT
+## WordPress Access
 
-| Device | Location | Notes |
-|--------|----------|-------|
-| _camera-1_ | _Living room_ | _180° wide angle_ |
+- WordPress credentials stored in `.secrets/wordpress-sites.json`
+- File includes wp-admin credentials and REST API credentials where provided
+- Use that file when admin or REST access is needed for:
+  - Affiliatemarketingforsuccess.com
+  - Mysticaldigits.com
+  - Gearuptogrow.com
+  - FrenchyFab.com
+  - Plantastichaven.com
+  - Gearuptofit.com
+  - Micegoneguide.com
+  - EfficientGPTPrompts.com
+  - Outdoormisting.com
 
-## Swarm Notes
+## Ops Patterns / Verification Traps
 
-_(Store validated patterns here)_
-- Preferred publishing patterns
-- Known cache/plugin quirks
-- Preferred worker roles for recurring workflows
-- Verification traps to remember
+- Check real runtime state after any restart attempt: process list, logs, health endpoint, or message flow
+- "Command said restarted" is not proof
+- Prefer fewer, higher-value writes over noisy one-item loops when using external APIs
+- After important edits, verify the result and update memory/docs if it matters later
 
----
+## TODO / Local Reference
 
-**Keep secrets in `.secrets/`, not here. This file is for operational reference only.**
+- Add device names, SSH hosts, voice prefs, cron inventory, and any stable infra notes here
+- Rotate previously exposed provider/channel/gateway tokens as a follow-up hardening step

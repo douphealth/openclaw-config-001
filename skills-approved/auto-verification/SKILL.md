@@ -1,68 +1,95 @@
 ---
 name: auto-verification
-description: Use after any skill completes its work to verify the output is real, correct, and complete. Triggers automatically when a skill claims "done", "fixed", "published", "working", or "complete". Catches fake completion, partial work, and unverified claims.
+description: Use after any skill completes work to verify the output is real, correct, and complete. Triggers automatically when a skill claims "done", "fixed", "published", "working", or "complete" and proof is possible.
 ---
 
 # Auto-Verification
 
 ## Purpose
-Automatic verification layer that proves skill outputs are real before accepting completion claims.
+Provide a mandatory proof layer that checks whether a claimed outcome is actually real, user-visible, and complete before accepting completion.
 
 ## Use this when
-- ANY skill claims work is "done" or "complete"
-- Before declaring a fix worked
-- Before confirming a deployment went live
-- Before accepting that a configuration change applied
+- ANY skill claims work is done, fixed, published, working, or complete
+- before declaring a fix worked
+- before confirming a deployment went live
+- before accepting that a configuration change applied
+- before reporting success on a user-visible outcome when proof is possible
 
 ## Do NOT use this for
-- Tasks where verification is impossible (research, planning)
-- Quick Q&A that doesn't need proof
+- tasks where verification is impossible or inherently subjective
+- quick Q&A that has no artifact or outcome to prove
+- research/planning tasks that do not claim implementation
+
+## Verification order
+Prefer this order when possible:
+1. **User-visible outcome** — what the user would actually experience
+2. **Functional behavior** — whether the thing works end-to-end
+3. **Underlying state** — config, files, API state, logs
+4. **Secondary signals** — status codes, timestamps, background logs
+
+Do not stop at a lower layer if a higher layer is testable.
 
 ## Do this
 
-### 1. Claim Detection
-When a skill or worker claims completion, identify what needs verification:
-- "Published" → Check page is live and renders
-- "Fixed" → Verify fix actually applied
-- "Configured" → Test the configuration works
-- "Created" → Verify artifact exists and is correct
-- "Deleted" → Confirm it's actually gone
+### 1. Detect the claim
+Identify exactly what was claimed:
+- published
+- fixed
+- configured
+- created
+- deleted
+- connected
+- delivered
+- validated
 
-### 2. Verification Methods
+### 2. Choose the strongest proof method
 | Claim | Verification Method |
-|-------|-------------------|
-| Page published | Fetch URL, check content renders |
-| Email sent | Check email history/logs |
-| API working | Make test call, verify response |
-| Tracking fixed | Check real-time events fire |
-| Schema added | Validate with schema validator |
-| Config changed | Read config, confirm values |
-| File created | Read file, confirm contents |
+|---|---|
+| Page published | Fetch/render URL and confirm expected content appears |
+| UI fixed | Reproduce the user-visible path and confirm behavior |
+| Email sent | Check provider history/logs and delivery evidence |
+| API working | Make a real test call and validate the response |
+| Tracking fixed | Confirm real-time or test events fire correctly |
+| Schema added | Validate the schema output, not just the source file |
+| Config changed | Read config and test the behavior it should change |
+| File created | Read file and confirm its contents are correct |
+| File deleted | Confirm absence at the source of truth |
 
-### 3. Pass/Fail Report
+### 3. Produce a pass/fail report
+Use this structure:
 ```
 CLAIM: [what was claimed]
 METHOD: [how verified]
-RESULT: ✅ PASS / ❌ FAIL
+RESULT: ✅ PASS / ❌ FAIL / ⚠️ PARTIAL
 EVIDENCE: [proof]
-ACTION: [if fail: what to fix]
+GAP: [what remains unproven]
+ACTION: [if fail/partial: exact next fix]
 ```
 
-### 4. Auto-Retry Logic
+### 4. Handle failures
 If verification fails:
-1. Report the specific failure
-2. Attempt to fix if fix is obvious
-3. Re-verify
-4. If still failing after 2 attempts, escalate to user
+1. report the specific failure
+2. attempt an obvious fix if the method is clear and low risk
+3. re-verify
+4. if still failing after 2 attempts, escalate with exact blocker details
 
-## Output Contract
-**Artifact**: Verification report with pass/fail for each claim
-**Evidence**: Actual data proving the claim (URL content, API response, file contents)
-**Decision**: Accept completion or require rework
-**Next**: If failed, specific fix instructions
+## Failure taxonomy
+Classify failures when helpful:
+- **false completion** — claim does not match reality
+- **partial completion** — some but not all outcomes are real
+- **wrong artifact** — something was produced, but not the requested thing
+- **state-only success** — internals changed, but user-visible outcome is still broken
+- **verification blocked** — proof may exist, but access or tooling prevented confirmation
 
 ## Rules
-- NEVER accept "done" without proof when proof is possible
-- ALWAYS check the actual output, not just the status code
-- If verification is impossible, note it explicitly
-- Track false completion claims — they indicate skill quality issues
+- NEVER accept “done” without proof when proof is possible.
+- ALWAYS check the actual output, not just the status code.
+- Prefer user-visible proof over internal proof.
+- If verification is impossible, say exactly why.
+- Track false completion patterns; they indicate skill quality problems.
+
+## Output contract
+**Artifact:** verification report with pass/fail/partial result for each claim
+**Evidence:** actual proof data such as rendered content, API response, file contents, logs, or functional test result
+**Decision:** accept completion or require rework
+**Next:** if failed or partial, exact fix instructions

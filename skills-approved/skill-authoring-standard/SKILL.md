@@ -5,12 +5,20 @@ description: Use when creating, editing, reviewing, or refactoring OpenClaw skil
 
 # Skill Authoring Standard
 
-## DO NOT USE FOR
-- Executing tasks that existing skills handle (use those skills instead)
-- Creating skills for one-off tasks (use ad-hoc instructions)
-
 ## Purpose
-Create OpenClaw skills that are discoverable, lean, reusable, and tested enough to trust.
+Create OpenClaw skills that are discoverable, lean, reusable, hard to misuse, and structured for real execution rather than decorative documentation.
+
+## Use this when
+- creating a new skill
+- refactoring or tightening an existing skill
+- cleaning up a bloated `SKILL.md`
+- improving trigger clarity, boundaries, or output contracts
+- restructuring a skill directory into better references/scripts/assets
+
+## Do NOT use this for
+- executing tasks that an existing skill already handles
+- creating a skill for a one-off project note or temporary workaround
+- preserving bloated external skill content without distillation
 
 ## Non-negotiables
 - Write skills for repeated workflows, not one-off stories.
@@ -19,9 +27,10 @@ Create OpenClaw skills that are discoverable, lean, reusable, and tested enough 
 - Use exact file names and forward-slash paths.
 - Prefer one strong example over many weak ones.
 - For fragile or compliance-heavy skills, test behavior before declaring the skill good.
+- Every meaningful skill should define artifact, evidence, decision, and next.
 
-## When to create a skill
-Create a skill when all are true:
+## Create or refactor a skill only when
+All are true:
 - the workflow repeats
 - the right approach is not obvious every time
 - a future agent would benefit from saved judgment, reference, or tooling
@@ -61,18 +70,18 @@ Write for **selection**.
 Good pattern:
 - `Use when ...`
 
-## Body pattern
+## Preferred body pattern
 Use this default shape unless the task strongly suggests a better one:
+1. **Purpose**
+2. **Use this when**
+3. **Do NOT use this for**
+4. **Do this**
+5. **Resources**
+6. **Checks and common mistakes**
+7. **Output contract**
 
-1. **Purpose** — one short paragraph
-2. **Use this when** — triggers and boundaries
-3. **Do this** — numbered workflow or decision rules
-4. **Resources** — which `references/` or `scripts/` to use and when
-5. **Checks / common mistakes** — what usually goes wrong
-
-## Degrees of freedom
-Choose the tightness of instructions deliberately.
-
+## Tightness rules
+Choose the instruction tightness deliberately:
 - **High freedom**: heuristics, review, analysis, writing
 - **Medium freedom**: preferred pattern with room for adaptation
 - **Low freedom**: exact scripts or exact sequences for fragile operations
@@ -86,6 +95,7 @@ Move large materials into `references/` when they are:
 - schemas
 - detailed examples
 - variant-specific instructions
+- long decision trees that do not need to be loaded every time
 
 Keep references one level deep from `SKILL.md`.
 If a reference file is long, add a table of contents.
@@ -104,7 +114,19 @@ A good skill should be:
 - easy to scan
 - hard to misuse
 - small enough to justify its token cost
-- structured so another agent can succeed without extra hidden context
+- structured so another agent can succeed without hidden context
+- explicit about proof when proof matters
+
+## Refactor checklist
+When improving an existing skill, check for:
+- vague or bloated description
+- weak or missing boundaries
+- duplicated instructions
+- no clear decision sequence
+- no output contract
+- no proof or verification guidance where needed
+- too much theory in the main file
+- references that should be scripts
 
 ## Testing standard
 For reference-heavy or low-risk skills, do a light reality check.
@@ -122,19 +144,15 @@ For stack-level routing and overlap checks, also use:
 - multiple mediocre examples when one good example would do
 - deeply nested references
 - project-specific narratives pretending to be reusable skills
+- output contracts that say nothing real
+- “done” language without proof expectations
 
 ## Final rule
 If importing an external skill, distill it first.
 Adopt principles, not bloat.
 
-
-## Output Contract
-**Artifact**: Validated SKILL.md file
-**Evidence**: Passes quality checklist, trigger clarity
-**Decision**: Skill approved for use
-**Next**: Monitor trigger accuracy
-
-## Do NOT Use This For
-- Tasks better handled by a more specific skill — check skill-router
-- One-off quick questions that don't need a skill
-- Tasks in a different domain — route to the correct skill first
+## Output contract
+**Artifact:** validated `SKILL.md` file and any supporting structure changes
+**Evidence:** clearer trigger logic, stronger boundaries, and improved operating contract
+**Decision:** skill approved, rejected, or needs further refactor
+**Next:** monitor trigger accuracy and quality after use

@@ -15,7 +15,10 @@ Keep OpenClaw memory high-signal, current, and easy to retrieve. Operate across 
 - Improving semantic search quality or entity memory structure
 - Running periodic memory maintenance (heartbeat or cron)
 
-Do **not** use for: general project documentation (use project files directly), one-off notes (write to daily), or file operations unrelated to memory.
+## Do NOT Use This For
+- General project documentation better stored in project files directly
+- One-off notes that belong in the daily file only
+- File operations unrelated to memory structure or retrieval quality
 
 ## Do this
 
@@ -94,16 +97,8 @@ Read when needed:
 - Do not promote transient operational state into `MEMORY.md` — entity files are the right home.
 - Do not skip the health check when retrieval quality degrades — it compounds.
 
-## Output contract
-When performing memory operations, deliver:
-- **Promotion log**: list of items promoted between layers (source → destination, reason)
-- **Pruned entries**: items removed or merged (with reason)
-- **Updated files**: list of files modified
-- **Health status**: pass/fail on the 5-point health check with notes on any failures
-- **Pattern findings**: any new patterns identified from repeated observations
-
 ## Output Contract
-**Artifact**: Skill-specific deliverable (report, fix, config, or document)
-**Evidence**: Proof that the work was completed correctly
-**Decision**: What was decided or recommended
-**Next**: Follow-up action or monitoring period
+**Artifact**: Promotion log, pruned-entry summary, updated file list, and memory health result
+**Evidence**: Concrete before/after file updates, promotion rationale, and retrieval/health-check proof when applicable
+**Decision**: What changed, what was promoted or pruned, and whether memory health is acceptable
+**Next**: Follow-up cleanup, promotion cadence, or retrieval tuning if needed
