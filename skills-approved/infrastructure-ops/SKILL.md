@@ -1,125 +1,147 @@
 ---
 name: infrastructure-ops
-description: Use when managing server infrastructure, deployments, DNS/SSL, backups, container/runtime operations, cron or scheduled automation, or other changes to infrastructure state that require rollback thinking and post-change verification.
+description: Enterprise infrastructure management: server configuration, deployment automation, DNS/SSL management, Docker containers, backup strategy, disaster recovery, performance optimization, and DevOps workflows. Use when managing servers, configuring deployments, setting up monitoring, handling backups, managing DNS/SSL, containerizing services, or automating DevOps workflows.
 ---
 
-# Infrastructure Ops
+# Infrastructure Ops — Enterprise DevOps
 
 ## Purpose
-Handle infrastructure changes, deployment operations, and runtime/platform configuration with rollback discipline, verification, and documentation.
+Server infrastructure, deployment automation, and DevOps workflows for managed WordPress and web properties.
 
-## Use this when
-- configuring servers, DNS, SSL certificates, or runtime networking
-- setting up Docker containers, compose stacks, or service processes
-- automating deployments or scheduled tasks
-- managing backups and disaster recovery operations
-- changing infrastructure state or operational configuration
-- repairing OpenClaw runtime, gateway, auth, provider, or channel plumbing
+## When to Use
+- Server configuration and optimization
+- DNS/SSL certificate management
+- Docker container setup and management
+- Deployment automation and CI/CD
+- Backup strategy and disaster recovery
+- Performance optimization (server-level)
+- Cron job scheduling and automation
+- Cloudflare configuration
+- WordPress hosting optimization
 
-## Do NOT use this for
-- WordPress plugin/content growth work (→ `wordpress-growth-ops`)
-- email automation and lifecycle delivery (→ `email-marketing-engine`)
-- monitoring or alerting as the primary task (→ `monitoring-ops` / `notification-engine`)
-- pure verification work after a claimed fix (→ `auto-verification`)
+**Do NOT use for:** WordPress plugin/content management (→ `wordpress-growth-ops`), email automation (→ `email-marketing-engine`), application monitoring (→ `monitoring-ops`).
 
-## Do this
+## Infrastructure Checklist
 
-### 1. Assess current state
-Before changing anything:
-- What is running? (process list, container status, service health)
-- What is the current configuration? (read the actual config, don't assume)
-- What changed recently? (check logs, deployment history)
+### Server Health
+- CPU/Memory/Disk usage
+- PHP version and configuration
+- MySQL/MariaDB optimization
+- Nginx/Apache configuration
+- Object caching (Redis/Memcached)
 
-### 2. Define the change, risk, and rollback
-- **Intended outcome:** what should be true after the change?
-- **Risk level:** low (config tweak), medium (service restart), high (deployment, migration)
-- **Rollback plan:** how to undo if it goes wrong? (config revert, container rollback, restore from snapshot)
+### DNS & SSL
+- DNS propagation verification
+- SSL certificate validity and auto-renewal
+- HSTS, CAA, and security headers
+- CDN configuration (Cloudflare)
 
-### 3. Snapshot or back up state
-For medium/high risk changes:
-- Back up the config file before editing
-- Snapshot the database before migration
-- Tag the current container image before deploying
+### Deployment
+- Git-based deployment workflows
+- Staging → production pipeline
+- Database migration handling
+- Rollback procedures
 
-### 4. Apply the smallest viable change
-- One change at a time. Don't bundle unrelated changes.
-- Prefer config changes over code changes when both would work.
-- Prefer rolling updates over big-bang deployments.
+### Backup Strategy
+- Automated daily backups (files + database)
+- Off-site backup storage
+- Backup restoration testing (quarterly)
+- Disaster recovery documentation
 
-### 5. Verify the changed behavior
-Don't trust command exit codes. Verify:
-- The service is running (process health, container status)
-- The service is reachable (HTTP check, port check, health endpoint)
-- The expected behavior is present (the thing you changed actually works)
-- No regressions (other services/features still work)
+### Performance
+- Server response time optimization
+- PHP-FPM tuning
+- Database query optimization
+- Static asset caching headers
+- CDN cache configuration
 
-### 6. Document what changed
-Record in `memory/YYYY-MM-DD.md` when the change matters:
-- What was changed and why
-- What proof confirmed success
-- Rollback path if needed later
+## Operational Protocol
+1. Assess current infrastructure state
+2. Document planned changes
+3. Backup before any changes
+4. Apply with rollback plan ready
+5. Verify post-change state
+6. Document in memory/YYYY-MM-DD.md
 
-## Change categories and proof
+## Performance Optimizations
 
-| Category | What to verify after change |
-|---|---|
-| DNS / SSL | Real DNS lookup + certificate check + reachable endpoint |
-| Deployment | Live service behavior (not just deploy logs) |
-| Runtime / process | Process alive + health endpoint + expected output |
-| Backup / recovery | Successful restore test or backup integrity check |
-| Scheduled automation | Job exists + runs on schedule + produces expected effect |
-| Container / compose | Container status (`docker ps`) + service reachability |
+### Speed Multipliers
+- Parallel data fetching from multiple sources
+- Pre-compute common metrics for the session
+- Template-based reports and dashboards
+- Batch API calls for platform operations
+- Automated threshold alerts for significant changes
 
-## Example: OpenClaw gateway scheduled task repair
+### Self-Critique Scorecard (/25)
+1. **Functionality** (1-5): Does it work perfectly?
+2. **Quality** (1-5): Enterprise-grade analysis?
+3. **Verification** (1-5): Data validated from multiple sources?
+4. **Speed** (1-5): Optimal execution?
+5. **Learning** (1-5): Patterns documented?
 
-**Context:** `openclaw status` reports gateway scheduled task is missing/stopped.
+**Target: 22+/25**
 
-**Current state assessment:**
-```powershell
-# Check if scheduled task exists
-Get-ScheduledTask -TaskName "OpenClaw*" -ErrorAction SilentlyContinue
-# Check if gateway process is running
-Get-Process | Where-Object { $_.ProcessName -match "node|openclaw" }
-# Check gateway health
-openclaw gateway status
-```
+### Auto-Check
+- [ ] Data quality validated before conclusions
+- [ ] Comparison periods consistent
+- [ ] Confidence levels stated
+- [ ] Actionable recommendations provided
+- [ ] Score logged to memory
 
-**Change plan:**
-- Intended: Gateway auto-starts on boot and restarts on crash
-- Risk: Low (creates scheduled task, no config change)
-- Rollback: `Unregister-ScheduledTask -TaskName "OpenClaw-Gateway" -Confirm:$false`
+## Output Contract
+**Artifact**: Infrastructure change documentation, configuration files
+**Evidence**: Before/after state, verification commands, health check results
+**Decision**: Changes applied and verified
+**Next**: Monitor for 24-48 hours post-change
 
-**Verification:**
-1. Task exists: `Get-ScheduledTask -TaskName "OpenClaw-Gateway"` → returns task
-2. Task runs: trigger it manually → `Start-ScheduledTask -TaskName "OpenClaw-Gateway"`
-3. Gateway healthy: `openclaw gateway status` → reports running
-4. Message flow: send a test message → received in Telegram
+## Compatibility
+- Targets current WordPress 6.9+ where applicable
+- REST API + WP-CLI preferred over browser automation
+- Batch operations via `_fields` + `per_page=100` + `concurrent.futures`
+- Browser automation only when API/CLI insufficient
 
-**Documentation:** Record fix in daily memory file with timestamp.
+## Inputs Required (Pre-Flight)
+Before executing any task in this skill:
+1. **Target identification** — What site, page, post, or system is being operated on?
+2. **Auth verification** — Confirm credentials work (test API call or CLI command)
+3. **Current state** — Understand what exists before making changes (GET before POST)
+4. **Environment** — Production vs staging (assume production unless stated)
+5. **Constraints** — No downtime? Preserve SEO? Preserve data? Budget limits?
 
-## Core rules
-- Prefer the smallest safe change.
-- Document intended change and rollback path before execution when risk is non-trivial.
-- Verify the changed behavior, not just the command exit code.
-- Treat restart success text as unproven until runtime behavior is confirmed.
-- Pair important infrastructure changes with `auto-verification`.
+## Triage Protocol
+Before ANY operation:
+1. **Identify** — What type of content/system/problem is this?
+2. **Check state** — Query current state via API/CLI before modifying
+3. **Verify creds** — Confirm authentication works
+4. **Plan rollback** — How to undo if something breaks?
+5. **Scope check** — Is this a single item or batch? Scale determines approach.
 
-## Resources
-- Workspace `TOOLS.md` — local infrastructure notes, service inventory, and operational patterns
-- OpenClaw docs at `C:\Users\<user>\AppData\Roaming\npm\node_modules\openclaw\docs`
-- WordPress sites via WP REST API (credentials in `.secrets/wordpress-sites.json`)
-- Cloud/provider tooling as available
+## Speed Optimizations
+- **API calls**: Always use `_fields` parameter (80%+ payload reduction)
+- **Pagination**: Use `per_page=100` for list endpoints
+- **Parallelism**: Use `concurrent.futures` for independent operations (max 10/site)
+- **Caching**: Store results in session — never re-fetch same data
+- **Batching**: Group similar operations into single API calls where possible
+- **Direct CLI**: Use WP-CLI `wp db query` for complex operations
 
-## Checks and common mistakes
-- Changing infra without defining rollback
-- Trusting CLI success text without runtime proof ("command said restarted" ≠ restarted)
-- Restarting services without checking real health after restart
-- Applying multiple changes at once and losing causality (can't tell which change caused the issue)
-- Forgetting to document important infra changes in memory files
-- Not checking process list after "stop" commands (process might still be running)
+## Error Recovery (Auto-Learning)
+- Track error patterns — after 2 failures, try alternative approach
+- Log recurring fixes to `memory/YYYY-MM-DD.md`
+- Update references when new patterns discovered
+- Rollback plan: Know how to undo before making changes
 
-## Output contract
-**Artifact:** Infrastructure change summary with before/after state
-**Evidence:** Verification proof — process status, health endpoint response, test message received, or equivalent concrete proof
-**Decision:** Applied successfully, rolled back, blocked, or needs follow-up verification
-**Next:** Monitoring period (watch for regressions), additional hardening, or document in memory
+## Self-Critique Scorecard (/25)
+Before claiming complete, score yourself:
+1. **Triage** (1-5): Was current state fully understood before changes?
+2. **Execution** (1-5): Was the operation clean, efficient, correct?
+3. **Verification** (1-5): Was the result verified via API/live check?
+4. **Rollback** (1-5): Can changes be undone if issues found?
+5. **Learning** (1-5): Were new patterns documented for future use?
+
+**Target: 22+/25**
+
+## Output Contract
+- **Artifact**: What was created/changed/deleted
+- **Evidence**: API response proof + live verification
+- **Decision**: Success/failure with reasoning
+- **Next**: What follow-up is needed (if any)

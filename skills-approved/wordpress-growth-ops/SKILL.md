@@ -1,242 +1,435 @@
 ---
 name: wordpress-growth-ops
-description: Use when a WordPress site needs growth work that crosses content, funnel, plugin, form, CRM, checkout, performance, security, publishing, or verification layers and the task affects monetization, lead capture, or conversion. Triggers on WordPress conversion problems, funnel debugging, plugin conflicts affecting revenue, WP-CLI diagnostics, site speed affecting conversions, or multi-layer WordPress growth optimization.
+description: Enterprise WordPress growth operations. Covers REST API mastery, content publishing, theme/plugin management, CSS/JS injection, homepage deployment, blog optimization, conversion path hardening, auto-verification, error recovery, and self-improving execution. Use when a WordPress site needs growth work crossing content, design, plugins, publishing, conversion paths, or verification. NOT for: server infra (→infrastructure-ops), email setup (→email-marketing-engine), SEO auditing (→seo-audit-playbook).
 ---
 
-# WordPress Growth Ops
+# WordPress Growth Ops — Enterprise Autonomous Site Operations
 
 ## Purpose
-Handle WordPress growth as an integrated system — diagnosis → fix → verify → improve — using deterministic procedures, WP-CLI-first operations, and self-critiquing quality gates to ensure every change actually moves the conversion needle.
+Handle WordPress as a unified growth system: copy, design, plugins, publishing, conversion paths, verification, and autonomous error recovery. Every operation includes auto-verification, error pattern learning, and self-critique before claiming completion.
 
-## Use this when
-- a WordPress task affects a lead path, checkout path, booking path, email capture path, or offer page
-- the blocker could be copy, form behavior, plugin config, CRM wiring, performance, security, or publishing quality
-- the work spans more than simple content editing but is not purely server infrastructure
-- diagnosing why a WordPress site converts poorly despite traffic
-- a plugin/theme update broke a money path
-- site speed is impacting conversion rate or SEO rankings affecting revenue
+## When to Use
+- Homepage redesigns and full-page deployments
+- Blog post formatting, optimization, and SEO hardening
+- Conversion path improvements (lead capture, checkout, CTAs)
+- Plugin/theme conflicts affecting monetization
+- CSS/JS injection and style overrides
+- Content publishing and batch operations
+- Site-wide template and layout changes
+- WordPress troubleshooting and repair
+- Multi-site portfolio operations
 
-## Do NOT use this for
-- server or runtime infrastructure work (→ `infrastructure-ops`)
-- standalone email platform setup (→ `email-marketing-engine`)
-- pure end-to-end proof of a path after changes are done (→ `money-path-verification`)
-- heavy single-article editorial work as the main task (→ `editorial-post-enhancement`)
-- WordPress core/plugin development from scratch (use WordPress/agent-skills directly)
+**Do NOT use for:** Server infrastructure (→`infrastructure-ops`), email marketing setup (→`email-marketing-engine`), SEO auditing (→`seo-audit-playbook`), general copywriting (→`conversion-copywriting`), API integrations (→`api-integration-builder`).
 
-## Self-Improvement Protocol
+## Compatibility
+- WordPress 6.9+ (REST API, WP-CLI, Application Passwords)
+- PHP 8.0+ recommended
+- WP-CLI preferred for backend operations
+- Browser automation only when REST API insufficient
 
-After every WordPress growth operation, run this critique loop:
+## Inputs Required (Pre-Flight)
+- Target site URL and WordPress root path
+- Authentication method (app password, WP-CLI, file access)
+- Environment: production/staging (assume production unless stated)
+- Constraints: no downtime, preserve SEO, preserve data
 
-1. **Pattern capture:** Did this diagnosis reveal a new failure mode? Add it to `references/operational-traps.md`.
-2. **Routing accuracy:** Did the first-pass diagnosis find the real issue, or did you need extra rounds? Log the miss in daily memory.
-3. **Verification quality:** Did the verification step catch a regression? If not, strengthen the verification checklist.
-4. **Speed:** Could the diagnosis have been faster with a different initial probe? Update the diagnostic order.
-5. **Metric impact:** 48 hours after the fix, check if the conversion metric actually improved. If not, the fix addressed a symptom — escalate.
+## Triage Protocol
+Before ANY operation:
+1. Identify content type (page vs post vs CPT) via body class or REST API
+2. Check current state via API (GET before POST/PUT/DELETE)
+3. Verify credentials work (test API call)
+4. Check for conflicts (slug duplicates, concurrent modifications)
+5. Plan rollback (how to undo if something breaks)
 
-## Do this
+## Speed Optimizations (Official Patterns)
+- Use `_fields` parameter to fetch only needed data (80%+ payload reduction)
+- Batch operations: `per_page=100` for list endpoints
+- Parallel API calls via `concurrent.futures` (max 10/site)
+- WP-CLI for bulk operations (faster than REST API for many tasks)
+- Cache post/category maps in session (don't re-fetch)
+- Use `wp db query` for direct DB operations when REST API is too slow
 
-### Phase 0: Triage and Detect (WP-CLI first)
+## Self-Critique Scorecard (/25)
+1. **Triage** (1-5): Was current state fully understood before changes?
+2. **Execution** (1-5): Was the operation clean and efficient?
+3. **Verification** (1-5): Verified via API + live page + body class?
+4. **Rollback** (1-5): Can changes be undone if issues found?
+5. **Learning** (1-5): Were new patterns documented?
 
-Run deterministic detection before making ANY changes:
+**Target: 22+/25**
 
-```bash
-# Detect WP install, version, active plugins, theme
-wp core version --path=<path>
-wp plugin list --status=active --path=<path>
-wp theme list --status=active --path=<path>
+## Error Recovery (Auto-Learning)
+- Track error patterns per site (404s, auth failures, cache issues)
+- After 2 failures on same operation → try alternative approach
+- Log recurring fixes to memory/YYYY-MM-DD.md
+- Update error-patterns.md reference when new patterns discovered
 
-# Check for critical issues
-wp doctor check --path=<path>          # autoload bloat, debug flags, update status
-wp option get siteurl --path=<path>    # confirm correct URL
-wp rewrite flush --dry-run --path=<path>  # check permalink structure
+## Output Contract
+**Artifact**: WordPress operation completed and verified
+**Evidence**: API response proof + live page verification + body class check
+**Decision**: Operation successful or error pattern identified with recovery path
+**Next**: Log pattern, update memory, or schedule follow-up verification
+
+## Architecture
+
+```
+Request → Classify → Execute → Verify → Learn
+                    ↓          ↓        ↓
+               REST API    Live      Error DB
+               + Direct    Check     + Pattern
+               File Access            Matching
 ```
 
-**Classify the site type** (routes to different growth strategies):
-- **Content/Affiliate site:** revenue from ads, affiliates, display → focus on traffic→click paths
-- **E-commerce (WooCommerce):** revenue from products → focus on product→cart→checkout→order
-- **Service/Lead gen:** revenue from inquiries/bookings → focus on page→form→CRM→follow-up
-- **SaaS/App:** revenue from signups/trials → focus on landing→signup→onboarding
+Every operation follows: **Plan → Execute → Verify → Self-Critique → Log**
 
-### Phase 1: Map the Money Path
+## WordPress REST API — Complete Reference
 
-Before tracing the path, pull Google Search Console and Bing Webmaster data when available so traffic-entry and indexation decisions use real search data, not guesses.
-
-Identify the PRIMARY money path and trace every hop:
-
-| Hop | What to check | WP-CLI / REST probe |
-|---|---|---|
-| Traffic entry | Which pages get traffic? | `wp db query "SELECT post_name, meta_value FROM wp_posts p JOIN wp_postmeta pm ON p.ID=pm.post_id WHERE pm.meta_key='_yoast_wpseo_focuskw' LIMIT 20"` |
-| Offer/CTA | Is the offer clear? Does CTA render? | `curl -s <page-url> \| grep -i 'cta\|buy\|book\|sign.up'` |
-| Form/Checkout | Does the form submit? Does Woo process? | Test via REST: `POST /wp-json/<form-plugin>/submit` or Woo `/wp-json/wc/v3/orders` |
-| Plugin wiring | Does the form/checkout plugin fire hooks? | Check `wp cron event list` for scheduled sends, check plugin settings via `wp option get <plugin_option>` |
-| CRM/Automation | Does data reach the CRM/ESP? | Check provider API for recent contacts, check automation trigger logs |
-| Delivery | Does the user get what was promised? | Test with real email, check delivery logs |
-
-**If the path design itself is weak,** route through `offer-positioning`, `service-funnel-architecture`, or `lead-magnet-delivery-ops` BEFORE touching WordPress.
-
-### Phase 2: Diagnose by Layer (bottom-up)
-
-Fix the lowest broken layer first:
-
-#### Layer 1: Performance (site speed → conversion impact)
-Slow sites kill conversion before the user sees the offer.
-
+### Authentication Methods
 ```bash
-# Quick performance check
-wp doctor check --path=<path>           # catches autoload bloat, debug flags
-wp profile stage --path=<path>          # bootstrap / main_query / template timing
+# App Password (preferred — REST API only)
+AUTH=$(echo -n "user:xxxx xxxx xxxx xxxx xxxx xxxx" | base64)
+curl -H "Authorization: Basic $AUTH" "https://site.com/wp-json/wp/v2/posts"
 
-# Check autoloaded options (common bloat source)
-wp db query "SELECT option_name, LENGTH(option_value) as size FROM wp_options WHERE autoload='yes' ORDER BY LENGTH(option_value) DESC LIMIT 20"
-
-# Check object cache
-wp cache flush --path=<path>            # only if safe and needed
+# Cookie auth (for wp-admin sessions — needed for certain endpoints)
+# Not available via REST API — requires browser or wp-login.php POST
 ```
 
-**Critical WordPress 6.9+ considerations:**
-- Classic themes now get on-demand CSS (30-65% CSS reduction)
-- Block themes can load with zero render-blocking CSS
-- If performance is poor despite these, check: unoptimized images, render-blocking plugins, excessive HTTP API calls on every request, cron spike overhead
-
-#### Layer 2: Rendering (does the page actually show what it should?)
+### Posts & Pages
 ```bash
-# Check for PHP errors
-wp eval 'echo (WP_DEBUG ? "DEBUG ON" : "debug off");' --path=<path>
+# List posts (paginated, 10 per page)
+GET /wp-json/wp/v2/posts?page=1&per_page=10
 
-# Check for broken blocks/content
-wp db query "SELECT post_id FROM wp_postmeta WHERE meta_key='_wp_old_slug' LIMIT 5"
+# Get single post
+GET /wp-json/wp/v2/posts/{id}?_fields=id,title,content,status,template,categories
 
-# Verify critical shortcodes/blocks render
-curl -s <page-url> | grep -c 'class="wp-block\|shortcode-error\|This block\|Invalid block'
+# Create/Update post
+POST /wp-json/wp/v2/posts/{id}
+{
+  "title": "New Title",
+  "content": "<!-- wp:html -->\n...content...\n<!-- /wp:html -->",
+  "status": "publish",
+  "categories": [1, 5],
+  "template": "elementor_header_footer",
+  "meta": {
+    "_yoast_wpseo_metadesc": "Meta description",
+    "_yoast_wpseo_focuskw": "focus keyword"
+  }
+}
+
+# Trash (soft delete)
+DELETE /wp-json/wp/v2/posts/{id}
+
+# Force delete (permanent)
+DELETE /wp-json/wp/v2/posts/{id}?force=true
+
+# Pages use /wp-json/wp/v2/pages/ endpoint (same structure)
 ```
 
-Common failures:
-- Plugin shortcodes broken after update
-- Gutenberg "Invalid block" errors after theme/plugin changes
-- Cached pages showing stale content (check cache plugin purge status)
-
-#### Layer 3: Form/Checkout Wiring
+### Media Upload
 ```bash
-# Check form plugin status
-wp plugin list --name=<form-plugin> --path=<path>
+# Upload file
+curl -X POST -H "Authorization: Basic $AUTH" \
+  -H "Content-Disposition: attachment; filename=image.jpg" \
+  -H "Content-Type: image/jpeg" \
+  --data-binary @image.jpg \
+  "https://site.com/wp-json/wp/v2/media"
 
-# Check if form pages exist and are published
-wp post list --post_type=page --s=<form-page-slug> --path=<path>
+# CRITICAL: Never upload .html files — WordPress corrupts them with wpautop
+# Use application/octet-stream or direct filesystem upload for HTML
 
-# Test REST API form submission
-curl -X POST <site>/wp-json/<form-namespace>/v1/submit \
-  -H "Content-Type: application/json" \
-  -d '{"fields":{"email":"test@example.com","name":"Test"},"form_id":<id>}'
+# List media
+GET /wp-json/wp/v2/media?per_page=100&media_type=image
 ```
 
-#### Layer 4: CRM/Email Automation Wiring
-- Check if the form plugin has a CRM integration active
-- Verify API keys/tokens are valid (not expired/revoked)
-- Test with a fresh email address (stale contacts lie)
-- Check automation trigger conditions (tags, segments, lists)
-
-#### Layer 5: Performance Post-Fix Verification
-After ANY fix:
+### Taxonomies (Categories/Tags)
 ```bash
-# Re-measure the same metric
-wp profile stage --path=<path>          # if performance fix
-curl -s -o /dev/null -w "%{time_total}" <page-url>
+# List categories
+GET /wp-json/wp/v2/categories?per_page=100
 
-# Verify the fix is live (not cached)
-curl -s -H "Cache-Control: no-cache" <page-url> | grep <expected-change>
+# Update category (name, slug, meta)
+POST /wp-json/wp/v2/categories/{id}
+{
+  "name": "New Name",
+  "slug": "new-slug",
+  "meta": {
+    "_yoast_wpseo_metadesc": "Category meta description"
+  }
+}
 ```
 
-### Phase 3: Apply Fix + Self-Critique
-
-Before declaring "fixed":
-
-1. **Apply the smallest high-leverage change.** One layer at a time.
-2. **Self-critique:** Did I verify on the REAL user path, not just the admin? (Yes/No)
-3. **Self-critique:** Did I use a fresh test input, not stale data? (Yes/No)
-4. **Self-critique:** Did I check for regression in other money paths? (Yes/No)
-5. If any answer is No → fix the verification gap before proceeding.
-
-### Phase 4: Publishing Quality (if content/funnel pages changed)
-
-For any page that's part of a money path:
-- Contextual internal links to supporting content
-- Clear visual hierarchy (scannable headings, short paragraphs)
-- Trust signals near CTA (testimonials, guarantees, social proof)
-- Clean title / slug / focus keyphrase (SEO metadata)
-- Fast-loading media (compressed images, lazy loading, proper sizes)
-- Mobile-first rendering (check responsive layout)
-
-### Phase 5: Post-Change Verification
-
+### WordPress Settings
 ```bash
-# Verify critical paths
-wp doctor check --path=<path>
+# Get settings
+GET /wp-json/wp/v2/settings
 
-# Test money path end-to-end with fresh input
-curl -X POST <form-endpoint> -d '{"email":"verify-$(date +%s)@test.com"}'
-
-# Check for new PHP errors
-tail -20 <wp-content>/debug.log  # if WP_DEBUG_LOG enabled
-
-# Verify no regression in other pages
-wp eval 'echo get_option("siteurl");' --path=<path>
+# Update settings
+POST /wp-json/wp/v2/settings
+{
+  "title": "Site Title",
+  "description": "Tagline",
+  "permalink_structure": "/%postname%/"
+}
 ```
 
-## Operating rules
-- Start with the conversion target, not the WordPress admin.
-- WP-CLI first — it's deterministic and doesn't lie like admin UIs do.
-- Fix the lowest blocking layer first (performance → rendering → wiring → automation → copy).
-- Money path before cosmetics. Always.
-- Fresh test inputs beat stale contact records. Always.
-- After meaningful changes, verify the live path, not just the admin config.
-- Prefer stable plugin-supported mechanisms over brittle hacks.
-- Document every non-obvious fix in `memory/YYYY-MM-DD.md` for pattern learning.
+### Elementor
+```bash
+# Elementor data stored in post meta: _elementor_data
+# WARNING: Complex JSON structure — handle with care
 
-## Default layer order
-1. Performance (speed kills conversion before the user sees the offer)
-2. Rendering (broken blocks/shortcodes/theming)
-3. Form/checkout wiring (submit transport, AJAX, nonces)
-4. CRM/automation/delivery wiring
-5. Offer/CTA clarity and copy
-6. Publishing quality and trust signals
-7. Proof/verification
+# Get Elementor data
+GET /wp-json/wp/v2/posts/{id} → check meta._elementor_data
 
-## Build vs buyer rule
-Separate internal build assets from buyer-facing delivery assets.
-- Internal: manifests, implementation notes, launch docs, fulfillment specs
-- Buyer: guided docs, examples, templates, bonuses, deliverables
+# Elementor templates
+GET /wp-json/wp/v2/elementor_library/{id}
+```
 
-Never ship internal scaffolding as if it were customer value.
+### Yoast SEO via REST API
+```bash
+# Update Yoast settings
+POST /wp-json/yoast/v1/configuration
+{"noindex-author-wpseo": true}
 
-## Resources
-Read when needed:
-- `references/common-wordpress-money-paths.md` — money path templates by site type
-- `references/portfolio-wordpress-routing.md` — routing rules for multi-site operations
-- `references/operational-traps.md` — learned failure modes (updated by self-improvement protocol)
-- `references/wp-growth-diagnostic-checklist.md` — step-by-step diagnostic flowchart
-- `references/conversion-layer-audit.md` — detailed conversion layer analysis patterns
-- `references/wp-performance-growth.md` — performance optimizations that directly impact conversion
+# Update post meta
+POST /wp-json/wp/v2/posts/{id}
+{
+  "meta": {
+    "_yoast_wpseo_metadesc": "description",
+    "_yoast_wpseo_focuskw": "keyword",
+    "_yoast_wpseo_noindex": ""
+  }
+}
+```
 
-WordPress/agent-skills (official, for deep WP development work):
-- `wp-performance` — profiling, caching, database optimization
-- `wp-plugin-development` — plugin architecture, hooks, security
-- `wp-rest-api` — REST endpoints, schema, auth
-- `wp-wpcli-and-ops` — WP-CLI operations, automation, multisite
-- `wp-block-development` — Gutenberg blocks, deprecations
-- `wp-block-themes` — theme.json, templates, patterns
+### Code Snippets Plugin
+```bash
+# List snippets
+GET /wp-json/wp/v2/wpcode-snippets
 
-## Checks and common mistakes
-- Do not mistake admin writability for real front-end success (verify on live path).
-- Do not assume static HTML reflects JS/AJAX submit behavior (test actual form transport).
-- Do not spend hours on styling while the money path is still broken (layers before cosmetics).
-- Do not trust "subscriber exists" as proof of email delivery (check inbox/provider history).
-- Do not fix copy before verifying the form actually submits and the CRM actually receives data.
-- Do not declare "fixed" without a fresh successful end-to-end test.
-- Do not ignore performance — a 3-second page load kills 40%+ of conversions before the offer is seen.
-- Do not cache-purge in production during traffic peaks (schedule low-traffic windows).
+# Create/Update snippet (WORKS — different storage from WPCode)
+POST /wp-json/wp/v2/wpcode-snippets
+{
+  "title": "Snippet Name",
+  "content": "/* CSS or JS code */",
+  "status": "publish",
+  "wpcode_type": "php"  # or "css", "js", "html"
+}
+```
 
-## Output contract
-**Artifact:** WordPress growth improvement with diagnostic report showing which layer was broken, what was fixed, and verification proof
-**Evidence:** WP-CLI output confirming fix + live path test with fresh input + before/after performance metrics (if applicable)
-**Decision:** Change is live and verified, blocked (with specific blocker), or needs deeper verification via `money-path-verification`
-**Next:** Monitor conversion metric for 48h, run self-improvement protocol, or escalate to specialized skill for follow-up work
+## Critical WordPress Gotchas (Lessons Learned)
+
+### Content Rendering
+1. **wpautop()** — Wraps bare text in `<p>`, adds `<br>` on double newlines. Breaks CSS in `<style>` blocks and JS in `<script>` tags.
+2. **`<!-- wp:html -->` block** — Prevents wpautop for enclosed content BUT strips ALL `<p>` tags from inside. Use only for self-contained HTML, not mixed content.
+3. **`<script>` tags stripped** — WordPress REST API `wp_filter_post_kses` removes `<script>` tags from post content. Use Code Snippets plugin or mu-plugins instead.
+4. **`<style>` block corruption** — wpautop injects `<p>`, `</p>`, `<br/>` inside style blocks. Must strip artifacts before deploying.
+5. **Application passwords** — Work for REST API Basic Auth ONLY. Cannot use for wp-login.php form submission.
+6. **`post_content` corruption** — If `content.raw` is 0 chars but `content.rendered` has content, another plugin is providing the content. Always check raw field for database integrity.
+
+### Routing & Templates
+7. **Pages beat Posts** — If a PAGE and POST share the same slug, WordPress routes to the PAGE. Even trashed pages can block routes.
+8. **Trash ≠ Delete** — Trashed content still exists in DB and can still match URL routes. Force-delete to fully remove.
+9. **`elementor_header_footer` template** — Only renders header + footer, NO content area. Appears blank if used incorrectly.
+10. **Body class detection** — `page-id-{N}` = serving a page, `postid-{N}` = serving a post. Always check when debugging routing issues.
+11. **Permalink flush** — After slug/template changes, rewrite rules may need flushing. Update permalink settings in WP admin.
+
+### Theme & CSS
+12. **Never embed CSS in page content `<style>` tags** — wpautop() wraps CSS rules in `<p>` tags, breaking everything.
+13. **CSS injection via `<script>`** — Create `<style>` element via JS: `<script>(function(){var s=document.createElement("style");s.textContent="CSS";document.head.appendChild(s)})();</script>`
+14. **Theme CSS battles** — GeneratePress has 13+ `body{}` declarations. Don't fight themes with overrides — replace entire document with `document.write()` + base64.
+15. **`document.write()` with base64** — Most reliable full-page replacement. WP-safe (only `[A-Za-z0-9+/=]`), zero theme interference.
+
+### Performance & Caching
+16. **PhastPress** — HTML rewriter (not standard page cache). Changes may require manual purge.
+17. **Cloudflare** — Edge cache. Add `?v=timestamp` for verification. Purge via CF API for immediate updates.
+18. **LiteSpeed Cache** — Server-level cache. Purge via plugin settings or REST API if available.
+
+## Auto-Verification Protocol
+
+Every WordPress operation MUST pass verification before claiming completion:
+
+### Content Operations
+```
+1. GET the post/page via REST API
+2. Verify content.raw has expected length (> 0 chars)
+3. Verify no wpautop artifacts in content.rendered
+4. Fetch live page, check content appears between header/footer
+5. Check body class matches expected content type (post vs page)
+```
+
+### Style/Template Operations
+```
+1. Verify template field is correct
+2. Check body classes match expected template
+3. Verify no CSS conflicts (theme CSS overriding injected styles)
+4. Check mobile responsiveness via readability extraction
+```
+
+### Full Verification Script
+```bash
+verify_wp_page() {
+    local site="$1" post_id="$2" expected_content="$3"
+    local auth="$4"
+    
+    # 1. Check DB content
+    local raw_len=$(curl -s -u "$auth" "$site/wp-json/wp/v2/posts/$post_id" | \
+        python3 -c "import json,sys; d=json.load(sys.stdin); print(len(d['content']['raw']))")
+    
+    # 2. Check live page
+    local page_size=$(curl -s -o /dev/null -w "%{size_download}" "$site/?p=$post_id")
+    
+    # 3. Report
+    if [ "$raw_len" -gt 0 ] && [ "$page_size" -gt 1000 ]; then
+        echo "✅ VERIFIED: raw=$raw_len, live=${page_size}B"
+        return 0
+    else
+        echo "❌ FAILED: raw=$raw_len, live=${page_size}B"
+        return 1
+    fi
+}
+```
+
+## Error Recovery Patterns
+
+### Pattern 1: Content Wiped (raw = 0)
+```
+Symptom: content.raw = 0, content.rendered = N chars
+Cause: Batch operation corrupted post_content field
+Recovery: Restore from rendered field
+Action: POST /wp-json/wp/v2/posts/{id} with {"content": "<rendered content>"}
+Verify: GET post, confirm raw > 0
+```
+
+### Pattern 2: Slug Conflict (wrong content served)
+```
+Symptom: Live page shows wrong content or blank
+Cause: PAGE and POST share same slug
+Detection: Body class shows page-id-N instead of postid-N
+Recovery: Force-delete conflicting page
+Action: DELETE /wp-json/wp/v2/pages/{id}?force=true
+Verify: Check body class on live page
+```
+
+### Pattern 3: Template Blocking Content
+```
+Symptom: Page blank between header/footer
+Cause: elementor_header_footer template (no content area)
+Detection: Body shows page-template-elementor_header_footer
+Recovery: Change template or force-delete page to serve post
+Action: POST /wp-json/wp/v2/pages/{id} {"template": ""} or DELETE page
+Verify: Check live page renders content
+```
+
+### Pattern 4: wpautop Artifacts in Style Blocks
+```
+Symptom: CSS broken, <p> tags inside <style>
+Cause: wpautop() ran before content was saved with raw HTML
+Detection: <p> or <br/> inside <style> blocks
+Recovery: Extract style blocks, strip artifacts, re-embed
+Action: Python script to clean and redeploy
+Verify: Check style blocks have 0 artifacts after fix
+```
+
+## Batch Operations Protocol
+
+For operations affecting multiple posts/pages:
+
+### Pre-Batch
+1. Scan total count of affected items
+2. Estimate time (0.5s per item for simple REST API operations)
+3. Create backup/rollback plan
+4. Set rate limit (10 items per API page, pause 0.5s between pages)
+
+### During Batch
+1. Track progress: items completed / total
+2. Log errors immediately, don't continue on critical failures
+3. Pause if error rate > 10%
+4. Verify first 3 items before continuing with rest
+
+### Post-Batch
+1. Sample verification (check 5% of affected items)
+2. Report: total changed, errors, skipped
+3. Update ops log with results
+
+## Self-Critique Protocol
+
+Before declaring any WordPress operation complete, run self-critique:
+
+```markdown
+## Self-Critique: [Operation]
+
+1. **Did I verify the live page?** (Not just the API response)
+2. **Did I check the correct content type?** (Post vs Page)
+3. **Did I check for slug conflicts?** (Same slug on different content types)
+4. **Did I verify on mobile viewport?** (responsive rendering)
+5. **Did I check for caching issues?** (PhastPress, Cloudflare, LiteSpeed)
+6. **Did I verify money path still works?** (CTAs, forms, checkout)
+7. **Did I check for side effects?** (Other pages affected by template changes)
+8. **Is my evidence solid?** (API response + live page + body class check)
+```
+
+If ANY answer is "no" → Fix it before claiming completion.
+
+## Output Contract
+**Artifact**: WordPress operation completed and verified
+**Evidence**: API response proof + live page verification + body class check
+**Decision**: Operation successful or error pattern identified with recovery path
+**Next**: Monitor for 24h if critical operation, or log pattern for future learning
+
+## Performance Optimizations
+
+### Speed Multipliers
+- **Always use `_fields` parameter** — fetch only what you need, reduces payload 80%+
+- **Parallel API calls** — use `concurrent.futures` for independent operations (max 10/site)
+- **Batch by site** — never context-switch mid-operation
+- **Pre-fetch auth** — validate credentials before starting work
+- **Cache category/post maps** — don't re-fetch data already available in session
+
+### WP-CLI Speed Patterns
+- `wp post list --field=ID` for fast ID-only queries
+- `wp post meta get/update` for bulk meta operations
+- `wp db query "SELECT..."` for complex data operations
+- `wp cache flush` after major content changes
+- `wp rewrite flush` after permalink changes
+- `wp search-replace` for URL migrations (faster than REST API)
+
+### Self-Critique Scorecard (/25)
+1. **Functionality** (1-5): Does it work perfectly?
+2. **Quality** (1-5): Enterprise-grade?
+3. **Verification** (1-5): Verified via API + live + visual?
+4. **Speed** (1-5): Optimal execution?
+5. **Learning** (1-5): Patterns documented?
+
+**Target: 22+/25**
+
+### Auto-Check
+- [ ] Pre-flight checks completed
+- [ ] Verified via multiple methods
+- [ ] Anti-patterns avoided
+- [ ] Score logged to memory
+
+### Homepage Deployment Anti-Patterns (LESSONS LEARNED)
+- ❌ **NEVER put full HTML document (DOCTYPE/head/body) in WP page content** — causes nested documents
+- ❌ **NEVER use `document.write()` base64 on themes that process meta descriptions from content** — script gets trapped in meta tags
+- ✅ **Always use scoped CSS** (prefix all classes with site-specific prefix like `.mgg-`, `.ph-`, `.mw-`)
+- ✅ **Use `all:initial` on container** to reset theme styles
+- ✅ **iframe approach is most reliable** for standalone HTML in WP — works across all themes
+- ✅ **`<!-- wp:html -->` Gutenberg block** prevents wpautop from processing content
+
+### Verified Patterns (Use These)
+- **Scoped HTML**: `<div class="PREFIX">` + `all:initial` + prefixed CSS classes → zero theme conflicts
+- **iframe**: `<script>body.innerHTML='';iframe=document.createElement('iframe');iframe.src='...'</script>` → works on all themes
+- **document.write()**: Only when meta description won't trap the script — test first
+- **Media upload**: `application/octet-stream` MIME for binary files, `text/html` corrupted by WP
+
+## Scripts
+- `scripts/wp-content-fix.py` — Fix wpautop artifacts in style blocks
+- `scripts/wp-batch-update.py` — Batch post/page updates with verification
+- `scripts/wp-verify.py` — Full verification of WordPress content operations
+- `scripts/wp-slug-check.py` — Check for slug conflicts across content types
+
+## References
+- `references/rest-api-complete.md` — Full REST API endpoint reference
+- `references/error-patterns.md` — Known error patterns and recovery procedures
+- `references/template-troubleshooting.md` — Template and theme debugging guide
+- `references/performance-caching.md` — Cache management for each platform
+- `references/security-hardening.md` — WordPress security best practices

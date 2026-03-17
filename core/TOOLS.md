@@ -1,25 +1,51 @@
-# TOOLS.md - Tool Orchestration & Capability Matrix
+# TOOLS.md - Local Notes
 
-# schema
-_version: 2.0
-_last_updated: 2026-02-28
+Skills define _how_ tools work. This file is for _your_ specifics — the stuff that's unique to your setup.
 
-## Core Capabilities
-1. **Search:** Web, Memory, Codebase.
-2. **Action:** Computer (Browser), Shell/Bash, File Management.
-3. **Integration:** LLM APIs, WordPress XML-RPC/REST, NeuronWriter.
+## What Goes Here
 
-## Preferred Tool Patterns
-- Use `search_web` for current trends and SEO entity discovery.
-- Use `computer` for deep technical interaction and manual audits.
-- Use `read_page` / `get_page_text` for high-density information extraction.
+Things like:
 
-## Safety & Governance
-- NO sensitive credential entry (API keys, passwords).
-- ALWAYS verify URL parameters for PII leaks.
-- Respect bot detection; never attempt bypass.
+- Camera names and locations
+- SSH hosts and aliases
+- Preferred voices for TTS
+- Speaker/room names
+- Device nicknames
+- Anything environment-specific
 
-## Tool Logic
-- **Pre-flight:** Check `MEMORY.md` for existing context.
-- **Execution:** Atomic, verifiable steps.
-- **Post-flight:** Update `STATUS.md` and `HEARTBEAT.md`.
+## Examples
+
+```markdown
+### Cameras
+
+- living-room → Main area, 180° wide angle
+- front-door → Entrance, motion-triggered
+
+### SSH
+
+- home-server → 192.168.1.100, user: admin
+
+### TTS
+
+- Preferred voice: "Nova" (warm, slightly British)
+- Default speaker: Kitchen HomePod
+```
+
+## Why Separate?
+
+Skills are shared. Your setup is yours. Keeping them apart means you can update skills without losing your notes, and share skills without leaking your infrastructure.
+
+---
+
+Add whatever helps you do your job. This is your cheat sheet.
+
+## Swarm Notes
+
+Store here when validated:
+- site access locations
+- preferred publishing patterns
+- known cache/plugin quirks
+- preferred worker roles for recurring workflows
+- verification traps to remember
+
+Keep secrets in `.secrets/` and operational notes here.

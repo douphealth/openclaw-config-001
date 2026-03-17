@@ -1,259 +1,211 @@
 ---
 name: content-strategy-planning
-description: Use when planning content strategy, topic clusters, editorial priorities, keyword research, cannibalization prevention, content gap analysis, or what-to-publish-next decisions tied to traffic, leads, authority, or revenue.
+description: Enterprise content strategy, topic cluster design, and editorial planning. Use when planning content strategy, building topic clusters, prioritizing editorial topics, designing content calendars, or mapping content gaps to business goals. Triggers on content strategy, topic clustering, editorial calendar planning, pillar content design, or customer question mining.
 ---
 
-# Content Strategy Planning
+# Content Strategy Planning — Enterprise Editorial Strategy
 
 ## Purpose
-Turn business goals, customer language, search demand, and competitive gaps into a prioritized, cannibalization-safe content plan that drives real business outcomes — not just page counts.
+Design content systems that drive traffic, leads, and authority through structured topic clusters, not random publishing.
 
-## Use this when
-- planning what content to create, expand, or consolidate
-- doing keyword research, clustering, or content gap analysis
-- building topic cluster architecture for a site or domain
-- checking for cannibalization before publishing new content
-- prioritizing an editorial backlog by business value
-- planning affiliate, monetization, or lead-gen content systems
-- designing internal-linking topology for topical authority
+## When to Use
+- Planning content strategy from scratch or for a new site
+- Building topic clusters and pillar content architecture
+- Prioritizing editorial topics by business impact
+- Designing content calendars and publishing cadences
+- Mining customer questions for content opportunities
 
-## Do NOT use this for
-- writing or editing individual articles (→ `conversion-copywriting` or `editorial-post-enhancement`)
-- executing technical SEO fixes (→ `seo-audit-playbook` or `schema-ops`)
-- one-off single-page copy improvements (→ `conversion-copywriting`)
-- WordPress plugin/server troubleshooting (→ `wordpress-growth-ops` or `infrastructure-ops`)
+**Do NOT use for:** Writing articles (→ `editorial-post-enhancement`), SEO auditing (→ `seo-audit-playbook`), conversion copy (→ `conversion-copywriting`).
 
-## Self-Improvement Protocol
+## Strategy Framework
 
-After each strategy run:
-1. **Cluster accuracy:** Did the cluster map match real SERP overlap? Note misses in `references/cluster-pattern-learnings.md`.
-2. **Intent classification:** Were intent labels accurate when pages were published? Track corrections.
-3. **Business value prediction:** Did high-priority topics actually perform? Log actual vs predicted.
-4. **Cannibalization prediction:** Did new content cause cannibalization despite checks? Add new signal patterns.
-5. **Competitive gap quality:** Were identified gaps actually achievable? Note difficulty calibration improvements.
-6. **Priority model tuning:** If the top 5 topics by priority didn't perform, adjust the weighting model in `references/priority-model.md`.
+### Phase 1: Business Goals
+1. Primary content goal: traffic, leads, authority, or education?
+2. Target audience segments and their awareness levels (TOFU/MOFU/BOFU)
+3. Map buyer journey: awareness → consideration → decision
+4. Set measurable targets: traffic, leads, rankings, engagement KPIs
 
-## Do this
+### Phase 2: Topic Research
+5. **Customer question mining**:
+   - Support tickets and sales call transcripts
+   - Reddit, Quora, forums in the niche
+   - "People also ask" boxes on Google
+   - Competitor comment sections
+   
+6. **Keyword cluster analysis**:
+   - Head terms (high volume, high competition)
+   - Long-tail variants (lower volume, easier to rank)
+   - Question queries (how, what, why, when)
+   - Comparison queries (vs, alternatives, best)
 
-### Phase 0: Business Context & Goal Lock (< 5 minutes)
+7. **Competitor content gap analysis**:
+   - What are competitors ranking for that you're not?
+   - What are they covering poorly?
+   - Where is the content thin or outdated?
 
-Extract the site's current state before planning:
+### Phase 3: Topic Cluster Design
 
-```bash
-# Site structure snapshot
-wp post list --post_type=post,page --post_status=publish --fields=ID,post_title,post_type --format=csv > /tmp/site-content.csv
-
-# Category/tag topology
-wp term list category --fields=name,slug,count --format=json
-wp term list post_tag --fields=name,slug,count --format=json
-
-# Existing content count by topic (rough)
-wp post list --post_type=post --post_status=publish --s="<topic>" --fields=ID,post_title
+**Architecture:**
+```
+[Pillar: Comprehensive Guide 3000+ words]
+├── [Cluster: Specific Subtopic 1500+ words]
+├── [Cluster: Specific Subtopic 1500+ words]
+├── [Cluster: Comparison/How-To 1500+ words]
+├── [Cluster: Tool/Resource List 1500+ words]
+└── [Cluster: FAQ/Common Mistakes 1500+ words]
 ```
 
-**Questions to answer before moving forward:**
-1. What is the **primary business goal** this content supports? (organic traffic, leads, sales, authority, affiliate revenue)
-2. Who is the **target reader** and what problem are they trying to solve?
-3. What **conversion action** should the reader take after consuming content?
-4. What is the **current topical authority** strength? (new site = 0 clusters; established = focus on gaps)
-5. What **resources** are available? (writer count, publishing cadence, budget for research/tools)
+**Rules:**
+- Each pillar has 5-10 cluster articles
+- Every cluster links to pillar (rich anchor text)
+- Pillar links to every cluster in relevant context
+- Cluster articles target specific long-tail keywords
+- Pillar covers the topic comprehensively
 
-### Phase 1: Seed Topic Discovery
+### Phase 4: Prioritization Matrix
 
-Gather raw topic candidates from multiple sources:
+| Keyword Volume | Competition | Business Value | Priority |
+|----------------|-------------|----------------|---------|
+| High (>1K/mo) | Low | High | 🔴 **P0** — Write first |
+| High | Medium | High | 🟡 **P1** — Write second |
+| Medium (100-1K) | Low | High | 🟡 **P1** — Write second |
+| Medium | Low | Medium | 🟢 **P2** — Write later |
+| Low (<100) | Low | High | 🟢 **P2** — Write for conversion |
 
-#### Source 1: Customer Language Mining
-```bash
-# From support tickets, sales calls, community posts — manual extraction
-# Record: exact phrases customers use to describe their problem
-```
-- Mine support tickets for recurring questions
-- Extract phrases from sales call transcripts
-- Review social media comments and community forum threads
-- Check review sites (G2, Capterra, Trustpilot) for competitor reviews
+### Phase 5: Editorial Calendar
 
-**Output:** List of 20-50 customer-language phrases describing problems, goals, and desired outcomes.
+Format: Week → Content Type → Topic → Target Keyword → Funnel Stage → Owner → Status
 
-#### Source 2: Search Demand + Search Console Truth Set
-```bash
-# Use available keyword tools or scrape related searches
-# Core seed: primary product/service keywords
-# Expand: related questions, comparisons, alternatives
-# Pull Google Search Console + Bing Webmaster query/page exports when available
-```
-- Start with 5-10 core seed keywords
-- Expand with "how to", "best", "vs", "alternative to", "template", "checklist" modifiers
-- Extract People Also Ask questions from SERP
-- Pull GSC and Bing Webmaster queries/pages to see what the site already partially owns
-- Note search volumes and keyword difficulty
+**Publishing cadence:**
+- Week 1: Pillar article (comprehensive)
+- Week 2-3: Cluster articles (2 per week)
+- Week 4: Refresh/update existing content
+- Repeat with next cluster
 
-**Output:** 100-300 raw keyword candidates with volume/difficulty data plus real GSC/Bing query-page evidence where available.
+### Phase 6: Measure & Iterate
+- Track: page views, time on page, keyword rankings, leads per article
+- Double down on winning topics (more cluster content)
+- Prune or consolidate underperforming content quarterly
+- Refresh top content every 90 days
 
-#### Source 3: Competitor Content Audit
-```bash
-# For each top 3-5 competitor:
-curl -s "https://www.google.com/search?q=site:competitor.com+<topic>&num=20" | extract titles/URLs
-# Or use Screaming Frog / Ahrefs / SEMrush if available
-```
-- Catalog competitor's top-performing content by estimated traffic
-- Identify topics they cover that you don't (content gaps)
-- Note their content formats, depth, and unique angles
-- Flag topics where their content is thin (opportunity to outperform)
+## Content Quality Standards
+- Every article has target keyword + 3-5 secondary keywords
+- 5-8 internal links per article minimum
+- CTA or next step (newsletter, offer, related reading)
+- Author attribution + publication date + update date
+- FAQ section with schema markup for AI visibility
 
-**Output:** Competitor content map with gap analysis.
+### Voice & Style: Hormozi/Ferriss Standard
+All content should be written in the Hormozi/Ferriss style:
 
-#### Source 4: Existing Content Audit
-```bash
-# Identify underperforming content
-wp post list --post_type=post --post_status=publish --fields=ID,post_title --format=csv
+**Hormozi Principles:**
+- Answer first — Lead with the conclusion, not the buildup
+- Short paragraphs — 2-3 sentences max, then whitespace
+- Direct language — "Here's the thing:" "The real problem is..."
+- Practical examples — Real scenarios, not abstract theory
+- Numbered steps — "Step 1: Do this. Step 2: Do that."
+- Bold claims backed by proof — "This increased conversions 340%. Here's how:"
+- Conversational tone — "Look," "Here's what most people miss," "The bottom line:"
 
-# Check for thin content (< 500 words or < 1,000 words based on niche)
-# Map existing content to topic clusters
-# Find pages with high impressions but low clicks (CTR optimization opportunity)
-```
-- Categorize existing content by topic/intent
-- Identify pages to update, expand, consolidate, or prune
-- Flag cannibalization risk where 2+ pages target the same cluster
+**Ferriss Principles:**
+- Personal experiments — "I tried X for 30 days. Here's what happened:"
+- Data + stories — Combine numbers with real narratives
+- Contrarian takes — "Most people think X. The data says Y."
+- Frameworks — Give readers a system they can apply TODAY
+- Case studies — "Here's how [Person] did [Thing] in [Timeframe]"
+- Time-bounded experiments — "Try this for 7 days"
 
-**Output:** Existing content map with update/consolidate/create recommendations.
+**Practical > Theoretical:**
+- Every claim needs a real example
+- Every concept needs a concrete application
+- Every section ends with "Here's how to do this:"
+- NO abstract generalizations without practical follow-up
 
-### Phase 2: Keyword Clustering
+## Output Contract
+**Artifact**: Content strategy document with topic clusters, calendar, and measurement plan
+**Evidence**: Keyword research data, competitor gap analysis, topic cluster map
+**Decision**: Editorial calendar approved for publishing
+**Next**: Begin writing pillar content, then highest-priority cluster articles
 
-Group keywords by shared intent and SERP overlap. See `references/keyword-clustering-methodology.md` for detailed methodology.
+## Performance Optimizations
 
-#### Quick Clustering Process
-1. **Intent sort:** Group all keywords by intent type:
-   - Informational: "how to", "what is", "guide", "tutorial"
-   - Commercial investigation: "best", "vs", "review", "comparison"
-   - Transactional: "buy", "pricing", "discount", "coupon"
-   - Navigational: brand-specific searches (skip these)
+### Speed Multipliers
+- Batch page analysis (10-20 per call)
+- Pre-crawl data before live crawl
+- Template-based reports
+- Parallel checks where possible
 
-2. **SERP overlap test:** For each keyword, check if the same pages rank in top 10:
-   ```bash
-   # Quick overlap check: do the same URLs appear for both keywords?
-   # If >40% SERP overlap → same cluster (one page)
-   # If <20% SERP overlap → different clusters (separate pages)
-   ```
+### Self-Critique Scorecard (/25)
+1. **Functionality** (1-5): Does it work perfectly?
+2. **Quality** (1-5): Enterprise-grade?
+3. **Verification** (1-5): Verified via API + live + visual?
+4. **Speed** (1-5): Optimal execution?
+5. **Learning** (1-5): Patterns documented?
 
-3. **Cluster naming:** Each cluster gets a clear name based on the dominant intent:
-   - "Email marketing guide" (informational cluster)
-   - "Best email marketing tools" (commercial cluster)
-   - "Email marketing setup" (transactional/how-to cluster)
+**Target: 22+/25**
 
-**Output:** 15-40 keyword clusters, each with a primary keyword, 3-10 secondary keywords, and clear intent label.
+### Auto-Check
+- [ ] Pre-flight checks completed
+- [ ] Verified via multiple methods
+- [ ] Anti-patterns avoided
+- [ ] Score logged to memory
 
-### Phase 3: Cannibalization Check
+## Anti-Patterns
+- ❌ Publishing without keyword targeting or search intent analysis
+- ❌ Random topic selection with no cluster structure
+- ❌ No internal linking strategy (orphan articles)
+- ❌ No measurement plan (publish and forget)
+- ❌ Writing for algorithms, not humans
+- ❌ Ignoring content freshness (never updating old posts)
 
-**CRITICAL:** Never recommend new content without this step.
+## Compatibility
+- Targets current WordPress 6.9+ where applicable
+- REST API + WP-CLI preferred over browser automation
+- Batch operations via `_fields` + `per_page=100` + `concurrent.futures`
+- Browser automation only when API/CLI insufficient
 
-```bash
-# For each proposed cluster, check existing coverage:
-wp post list --post_type=post,page --post_status=publish --s="<primary keyword>" --fields=ID,post_title,post_type
+## Inputs Required (Pre-Flight)
+Before executing any task in this skill:
+1. **Target identification** — What site, page, post, or system is being operated on?
+2. **Auth verification** — Confirm credentials work (test API call or CLI command)
+3. **Current state** — Understand what exists before making changes (GET before POST)
+4. **Environment** — Production vs staging (assume production unless stated)
+5. **Constraints** — No downtime? Preserve SEO? Preserve data? Budget limits?
 
-# Check if existing pages target the same keyword:
-# - Same H1/title pattern
-# - Same target keyword in SEO plugin meta
-# - Same topic/angle
-```
+## Triage Protocol
+Before ANY operation:
+1. **Identify** — What type of content/system/problem is this?
+2. **Check state** — Query current state via API/CLI before modifying
+3. **Verify creds** — Confirm authentication works
+4. **Plan rollback** — How to undo if something breaks?
+5. **Scope check** — Is this a single item or batch? Scale determines approach.
 
-**Decision tree:**
-```
-Existing page targets same cluster?
-├─ YES, page is ranking well → UPDATE/EXPAND existing page (don't create new)
-├─ YES, page is ranking poorly → CONSOLIDATE: update existing or replace with better
-├─ YES, multiple pages target same cluster → CONSOLIDATE into one authoritative page
-└─ NO existing coverage → SAFE to CREATE new content
-```
+## Speed Optimizations
+- **API calls**: Always use `_fields` parameter (80%+ payload reduction)
+- **Pagination**: Use `per_page=100` for list endpoints
+- **Parallelism**: Use `concurrent.futures` for independent operations (max 10/site)
+- **Caching**: Store results in session — never re-fetch same data
+- **Batching**: Group similar operations into single API calls where possible
+- **Direct CLI**: Use WP-CLI `wp db query` for complex operations
 
-See `references/cannibalization-prevention-checklist.md` for detailed checks.
+## Error Recovery (Auto-Learning)
+- Track error patterns — after 2 failures, try alternative approach
+- Log recurring fixes to `memory/YYYY-MM-DD.md`
+- Update references when new patterns discovered
+- Rollback plan: Know how to undo before making changes
 
-### Phase 4: Opportunity Scoring
+## Self-Critique Scorecard (/25)
+Before claiming complete, score yourself:
+1. **Triage** (1-5): Was current state fully understood before changes?
+2. **Execution** (1-5): Was the operation clean, efficient, correct?
+3. **Verification** (1-5): Was the result verified via API/live check?
+4. **Rollback** (1-5): Can changes be undone if issues found?
+5. **Learning** (1-5): Were new patterns documented for future use?
 
-Score each cluster opportunity. See `references/priority-model.md` for the full scoring model.
+**Target: 22+/25**
 
-**Quick scoring (5 dimensions, 1-5 each):**
-| Dimension | Question | Weight |
-|-----------|----------|--------|
-| Business Value | Does this directly support revenue or leads? | ×3 |
-| Search Demand | Is there meaningful search volume? | ×2 |
-| Competition | Can we realistically rank (difficulty vs authority)? | ×2 |
-| Intent Match | Does the intent align with our conversion path? | ×2 |
-| Effort | How much work to create/update this content? | ×1 (inverse) |
-
-**Priority = (Business × 3) + (Demand × 2) + (Competition × 2) + (Intent × 2) + ((6 - Effort) × 1)**
-
-Sort clusters by priority score. Top 5-10 get scheduled first.
-
-### Phase 5: Topic Cluster Architecture
-
-Design the pillar/spoke structure:
-
-**Pillar page:** Comprehensive, definitive guide on the core topic (3,000-5,000+ words)
-**Spoke pages:** Specific subtopic articles that link back to the pillar (1,500-2,500 words)
-
-```
-Pillar: "Complete Guide to Email Marketing"
-├─ Spoke: "Email Marketing Automation Setup"
-├─ Spoke: "Best Email Marketing Tools Compared"
-├─ Spoke: "Email Segmentation Strategies"
-├─ Spoke: "Welcome Email Sequence Templates"
-├─ Spoke: "Email Deliverability Checklist"
-└─ Spoke: "Email Open Rate Benchmarks"
-```
-
-**Internal linking rules for clusters:**
-- Every spoke links TO the pillar with contextual anchor text
-- Pillar links TO every spoke with descriptive anchors
-- Spokes link TO each other where contextually relevant (natural, not forced)
-- No more than 1-2 cross-cluster links per spoke
-
-### Phase 6: Format & Execution Planning
-
-Assign content formats to each cluster:
-
-| Intent | Recommended Formats |
-|--------|-------------------|
-| Informational | Long-form guide, how-to, tutorial, explainer |
-| Commercial | Comparison, review, "best of" list, case study |
-| Transactional | Landing page, product page, pricing page, demo page |
-| FAQ-type | FAQ section (within pillar or standalone) |
-
-**Publishing order:**
-1. Pillar pages first (establish topical authority)
-2. High-priority spokes next (capture long-tail traffic)
-3. Supporting spokes last (fill gaps, internal link opportunities)
-4. Update/consolidate existing content in parallel
-
-## Core rules
-- Never recommend new content without a cannibalization check.
-- Do not confuse interesting topics with commercially useful topics.
-- One page should target one cluster — always.
-- Expand or consolidate existing pages when that beats creating new ones.
-- Every topic recommendation must map to a clear business goal.
-- Prioritize by business value first, then demand, then competitive opportunity.
-- Design internal-linking topology with every cluster, not as an afterthought.
-- Re-evaluate the priority model after each major publishing cycle.
-
-## Output contract
-**Artifact:** Content strategy document with cluster map, prioritized topic list, and publishing plan
-**Evidence:** Keyword/intent rationale, cannibalization review, opportunity scoring, internal-linking topology
-**Decision:** What to publish (new), expand (existing), consolidate (merge), or prune (remove)
-**Next:** Create briefs for top-priority clusters, route to `conversion-copywriting` (new) or `editorial-post-enhancement` (update), or schedule the editorial backlog
-
-## Resources
-Read when needed:
-- `references/keyword-clustering-methodology.md` — detailed clustering methodology with SERP overlap analysis
-- `references/cannibalization-prevention-checklist.md` — comprehensive cannibalization detection and prevention
-- `references/affiliate-content-strategy.md` — affiliate-specific content strategy patterns
-- `references/priority-model.md` — full opportunity scoring model with calibration
-- `references/research-inputs.md` — structured inputs for competitive and demand research
-
-## Checks and common mistakes
-- Skipping cannibalization review → creates duplicate content, splits authority
-- Treating every topic as equal priority → wastes resources on low-value content
-- Recommending new pages when an existing page should be expanded → fragments authority
-- Skipping intent classification → targets wrong content format
-- Planning topics with no clear audience or business path → generates traffic but not revenue
-- Building clusters without internal-linking logic → misses topical authority signals
-- Ignoring existing thin/underperforming content → missed pruning and consolidation opportunities
-- Not checking competitor depth before recommending format → underinvesting or overinvesting
+## Output Contract
+- **Artifact**: What was created/changed/deleted
+- **Evidence**: API response proof + live verification
+- **Decision**: Success/failure with reasoning
+- **Next**: What follow-up is needed (if any)

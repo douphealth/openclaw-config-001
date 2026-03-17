@@ -1,95 +1,158 @@
 ---
 name: experiment-tracking
-description: Use when designing, reviewing, or reporting experiments — A/B tests, CRO tests, messaging tests, pricing tests, onboarding tests, or channel experiments. Triggers on requests for hypotheses, success metrics, sample-size discipline, guardrails, experiment logs, test readouts, or go/no-go decisions.
+description: Enterprise experiment design, tracking, and analysis. Use when designing A/B tests, CRO experiments, messaging tests, pricing tests, onboarding tests, or channel experiments. Triggers on hypothesis frameworks, sample size calculators, statistical significance checks, experiment logging, or go/no-go decisions from experiment results.
 ---
 
-# Experiment Tracking
+# Experiment Tracking — Enterprise A/B Testing
 
 ## Purpose
-Run experiments like a disciplined operator: clear hypothesis, clean measurement, defensible decision.
+Design and evaluate experiments with statistical rigor, clear decision criteria, and no premature conclusions.
 
-## Use this when
-- planning or evaluating an experiment (not just reporting existing performance)
-- designing A/B tests, split tests, multivariate tests
-- reviewing experiment results and making go/no-go decisions
-- setting up experiment logs or readout templates
-- checking whether tracking can support a proposed test
+## When to Use
+- Designing A/B, CRO, or messaging experiments
+- Calculating sample sizes or test duration
+- Checking if results are statistically significant
+- Logging experiment results and learnings
+- Making go/no-go decisions from test data
 
-## Do NOT use this for
-- implementing tracking codes (→ `tracking-measurement`)
-- analyzing general performance after an experiment ends (→ `analytics-reporting`)
-- one-off copy changes without a test hypothesis (→ `copy-editing-sweeps`)
+**Do NOT use for:** Paid media optimization (→ `paid-media-audit`), analytics reporting (→ `analytics-reporting`), tracking setup (→ `tracking-measurement`).
 
-## Do this
+## Experiment Framework
 
-### 1. Define the decision
-State exactly what decision this experiment informs. If you can't name the decision, don't run the test.
+### Phase 1: Hypothesis
+Format: "We believe [change] will [effect] for [audience] because [reason]. We'll measure this by [metric]."
 
-### 2. Write a falsifiable hypothesis
-Format: "Changing [X] will [increase/decrease] [metric] by [amount] because [reason]."
-If the hypothesis can't be proven wrong, it's not a hypothesis.
+| Component | Example |
+|-----------|---------|
+| Change | Adding social proof above the CTA |
+| Effect | Increase sign-up rate by 10% |
+| Audience | First-time visitors from organic traffic |
+| Reason | Social proof reduces perceived risk |
+| Metric | Sign-up conversion rate |
 
-### 3. Define metrics
-- **Primary metric:** one per experiment. This is what determines the winner.
-- **Secondary metrics:** supporting signals (max 3).
-- **Guardrails:** metrics that must not degrade (revenue, lead quality, error rate).
+### Phase 2: Design
+1. **Single variable** — test one thing at a time
+2. **Control** — keep a version with no changes
+3. **Variant** — apply only the change being tested
+4. **Duration** — minimum 2 full business cycles (usually 2-4 weeks)
+5. **Traffic split** — typically 50/50, can use 80/20 for risk-averse tests
 
-### 4. Check tracking readiness
-Before launch, confirm:
-- Primary metric is tracked with a reliable event/conversion action
-- Guardrail metrics are trackable
-- Attribution window is defined and consistent
-If tracking is broken, route through `tracking-measurement` first.
+### Phase 3: Sample Size Calculator
 
-### 5. Set runtime and thresholds
-- Minimum sample size (use a calculator, not intuition)
-- Runtime window (don't stop early because "it looks good")
-- Decision threshold (e.g., 95% confidence, minimum 5% effect size)
-- Stopping rules (what triggers early stop for harm)
+Quick heuristic:
+| Baseline Conversion | Min Sample (per variant) | Min Detectable Lift |
+|--------------------|-------------------------|---------------------|
+| 1-5% | 5,000+ | 10-20% relative |
+| 5-10% | 2,500+ | 10-15% relative |
+| 10%+ | 1,000+ | 5-10% relative |
 
-### 6. Record and decide
-After the test runs:
-- Record result, confidence interval, effect size, sample size reached
-- State go/no-go with rationale
-- Document what you'd test next
+**Formal calculation**: Use a proper calculator (Google "sample size calculator A/B test") for confidence level 95%, power 80%.
 
-## Example: Homepage headline A/B test
+### Phase 4: Evaluate
+1. Check statistical significance (p-value < 0.05)
+2. Check practical significance (is the lift meaningful?)
+3. Examine segment breakdowns — did it work differently for different groups?
+4. Look for secondary effects (did one metric improve but another decline?)
+5. Document any external factors (holidays, campaigns, outages)
 
-**Hypothesis:** Changing the H1 from "Grow Your Business" to "Get 3x More Leads in 90 Days" will increase demo booking rate by 15% because the specific outcome reduces ambiguity.
+### Phase 5: Decision Matrix
 
-| Field | Value |
-|---|---|
-| Primary metric | Demo bookings / visitor |
-| Guardrails | Bounce rate must not increase >10%, page load time must not degrade |
-| Variants | A: "Grow Your Business" (control) / B: "Get 3x More Leads in 90 Days" |
-| Sample size | 4,200 visitors per variant (calculated for 80% power, 5% MDE) |
-| Runtime | 14 days minimum |
-| Decision threshold | 95% confidence, minimum 15% lift |
-| Result | B: 18.2% lift in demo bookings, 97.3% confidence, bounce rate flat |
-| Decision | **Go** — implement variant B, monitor for 7 days post-launch |
-| Next | Test social proof block below the new headline |
+| Significance | Practical Impact | Decision |
+|-------------|------------------|----------|
+| p < 0.05 | Lift > target | ✅ **Ship** |
+| p < 0.05 | Lift < target | ⚠️ **Monitor** — meaningful but small |
+| p > 0.05 | Clear winner trend | 🔄 **Extend** — need more data |
+| p > 0.05 | No trend | ❌ **Kill** — no difference |
 
-## Core rules
-- One primary success metric per experiment.
-- Do not launch tests with broken or uncertain instrumentation.
-- Do not stop early just because results look exciting.
-- Distinguish statistical significance, practical significance, and business significance.
-- Preserve a written experiment log so the same mistakes are not repeated.
+### Phase 6: Log & Learn
+Log every experiment: hypothesis, variant, results, significance, decision, and learning. Build institutional knowledge from experiment history.
 
-## Resources
-- `references/experiment-readout-standards.md` — readout template and reporting format
-- Sample size calculators: Evan Miller, Optimizely, or VWO calculators
+## Performance Optimizations
 
-## Checks and common mistakes
-- Running multiple hidden experiments inside one messy launch
-- Declaring winners from underpowered samples (<100 conversions per variant)
-- Ignoring adverse side effects on revenue, lead quality, or user experience
-- Using "we learned something" as an excuse for bad experimental design
-- Confusing correlation in secondary metrics with proof of causation
-- Changing multiple variables at once without a multivariate design
+### Speed Multipliers
+- Parallel data fetching from multiple sources
+- Pre-compute common metrics for the session
+- Template-based reports and dashboards
+- Batch API calls for platform operations
+- Automated threshold alerts for significant changes
 
-## Output contract
-**Artifact:** Experiment log entry with hypothesis, metrics, variants, runtime, and result
-**Evidence:** Statistical significance (p-value or confidence interval), sample size reached, effect size with direction
-**Decision:** Go / no-go / iterate, with explicit rationale tied to primary metric and guardrail status
-**Next:** Implement winner, design follow-up test, or investigate guardrail violations
+### Self-Critique Scorecard (/25)
+1. **Functionality** (1-5): Does it work perfectly?
+2. **Quality** (1-5): Enterprise-grade analysis?
+3. **Verification** (1-5): Data validated from multiple sources?
+4. **Speed** (1-5): Optimal execution?
+5. **Learning** (1-5): Patterns documented?
+
+**Target: 22+/25**
+
+### Auto-Check
+- [ ] Data quality validated before conclusions
+- [ ] Comparison periods consistent
+- [ ] Confidence levels stated
+- [ ] Actionable recommendations provided
+- [ ] Score logged to memory
+
+## Output Contract
+**Artifact**: Experiment report with hypothesis, results, significance, decision, and next steps
+**Evidence**: Statistical significance calculated, sample size adequate, segments analyzed
+**Decision**: Ship, monitor, extend, or kill
+**Next**: Log to experiment database, design follow-up if needed
+
+## Anti-Patterns
+- ❌ Stopping early when results "look good"
+- ❌ Testing multiple variables simultaneously
+- ❌ Ignoring segment differences
+- ❌ Treating statistical significance as practical significance
+- ❌ Not logging experiments (losing institutional knowledge)
+
+## Compatibility
+- Targets current WordPress 6.9+ where applicable
+- REST API + WP-CLI preferred over browser automation
+- Batch operations via `_fields` + `per_page=100` + `concurrent.futures`
+- Browser automation only when API/CLI insufficient
+
+## Inputs Required (Pre-Flight)
+Before executing any task in this skill:
+1. **Target identification** — What site, page, post, or system is being operated on?
+2. **Auth verification** — Confirm credentials work (test API call or CLI command)
+3. **Current state** — Understand what exists before making changes (GET before POST)
+4. **Environment** — Production vs staging (assume production unless stated)
+5. **Constraints** — No downtime? Preserve SEO? Preserve data? Budget limits?
+
+## Triage Protocol
+Before ANY operation:
+1. **Identify** — What type of content/system/problem is this?
+2. **Check state** — Query current state via API/CLI before modifying
+3. **Verify creds** — Confirm authentication works
+4. **Plan rollback** — How to undo if something breaks?
+5. **Scope check** — Is this a single item or batch? Scale determines approach.
+
+## Speed Optimizations
+- **API calls**: Always use `_fields` parameter (80%+ payload reduction)
+- **Pagination**: Use `per_page=100` for list endpoints
+- **Parallelism**: Use `concurrent.futures` for independent operations (max 10/site)
+- **Caching**: Store results in session — never re-fetch same data
+- **Batching**: Group similar operations into single API calls where possible
+- **Direct CLI**: Use WP-CLI `wp db query` for complex operations
+
+## Error Recovery (Auto-Learning)
+- Track error patterns — after 2 failures, try alternative approach
+- Log recurring fixes to `memory/YYYY-MM-DD.md`
+- Update references when new patterns discovered
+- Rollback plan: Know how to undo before making changes
+
+## Self-Critique Scorecard (/25)
+Before claiming complete, score yourself:
+1. **Triage** (1-5): Was current state fully understood before changes?
+2. **Execution** (1-5): Was the operation clean, efficient, correct?
+3. **Verification** (1-5): Was the result verified via API/live check?
+4. **Rollback** (1-5): Can changes be undone if issues found?
+5. **Learning** (1-5): Were new patterns documented for future use?
+
+**Target: 22+/25**
+
+## Output Contract
+- **Artifact**: What was created/changed/deleted
+- **Evidence**: API response proof + live verification
+- **Decision**: Success/failure with reasoning
+- **Next**: What follow-up is needed (if any)

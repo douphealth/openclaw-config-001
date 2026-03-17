@@ -1,103 +1,144 @@
 ---
 name: monitoring-ops
-description: Use when designing or operating uptime checks, technical health monitors, ranking watchlists, multisite watchdogs, mention monitoring, competitor intelligence, or actionable alert thresholds that should feed reliable operational alerts.
+description: Enterprise monitoring and alerting for search rankings, uptime, Core Web Vitals, brand mentions, competitor intelligence, multisite health, social listening, AI visibility, and technical health. Use when tracking keyword movements, watching site availability, monitoring brands or competitors, aggregating health across multiple sites, detecting technical risk signals, defining alert thresholds, or building monitoring dashboards.
 ---
 
-# Monitoring Ops
+# Monitoring Ops — Enterprise Site & Search Monitoring
 
 ## Purpose
-Design and operate monitoring systems that detect meaningful change, surface actionable issues, and feed reliable alerting without drowning the operator in noise.
+Proactive monitoring and alerting across all managed properties: rankings, uptime, performance, mentions, competitors, and AI visibility.
 
-## Use this when
-- tracking site uptime, response health, SSL expiry, DNS, or technical availability
-- watching keyword positions or ranking deltas over time
-- monitoring brand mentions, competitor signals, or trend spikes
-- aggregating health across multiple sites or assets
-- defining thresholds, severity logic, or watchdog checks
-- setting up OctoLens, UptimeRobot, Pingdom, or custom monitoring
+## When to Use
+- Rank tracking and keyword movement alerts
+- Uptime monitoring and availability checks
+- Brand mention tracking and social listening
+- Competitor intelligence and change detection
+- Multisite health aggregation
+- Core Web Vitals and performance monitoring
+- AI search visibility tracking (GEO/AEO)
+- Technical health signals (SSL, DNS, CDN, error rates)
+- Alert threshold definition and escalation
 
-## Do NOT use this for
-- one-off SEO diagnosis or ranking explanation (→ `seo-audit-playbook`)
-- tag/debug measurement implementation work (→ `tracking-measurement`)
-- delivery-routing-only work where the monitor already exists (→ `notification-engine`)
-- designing alert escalation chains (→ `notification-engine`)
+**Do NOT use for:** SEO auditing (→ `seo-audit-playbook`), tracking implementation (→ `tracking-measurement`), schema markup (→ `schema-ops`).
 
-## Do this
+## Monitoring Dimensions
 
-### 1. Define assets to monitor
-List every asset (site, domain, service) and its criticality level. Not everything needs the same monitoring intensity.
+### 1. Search Rankings
+- Track target keywords by domain → position → daily delta
+- Alert on: rank drop ≥3 positions, new competitor entering top 5, featured snippet loss
+- Tools: SERP API, Google Search Console API, manual checks
 
-### 2. Select monitor categories
+### 2. Uptime & Performance
+- Monitor HTTP status, response time, SSL expiry
+- Alert on: uptime <99.5%, response time >3s, SSL expiry <14 days
+- Core Web Vitals: LCP >2.5s, CLS >0.1, INP >200ms → flag
 
-| Category | What to watch | Example thresholds |
-|---|---|---|
-| Uptime / availability | HTTP status, latency, failures | Down >1min, repeated 5xx, latency >3s |
-| Technical health | SSL expiry, DNS records, CDN, error rate | SSL <14 days, DNS mismatch, CDN failure |
-| Search visibility | GSC/Bing clicks, impressions, CTR, page-two opportunities, sitemap/indexation anomalies | Clicks down >20%, CTR <2% on page-one pages, batch indexation drop |
-| Rankings | daily/weekly deltas on priority keywords | Drop >3 positions on top-10 keywords |
-| Mentions / social | volume spikes, sentiment shifts, competitor events | Spike >2 sigma, unusual negative surge |
-| Multisite watchdog | aggregated health across portfolio | Any critical asset degraded |
+### 3. Brand & Competitor Intelligence
+- Brand mentions across web, social, news
+- Competitor content changes (new pages, price changes, new features)
+- Alert on: mention volume spike >2σ, competitor launches new product/page
 
-### 3. Define thresholds and severity
-For each monitor, define:
-- **Warning threshold:** degraded but not critical (e.g., SSL <30 days, ranking drop 2-3 positions)
-- **Critical threshold:** immediate action needed (e.g., site down, SSL <3 days, ranking drop >5 positions)
-- **Baseline:** what "normal" looks for this metric
+### 4. Multisite Health (Portfolio Mode)
+- Iterate all managed sites → health check each → aggregate → alert on issues
+- Check: HTTP status, response time, WordPress health, plugin errors, disk space
 
-### 4. Set review cadence
-- Real-time (uptime, error rates)
-- Daily (rankings, traffic anomalies)
-- Weekly (trend analysis, mention volume)
-- Monthly (SSL expiry horizon, comprehensive health review)
+### 5. AI Visibility (New)
+- Track brand/product mentions in AI search results (Perplexity, ChatGPT, Gemini)
+- Monitor GEO/AEO signals: FAQ schema presence, Speakable markup, content freshness
+- Alert on: brand disappearing from AI answers for key queries
 
-### 5. Prove the alert path
-Don't just configure the monitor — fire a test alert and confirm it arrives. Connect to `notification-engine` for escalation design.
+## Alert Configuration
 
-### 6. Tune for signal over noise
-- If a monitor fires more than 3x/week, the threshold is wrong or the monitor is decorative
-- Archive monitors that nobody acts on
-- Review monthly: is this monitor still serving a decision?
+| Signal | Threshold | Severity | Action |
+|--------|-----------|----------|--------|
+| Rank drop | ≥3 positions | High | Check competitors, audit page |
+| Uptime | <99.5% over 24h | Critical | Check hosting, CDN, DNS |
+| Response time | >3s average | Medium | Check caching, optimize |
+| SSL expiry | <14 days | Critical | Renew certificate |
+| Core Web Vitals | 2+ metrics failing | Medium | Optimize assets, defer scripts |
+| Brand mention spike | >2σ volume | Low | Review sentiment, engage |
+| Competitor new page | Top-10 competitor | Low | Evaluate threat, respond |
+| AI visibility loss | Brand missing from AI answers | Medium | Update content, add schema |
 
-## Example: Multi-site WordPress portfolio monitoring
+## Performance Optimizations
 
-**Assets:** 9 WordPress sites, mixed criticality
+### Speed Multipliers
+- Parallel data fetching from multiple sources
+- Pre-compute common metrics for the session
+- Template-based reports and dashboards
+- Batch API calls for platform operations
+- Automated threshold alerts for significant changes
 
-**Configuration:**
-| Site | Criticality | Uptime check | SSL check | Ranking watch | Error rate |
-|---|---|---|---|---|---|
-| affiliatesite1.com | High | 1 min interval | 30d warning, 7d critical | Top 20 keywords, daily | 5xx > 2% for 5 min |
-| affiliatesite2.com | High | 1 min interval | 30d warning, 7d critical | Top 15 keywords, daily | 5xx > 2% for 5 min |
-| smallersite.com | Low | 5 min interval | 14d warning, 3d critical | Top 5 keywords, weekly | None |
+### Self-Critique Scorecard (/25)
+1. **Functionality** (1-5): Does it work perfectly?
+2. **Quality** (1-5): Enterprise-grade analysis?
+3. **Verification** (1-5): Data validated from multiple sources?
+4. **Speed** (1-5): Optimal execution?
+5. **Learning** (1-5): Patterns documented?
 
-**Test procedure:**
-1. Trigger artificial 503 on staging endpoint → confirm uptime monitor fires within 2 min
-2. Confirm alert arrives in notification channel (Telegram)
-3. Simulate SSL expiry <7 days → confirm critical alert fires
-4. Simulate ranking drop of 4 positions → confirm warning alert fires
+**Target: 22+/25**
 
-## Alert output format
-Every meaningful monitor should be able to state:
-- **Asset:** which site/service
-- **Metric or event:** what changed
-- **Threshold crossed:** which boundary
-- **Severity:** info / warn / critical
-- **Likely action:** what the operator should do
+### Auto-Check
+- [ ] Data quality validated before conclusions
+- [ ] Comparison periods consistent
+- [ ] Confidence levels stated
+- [ ] Actionable recommendations provided
+- [ ] Score logged to memory
 
-## Resources
-- `references/monitoring-thresholds-template.md` — standard threshold configurations by site type
-- Workspace `TOOLS.md` — site inventory and infrastructure notes
-- Platform docs: UptimeRobot API, Pingdom, Google Search Console API
+## Output Contract
+**Artifact**: Monitoring configuration, alert setup, or health dashboard
+**Evidence**: Alert firing test, escalation path verified, data source confirmed
+**Decision**: Monitoring active with appropriate thresholds
+**Next**: Review alert quality after 1 week, tune thresholds
 
-## Checks and common mistakes
-- Monitoring metrics that nobody will act on (decorative monitors)
-- Setting thresholds with no severity logic (everything is "alert")
-- Noisy monitors that fire too often → operator learns to ignore them
-- No proof that alerts actually arrive (configure without testing)
-- Mixing SEO diagnosis into monitoring operations (keep them separate)
-- Forgetting to update monitors when site inventory changes
+## Compatibility
+- Targets current WordPress 6.9+ where applicable
+- REST API + WP-CLI preferred over browser automation
+- Batch operations via `_fields` + `per_page=100` + `concurrent.futures`
+- Browser automation only when API/CLI insufficient
 
-## Output contract
-**Artifact:** Monitoring plan or watchdog configuration with assets, thresholds, and cadence
-**Evidence:** At least one test alert fired and confirmed received; threshold values documented per asset
-**Decision:** Monitoring active and tuned, needs alert-routing setup (→ `notification-engine`), or blocked
-**Next:** Connect to notification channels, tune thresholds after 1-week baseline, review monthly
+## Inputs Required (Pre-Flight)
+Before executing any task in this skill:
+1. **Target identification** — What site, page, post, or system is being operated on?
+2. **Auth verification** — Confirm credentials work (test API call or CLI command)
+3. **Current state** — Understand what exists before making changes (GET before POST)
+4. **Environment** — Production vs staging (assume production unless stated)
+5. **Constraints** — No downtime? Preserve SEO? Preserve data? Budget limits?
+
+## Triage Protocol
+Before ANY operation:
+1. **Identify** — What type of content/system/problem is this?
+2. **Check state** — Query current state via API/CLI before modifying
+3. **Verify creds** — Confirm authentication works
+4. **Plan rollback** — How to undo if something breaks?
+5. **Scope check** — Is this a single item or batch? Scale determines approach.
+
+## Speed Optimizations
+- **API calls**: Always use `_fields` parameter (80%+ payload reduction)
+- **Pagination**: Use `per_page=100` for list endpoints
+- **Parallelism**: Use `concurrent.futures` for independent operations (max 10/site)
+- **Caching**: Store results in session — never re-fetch same data
+- **Batching**: Group similar operations into single API calls where possible
+- **Direct CLI**: Use WP-CLI `wp db query` for complex operations
+
+## Error Recovery (Auto-Learning)
+- Track error patterns — after 2 failures, try alternative approach
+- Log recurring fixes to `memory/YYYY-MM-DD.md`
+- Update references when new patterns discovered
+- Rollback plan: Know how to undo before making changes
+
+## Self-Critique Scorecard (/25)
+Before claiming complete, score yourself:
+1. **Triage** (1-5): Was current state fully understood before changes?
+2. **Execution** (1-5): Was the operation clean, efficient, correct?
+3. **Verification** (1-5): Was the result verified via API/live check?
+4. **Rollback** (1-5): Can changes be undone if issues found?
+5. **Learning** (1-5): Were new patterns documented for future use?
+
+**Target: 22+/25**
+
+## Output Contract
+- **Artifact**: What was created/changed/deleted
+- **Evidence**: API response proof + live verification
+- **Decision**: Success/failure with reasoning
+- **Next**: What follow-up is needed (if any)

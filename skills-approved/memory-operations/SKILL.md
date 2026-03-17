@@ -1,104 +1,173 @@
 ---
 name: memory-operations
-description: Use when organizing, reviewing, consolidating, promoting, or improving OpenClaw memory across `memory/YYYY-MM-DD.md`, `MEMORY.md`, and entity memory files under `memory/people/`, `memory/sites/`, `memory/projects/`, or `memory/ops/`. Triggers on requests to remember something, improve memory, review memory, consolidate notes, promote durable facts, clean up stale memory, or make semantic memory retrieval more useful.
+description: Enterprise memory management for OpenClaw agents. Use when organizing, reviewing, consolidating, promoting, or improving OpenClaw memory across daily notes, MEMORY.md, and entity memory files. Triggers on remembering something, improving memory, reviewing memory, consolidating notes, promoting durable facts, cleaning up stale memory, or making semantic memory retrieval more useful.
 ---
 
-# Memory Operations
+# Memory Operations — Enterprise Agent Memory Management
 
 ## Purpose
-Keep OpenClaw memory high-signal, current, and easy to retrieve. Operate across three layers: daily notes (ephemeral), entity files (current truth), and `MEMORY.md` (curated wisdom).
+Keep agent memory organized, searchable, and useful across sessions. Ensure continuity, reduce retrieval noise, and promote durable knowledge.
 
-## Use this when
-- Remembering something, consolidating notes, or reviewing memory health
-- Promoting facts from daily → entity → long-term memory
-- Cleaning up stale, contradictory, or duplicated memory entries
-- Improving semantic search quality or entity memory structure
-- Running periodic memory maintenance (heartbeat or cron)
+## When to Use
+- Remembering facts, decisions, or preferences for future sessions
+- Reviewing and consolidating daily memory files
+- Cleaning up stale or outdated memory entries
+- Promoting daily notes to long-term memory
+- Organizing entity memory (people, sites, projects, operations)
 
-## Do NOT Use This For
-- General project documentation better stored in project files directly
-- One-off notes that belong in the daily file only
-- File operations unrelated to memory structure or retrieval quality
+**Do NOT use for:** General note-taking (→ write directly to files), search operations (→ use `memory_search`).
 
-## Do this
+## Memory Architecture
 
-### Writing & promotion
-1. Decide layer: daily note (raw), entity file (current state), or `MEMORY.md` (durable insight).
-2. Prefer updating current truth in an existing entity file over appending history.
-3. Promote durable operational state into entity files before promoting into `MEMORY.md`.
-4. Use semantic memory search when the exact file is unclear.
-5. Consolidate repeated truths instead of copying across files.
-
-### Pattern lifecycle (from failure to crystallized knowledge)
-6. When a failure occurs: capture the failure and resolution in the daily note.
-7. After 2–3 instances, identify the pattern and document it in the relevant entity or ops file.
-8. Promote crystallized patterns (proven, reusable) into `MEMORY.md` or a skill hook.
-9. Delete the intermediate drafts — keep only the distilled version.
-10. Pattern maturity: raw observation → validated pattern → actionable rule → skill-embedded hook.
-
-### Memory health check (run monthly or on retrieval degradation)
-11. Scan daily notes from the last 7 days for promotion candidates.
-12. Check entity files for stale state (values that no longer match reality).
-13. Verify `MEMORY.md` entries are still true and actionable.
-14. Run a semantic search test: query 3 known facts, confirm they surface correctly.
-15. Prune contradictions, merge duplicates, update timestamps.
-16. Score health: 5/5 = all pass, 3–4/5 = maintenance needed, <3 = rebuild.
-
-### Semantic search & entity memory best practices
-- Entity files should have a clear `## Current State` section at the top.
-- Use concrete nouns and specific values in memory entries (avoid "seems like" or "maybe").
-- Keep entity files under 50 lines — split when they grow beyond that.
-- Tag entity files with frontmatter: `type`, `last-updated`, `source`.
-- When semantic search returns wrong files, the problem is usually vague writing, not the search engine.
-- Write entries in declarative sentences with facts, not narrative summaries.
-- Front-load the most actionable information in each file.
-
-## Common memory patterns
-
-### Capturing a decision
+### File Structure
 ```
-## Current State
-- Decision: [what was decided]
-- Date: [when]
-- Context: [why]
-- Reversible: [yes/no, and how]
+memory/
+├── YYYY-MM-DD.md          # Daily raw logs (one file per session)
+├── heartbeat-state.json   # Last check timestamps
+├── people/                # Entity memory for individuals
+│   └── {name}.md
+├── sites/                 # Entity memory for managed sites
+│   └── {domain}.md
+├── projects/              # Entity memory for projects
+│   └── {project}.md
+└── ops/                   # Entity memory for operations
+│   └── {operation}.md
+MEMORY.md                  # Long-term curated memory (auto-read in main session)
 ```
 
-### Capturing a lesson
-```
-## Lessons Learned
-- [Situation] → [What happened] → [What to do instead]
-- Tag with the domain (ops, dev, content) for future retrieval
-```
+### Memory Types
+| Type | Location | Purpose | Retention |
+|------|----------|---------|-----------|
+| Daily logs | `memory/YYYY-MM-DD.md` | Raw events, decisions, context | Rolling 30 days |
+| Entity memory | `memory/{type}/{name}.md` | Structured facts about entities | Updated as needed |
+| Long-term | `MEMORY.md` | Curated, durable truths | Permanent |
+| Heartbeat state | `heartbeat-state.json` | Last check timestamps | Auto-managed |
 
-### Capturing entity state
-```
-## Current State
-- Status: [active/paused/archived]
-- Key metrics: [numbers]
-- Last reviewed: [date]
-- Open items: [bullets]
-```
+## Operations
 
-## Resources
-Read when needed:
-- `references/memory-architecture.md` — memory system design and layer model
-- `references/retrieval-order.md` — how memory search ranks results
-- `references/promotion-rules.md` — when to promote between layers
-- `references/review-workflow.md` — periodic review procedure
-- `references/health-check-workflow.md` — memory health diagnostics
+### 1. Remember (Capture)
+When the user says "remember this":
+- Extract the key fact or decision
+- Save to appropriate location:
+  - Daily events → `memory/YYYY-MM-DD.md`
+  - Entity facts → `memory/{type}/{name}.md`
+  - Durable truths → `MEMORY.md`
+- Include timestamp and context ("why" and "when")
 
-## Checks and common mistakes
-- Do not use daily notes as the only memory layer — they rot fast.
-- Do not turn `MEMORY.md` into a dumping ground — it's curated, not comprehensive.
-- Do not leave entity files stale when current state changes.
-- Do not trust semantic search to rescue low-quality memory writing.
-- Do not preserve five versions of the same blocker when one current bullet will do.
-- Do not promote transient operational state into `MEMORY.md` — entity files are the right home.
-- Do not skip the health check when retrieval quality degrades — it compounds.
+### 2. Consolidate (Daily → Long-Term)
+Periodically (during heartbeats or manual trigger):
+- Review daily notes from past 7-14 days
+- Identify durable facts worth keeping long-term
+- Promote to entity memory or MEMORY.md
+- Remove redundant entries from daily files once promoted
+
+### 3. Clean Up
+- Remove stale entries where reality has changed
+- Archive outdated daily notes (>30 days)
+- Deduplicate overlapping entries
+- Update entity memory when facts change
+
+### 4. Retrieve Efficiently
+- Use `memory_search` for semantic queries
+- Use `memory_get` for specific file reads
+- Entity memory files are best for current state
+- Daily files are best for chronological context
+
+## Rules
+- **Write, don't trust memory**: "Mental notes" don't survive restarts
+- **Timestamps matter**: Always include "when" for context
+- **Entity > Daily for state**: Current truth goes in entity files
+- **MEMORY.md is curated**: Only durable, important facts
+- **Privacy first**: Don't store secrets without encryption
+
+
+## Self-Critique Scorecard (/25)
+After every operation, score yourself:
+
+| Dimension | Score | Notes |
+|-----------|-------|-------|
+| **Functionality** (1-5) | ? | Does it work perfectly and meet all requirements? |
+| **Quality** (1-5) | ? | Is it enterprise-grade and production-ready? |
+| **Verification** (1-5) | ? | Was it verified via multiple methods? |
+| **Speed** (1-5) | ? | Was execution optimal with parallel operations? |
+| **Learning** (1-5) | ? | Were new patterns documented and memory updated? |
+
+**Target: 22+/25 before claiming completion**
+
+### Pre-Flight Checklist
+- [ ] Credentials verified and target exists
+- [ ] Rollback plan identified
+- [ ] Success criteria defined
+- [ ] Anti-patterns reviewed
+
+### Post-Flight Checklist
+- [ ] Verified via API response + live check
+- [ ] Quality score logged to memory/YYYY-MM-DD.md
+- [ ] Skill references updated if new patterns discovered
+- [ ] No common mistakes made
 
 ## Output Contract
-**Artifact**: Promotion log, pruned-entry summary, updated file list, and memory health result
-**Evidence**: Concrete before/after file updates, promotion rationale, and retrieval/health-check proof when applicable
-**Decision**: What changed, what was promoted or pruned, and whether memory health is acceptable
-**Next**: Follow-up cleanup, promotion cadence, or retrieval tuning if needed
+**Artifact**: Updated memory files with organized, timestamped content
+**Evidence**: Memory files exist and are properly structured
+**Decision**: Fact remembered or consolidated
+**Next**: Will be retrieved by `memory_search` in future sessions
+
+## Anti-Patterns
+- ❌ Storing secrets in memory without encryption
+- ❌ Memory bloat: everything goes to MEMORY.md (keep it curated)
+- ❌ No context: storing facts without "why" or "when"
+- ❌ Daily notes promoted without deduplication
+- ❌ Forgetting to update entity memory after state changes
+- ❌ Never cleaning up stale entries
+
+## Compatibility
+- Targets current WordPress 6.9+ where applicable
+- REST API + WP-CLI preferred over browser automation
+- Batch operations via `_fields` + `per_page=100` + `concurrent.futures`
+- Browser automation only when API/CLI insufficient
+
+## Inputs Required (Pre-Flight)
+Before executing any task in this skill:
+1. **Target identification** — What site, page, post, or system is being operated on?
+2. **Auth verification** — Confirm credentials work (test API call or CLI command)
+3. **Current state** — Understand what exists before making changes (GET before POST)
+4. **Environment** — Production vs staging (assume production unless stated)
+5. **Constraints** — No downtime? Preserve SEO? Preserve data? Budget limits?
+
+## Triage Protocol
+Before ANY operation:
+1. **Identify** — What type of content/system/problem is this?
+2. **Check state** — Query current state via API/CLI before modifying
+3. **Verify creds** — Confirm authentication works
+4. **Plan rollback** — How to undo if something breaks?
+5. **Scope check** — Is this a single item or batch? Scale determines approach.
+
+## Speed Optimizations
+- **API calls**: Always use `_fields` parameter (80%+ payload reduction)
+- **Pagination**: Use `per_page=100` for list endpoints
+- **Parallelism**: Use `concurrent.futures` for independent operations (max 10/site)
+- **Caching**: Store results in session — never re-fetch same data
+- **Batching**: Group similar operations into single API calls where possible
+- **Direct CLI**: Use WP-CLI `wp db query` for complex operations
+
+## Error Recovery (Auto-Learning)
+- Track error patterns — after 2 failures, try alternative approach
+- Log recurring fixes to `memory/YYYY-MM-DD.md`
+- Update references when new patterns discovered
+- Rollback plan: Know how to undo before making changes
+
+## Self-Critique Scorecard (/25)
+Before claiming complete, score yourself:
+1. **Triage** (1-5): Was current state fully understood before changes?
+2. **Execution** (1-5): Was the operation clean, efficient, correct?
+3. **Verification** (1-5): Was the result verified via API/live check?
+4. **Rollback** (1-5): Can changes be undone if issues found?
+5. **Learning** (1-5): Were new patterns documented for future use?
+
+**Target: 22+/25**
+
+## Output Contract
+- **Artifact**: What was created/changed/deleted
+- **Evidence**: API response proof + live verification
+- **Decision**: Success/failure with reasoning
+- **Next**: What follow-up is needed (if any)

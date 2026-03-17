@@ -1,95 +1,173 @@
 ---
 name: auto-verification
-description: Use after any skill completes work to verify the output is real, correct, and complete. Triggers automatically when a skill claims "done", "fixed", "published", "working", or "complete" and proof is possible.
+description: Enterprise automated verification and QA testing. Use when verifying fixes, deployments, form submissions, checkout flows, email delivery, page renders, or any process needing proof of completion. Triggers on verification requests, QA checks, fix verification, deployment validation, batch operation validation, or "prove it works."
 ---
 
-# Auto-Verification
+# Auto Verification — Enterprise QA & Proof of Completion
 
 ## Purpose
-Provide a mandatory proof layer that checks whether a claimed outcome is actually real, user-visible, and complete before accepting completion.
+Prove that work was completed correctly with automated verification, not assumptions. Default to evidence over promises.
 
-## Use this when
-- ANY skill claims work is done, fixed, published, working, or complete
-- before declaring a fix worked
-- before confirming a deployment went live
-- before accepting that a configuration change applied
-- before reporting success on a user-visible outcome when proof is possible
+## When to Use
+- Verifying form submissions, checkouts, or conversion paths
+- Confirming email delivery and automation triggers
+- Validating page renders and CSS/JS after deployment
+- Testing API endpoints and data flows
+- QA checks on batch operations (100+ posts updated correctly)
 
-## Do NOT use this for
-- tasks where verification is impossible or inherently subjective
-- quick Q&A that has no artifact or outcome to prove
-- research/planning tasks that do not claim implementation
+**Do NOT use for:** Designing features (→ `wordpress-growth-ops`), debugging (→ `email-automation-debugging`), launch readiness (→ `launch-readiness-audit`).
 
-## Verification order
-Prefer this order when possible:
-1. **User-visible outcome** — what the user would actually experience
-2. **Functional behavior** — whether the thing works end-to-end
-3. **Underlying state** — config, files, API state, logs
-4. **Secondary signals** — status codes, timestamps, background logs
+## Verification Framework
 
-Do not stop at a lower layer if a higher layer is testable.
+### Level 1: Functional Proof
+- HTTP status check (200 OK, 302 redirect — not 4xx/5xx)
+- Page content renders (no broken HTML, no blank pages)
+- CSS classes present in output (not stripped by wpautop)
+- Images and assets load correctly
+- No JavaScript console errors
 
-## Do this
+### Level 2: Data Proof
+- Data written to database correctly (check via API)
+- API returns expected response structure
+- Form data captured in CRM or database
+- Email sent and received (check delivery headers)
+- Contact created with correct tags/lists
 
-### 1. Detect the claim
-Identify exactly what was claimed:
-- published
-- fixed
-- configured
-- created
-- deleted
-- connected
-- delivered
-- validated
+### Level 3: End-to-End Proof
+- Complete a real user action (form submit, checkout, signup)
+- Verify trigger → capture → delivery → notification chain
+- Check timing (within expected SLA)
+- Verify all expected follow-up actions (emails, tags, sequences)
 
-### 2. Choose the strongest proof method
-| Claim | Verification Method |
-|---|---|
-| Page published | Fetch/render URL and confirm expected content appears |
-| UI fixed | Reproduce the user-visible path and confirm behavior |
-| Email sent | Check provider history/logs and delivery evidence |
-| API working | Make a real test call and validate the response |
-| Tracking fixed | Confirm real-time or test events fire correctly |
-| Schema added | Validate the schema output, not just the source file |
-| Config changed | Read config and test the behavior it should change |
-| File created | Read file and confirm its contents are correct |
-| File deleted | Confirm absence at the source of truth |
+### Level 4: Cross-Platform Proof
+- Desktop and mobile rendering match
+- Cross-browser check (Chrome, Safari, Firefox)
+- Ad platform receives conversion data
+- Analytics fires correct events with correct parameters
 
-### 3. Produce a pass/fail report
-Use this structure:
+## Verification Templates
+
+### Page Deployment Verification
 ```
-CLAIM: [what was claimed]
-METHOD: [how verified]
-RESULT: ✅ PASS / ❌ FAIL / ⚠️ PARTIAL
-EVIDENCE: [proof]
-GAP: [what remains unproven]
-ACTION: [if fail/partial: exact next fix]
+1. Fetch live URL → HTTP status = 200 ✅
+2. Check CSS classes render (not stripped by autop) ✅
+3. Verify images load (accessible, not 404) ✅
+4. Mobile viewport meta tag present ✅
+5. No console errors on load ✅
 ```
 
-### 4. Handle failures
-If verification fails:
-1. report the specific failure
-2. attempt an obvious fix if the method is clear and low risk
-3. re-verify
-4. if still failing after 2 attempts, escalate with exact blocker details
+### Form/Conversion Path Verification
+```
+1. Submit form with test data ✅
+2. Check HTTP response (200/302, not error) ✅
+3. Verify data in backend/CRM/WordPress ✅
+4. Check confirmation page or thank-you redirect ✅
+5. Verify email/automation trigger fired ✅
+6. Check email content and delivery status ✅
+```
 
-## Failure taxonomy
-Classify failures when helpful:
-- **false completion** — claim does not match reality
-- **partial completion** — some but not all outcomes are real
-- **wrong artifact** — something was produced, but not the requested thing
-- **state-only success** — internals changed, but user-visible outcome is still broken
-- **verification blocked** — proof may exist, but access or tooling prevented confirmation
+### Batch Update Verification
+```
+1. Check count of updated posts (expected vs actual) ✅
+2. Spot-check 5-10 random posts for correct content ✅
+3. Verify no data loss (content length similar to before) ✅
+4. Check for autop artifacts (removed, not added) ✅
+```
 
-## Rules
-- NEVER accept “done” without proof when proof is possible.
-- ALWAYS check the actual output, not just the status code.
-- Prefer user-visible proof over internal proof.
-- If verification is impossible, say exactly why.
-- Track false completion patterns; they indicate skill quality problems.
+## Evidence Quality Hierarchy
+| Level | Evidence | Reliability |
+|-------|----------|-------------|
+| **Strong** | Live URL screenshot, API response, database record | ✅ Definitive |
+| **Medium** | HTTP status, response time, content length check | ✅ Good |
+| **Weak** | "It should work", "I submitted it" | ❌ Unreliable |
 
-## Output contract
-**Artifact:** verification report with pass/fail/partial result for each claim
-**Evidence:** actual proof data such as rendered content, API response, file contents, logs, or functional test result
-**Decision:** accept completion or require rework
-**Next:** if failed or partial, exact fix instructions
+## Performance Optimizations
+
+### Speed Multipliers
+- Parallel data fetching from multiple sources
+- Pre-compute common metrics for the session
+- Template-based reports and dashboards
+- Batch API calls for platform operations
+- Automated threshold alerts for significant changes
+
+### Self-Critique Scorecard (/25)
+1. **Functionality** (1-5): Does it work perfectly?
+2. **Quality** (1-5): Enterprise-grade analysis?
+3. **Verification** (1-5): Data validated from multiple sources?
+4. **Speed** (1-5): Optimal execution?
+5. **Learning** (1-5): Patterns documented?
+
+**Target: 22+/25**
+
+### Auto-Check
+- [ ] Data quality validated before conclusions
+- [ ] Comparison periods consistent
+- [ ] Confidence levels stated
+- [ ] Actionable recommendations provided
+- [ ] Score logged to memory
+
+## Output Contract
+**Artifact**: Verification report with pass/fail per checkpoint
+**Evidence**: Screenshots, HTTP responses, API data, or database records
+**Decision**: Verified working / needs fix / partial pass
+**Next**: Fix failed checkpoints, or close verification
+
+## Anti-Patterns
+- ❌ "I submitted it" without checking backend delivery
+- ❌ Checking admin dashboard without front-end verification
+- ❌ Assuming static HTML = functional page
+- ❌ Not testing the complete user journey
+- ❌ No evidence (just claiming "it works")
+- ❌ Verifying once and never rechecking after changes
+
+## Compatibility
+- Targets current WordPress 6.9+ where applicable
+- REST API + WP-CLI preferred over browser automation
+- Batch operations via `_fields` + `per_page=100` + `concurrent.futures`
+- Browser automation only when API/CLI insufficient
+
+## Inputs Required (Pre-Flight)
+Before executing any task in this skill:
+1. **Target identification** — What site, page, post, or system is being operated on?
+2. **Auth verification** — Confirm credentials work (test API call or CLI command)
+3. **Current state** — Understand what exists before making changes (GET before POST)
+4. **Environment** — Production vs staging (assume production unless stated)
+5. **Constraints** — No downtime? Preserve SEO? Preserve data? Budget limits?
+
+## Triage Protocol
+Before ANY operation:
+1. **Identify** — What type of content/system/problem is this?
+2. **Check state** — Query current state via API/CLI before modifying
+3. **Verify creds** — Confirm authentication works
+4. **Plan rollback** — How to undo if something breaks?
+5. **Scope check** — Is this a single item or batch? Scale determines approach.
+
+## Speed Optimizations
+- **API calls**: Always use `_fields` parameter (80%+ payload reduction)
+- **Pagination**: Use `per_page=100` for list endpoints
+- **Parallelism**: Use `concurrent.futures` for independent operations (max 10/site)
+- **Caching**: Store results in session — never re-fetch same data
+- **Batching**: Group similar operations into single API calls where possible
+- **Direct CLI**: Use WP-CLI `wp db query` for complex operations
+
+## Error Recovery (Auto-Learning)
+- Track error patterns — after 2 failures, try alternative approach
+- Log recurring fixes to `memory/YYYY-MM-DD.md`
+- Update references when new patterns discovered
+- Rollback plan: Know how to undo before making changes
+
+## Self-Critique Scorecard (/25)
+Before claiming complete, score yourself:
+1. **Triage** (1-5): Was current state fully understood before changes?
+2. **Execution** (1-5): Was the operation clean, efficient, correct?
+3. **Verification** (1-5): Was the result verified via API/live check?
+4. **Rollback** (1-5): Can changes be undone if issues found?
+5. **Learning** (1-5): Were new patterns documented for future use?
+
+**Target: 22+/25**
+
+## Output Contract
+- **Artifact**: What was created/changed/deleted
+- **Evidence**: API response proof + live verification
+- **Decision**: Success/failure with reasoning
+- **Next**: What follow-up is needed (if any)

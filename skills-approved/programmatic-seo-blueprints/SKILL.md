@@ -3,679 +3,228 @@ name: programmatic-seo-blueprints
 description: Design and deploy scalable SEO page systems for affiliate marketing sites. Covers page models (comparison, alternative, location, directory, template, glossary, integration), quality gates, technical implementation, affiliate-specific patterns, monitoring, and Python scripts for page generation at scale. Triggers on programmatic SEO, pages at scale, template pages, comparison pages, alternative pages, directory pages, location pages, integration pages, or requests to build scalable content systems.
 ---
 
-# Programmatic SEO Blueprints — Enterprise Skill
+# Programmatic SEO Blueprints
 
-## Purpose
+Enterprise system for designing, validating, building, and monitoring scalable SEO page systems that create genuinely differentiated value across thousands of pages — built for affiliate marketing sites.
 
-Design, validate, build, and monitor scalable SEO page systems that create **genuinely differentiated value** across thousands of pages — built specifically for affiliate marketing sites.
+> **NOT a license for thin doorway pages.** Every page must pass quality gates before scaling.
 
-This is NOT a license to mass-produce thin doorway pages. Every page must pass quality gates before scaling.
-
-## When to Use Programmatic SEO vs Manual Content
-
-### Use Programmatic SEO When:
-- There is a **repeatable search pattern** with variable components (e.g., "[Product] vs [Product]", "Best [Category] in [Location]")
-- **Demand exists** across 100+ keyword variants (validated via SERP presence, not just volume tools)
-- You have a **structured data source** that enables per-page uniqueness (product specs, pricing, features, user reviews)
-- The content differentiation can be **templated** without sacrificing quality
-- Your site has enough **domain authority** or topical relevance to compete
-
-### Use Manual Content When:
-- Search intent is nuanced, opinionated, or requires original research
-- The topic has fewer than 20-30 viable keyword variants
-- Expertise, personal experience, or unique perspective is the ranking factor
-- SERPs are dominated by deep editorial content from authoritative sources
-
-### Hybrid Approach (Recommended for Affiliate Sites):
-- Programmatic for scalable comparison, alternative, and category pages
-- Manual editorial content for buyer's guides, in-depth reviews, and "best of" roundups that link to programmatic pages
-- Use editorial content to build topical authority, then let programmatic pages capture long-tail
-
-## 1. Strategy Framework
-
-### Page Model Selection
-
-| Page Model | Best For | Min Viable Pages | Affiliate Fit |
-|---|---|---|---|
-| **Comparison** (`A vs B`) | Software, tools, products with distinct features | 50+ pairs | ★★★★★ |
-| **Alternative** (`X alternatives`) | Replacing established products | 30+ products | ★★★★★ |
-| **Location** (`Best X in Y`) | Local services, location-dependent offers | 100+ locations | ★★★★☆ |
-| **Directory** (`Category list`) | Curated lists of tools/products in a niche | 20+ categories | ★★★★☆ |
-| **Template** (`Niche templates`) | Design, dev, productivity resources | 50+ templates | ★★★☆☆ |
-| **Glossary** (`Terms & definitions`) | Technical/niche education with tool tie-ins | 100+ terms | ★★★☆☆ |
-| **Integration** (`Tool A + Tool B`) | SaaS ecosystems, API-connected tools | 100+ pairs | ★★★★☆ |
-
-### Demand Validation Methodology
-
-**Step 1: Pattern-Level Demand**
-```
-1. Identify your seed pattern: "best [product] for [use case]"
-2. Use Google Autocomplete, People Also Ask, and related searches to find 50+ variants
-3. Check SERP composition: Are there programmatic pages already ranking?
-   - If yes → proven pattern, but you need differentiation
-   - If no → either no demand or an opportunity (check with broader terms)
-4. Estimate aggregate demand: Sum of variant search volumes × realistic CTR for your position
-```
-
-**Step 2: Per-Page Validation**
-```
-For each potential page in your set:
-1. Does the search query show clear intent (not ambiguous)?
-2. Do at least 2 programmatic page types rank on page 1?
-3. Can you provide UNIQUE information not available on ranking pages?
-4. Is the query commercially relevant (affiliate commission potential)?
-```
-
-**Step 3: SERP Analysis Template**
-```
-For each target SERP, document:
-- Top 10 URLs and their page type
-- Content depth (word count, tables, images, tools)
-- Featured snippets present (type: paragraph, list, table)
-- Domain authority range of ranking pages
-- Affiliate presence (are competitors monetizing?)
-- Gaps you can fill (data, comparison depth, user experience)
-```
-
-### Scalability Assessment
+## Decision Tree: Programmatic vs Manual?
 
 ```
-DATA AVAILABILITY SCORECARD:
-[ ] Primary data source identified (product API, scraping, manual research)
-[ ] Data covers all required fields for unique page content
-[ ] Data can be refreshed/updated automatically
-[ ] Data is accurate enough to publish without manual review per page
+Content need identified
+│
+├── Is there a repeatable search pattern with variable components?
+│   ├── YES (100+ keyword variants) → Programmatic (this skill)
+│   ├── YES (20-30 variants) → Hybrid (programmatic + editorial)
+│   └── NO → Manual content (conversion-copywriting)
+│
+├── Do you have structured data enabling per-page uniqueness?
+│   ├── YES → Programmatic viable
+│   └── NO → Gather data first, then decide
+│
+├── Is search intent nuanced/opinionated/requiring original research?
+│   ├── YES → Manual content
+│   └── NO → Programmatic viable
+│
+└── Are SERPs dominated by deep editorial from authority sites?
+    ├── YES → Hybrid approach (editorial builds authority, programmatic captures long-tail)
+    └── NO → Programmatic viable
+```
 
-CONTENT DIFFERENTIATION SCORECARD:
-[ ] Each page has at least 3 unique data points vs siblings
-[ ] Per-page unique content exceeds 30% of total page content
-[ ] Can add user-generated or dynamic elements (reviews, pricing, availability)
-[ ] Can add editorial judgment layer (ratings, recommendations)
+## Page Model Selection Matrix
 
-SCALE SCORECARD:
+| Page Model | URL Pattern | Min Viable Pages | Affiliate Fit | Unique Value Source |
+|-----------|-------------|-----------------|---------------|-------------------|
+| **Comparison** (`A vs B`) | `/compare/a-vs-b/` | 50+ pairs | ★★★★★ | Feature matrices, pricing, verdicts |
+| **Alternative** (`X alternatives`) | `/alternatives/x/` | 30+ products | ★★★★★ | Migration scores, "better for" tags |
+| **Location** (`Best X in Y`) | `/best/x-in-y/` | 100+ locations | ★★★★☆ | Local pricing, compliance, currency |
+| **Directory** (`Category list`) | `/category/subcategory/` | 20+ categories | ★★★★☆ | Editorial picks, buying guides |
+| **Template** (`Niche templates`) | `/templates/niche/name/` | 50+ templates | ★★★☆☆ | Preview, customization, bundles |
+| **Glossary** (`Terms & definitions`) | `/glossary/term/` | 100+ terms | ★★★☆☆ | Expert definitions, tool tie-ins |
+| **Integration** (`Tool A + Tool B`) | `/integrations/a-plus-b/` | 100+ pairs | ★★★★☆ | Setup guides, use cases |
+
+## Operational Procedures
+
+### 1. Demand Validation (Before Building Anything)
+
+**Phase 1 — Pattern-Level Demand:**
+1. Identify seed pattern: "best [product] for [use case]"
+2. Use Google Autocomplete, PAA, related searches to find 50+ variants
+3. Check SERP composition: are programmatic pages already ranking?
+4. Estimate aggregate demand: variant volumes × realistic CTR
+
+**Phase 2 — Per-Page Validation:**
+| Check | Pass Criteria |
+|-------|--------------|
+| Clear search intent | Query is unambiguous |
+| Programmatic pages rank | ≥2 on page 1 |
+| Unique data available | Info not on ranking pages |
+| Commercial relevance | Affiliate commission potential exists |
+
+**Phase 3 — Scalability Scorecard:**
+```
+[ ] Primary data source identified (API, scraping, manual)
+[ ] Data covers all required fields for unique content
+[ ] Data can be refreshed automatically
+[ ] Data is accurate enough to publish without per-page review
+[ ] Each page has ≥3 unique data points vs siblings
+[ ] Per-page unique content exceeds 30% of total
 [ ] Total addressable pages: _____
 [ ] Pages with sufficient differentiation: _____
-[ ] Data maintenance effort per month: _____ hours
-[ ] Content update frequency required: _____
 ```
 
-### Risk Assessment
+### 2. Blueprint Implementation
 
-| Risk | Threshold | Mitigation |
-|---|---|---|
-| **Thin content** | <300 words unique content per page | Add unique data tables, expert commentary, dynamic content |
-| **Duplicate content** | >70% similarity between any two pages | Enforce uniqueness via quality gate scripts (see references/) |
-| **Crawl budget waste** | >10% of crawled pages are noindexed or low-value | Strategic noindex, consolidate thin pages, optimize sitemaps |
-| **Keyword cannibalization** | 2+ pages targeting same primary keyword | Canonical tags, clear URL hierarchy, cannibalization detection script |
-| **Google penalty (doorway pages)** | Pages exist only for search engines, not users | Pass "human usefulness" test: would a real person bookmark this? |
-
-## 2. Page Model Blueprints
-
-### Blueprint A: Comparison Pages (`[Product A] vs [Product B]`)
-
-**URL Pattern:** `/compare/product-a-vs-product-b/`
-
-**Example:** `/compare/surfshark-vs-nordvpn/`
-
-**Data Requirements:**
-- Product names, logos, descriptions
-- Pricing tiers (current, with dates)
-- Feature list with per-product support status (yes/no/partial)
-- Pros and cons (at least 5 each)
-- User ratings (aggregated from multiple sources)
-- Best-for categories (who is each product best for?)
-- Screenshots or UI comparisons
-
-**Content Structure:**
+**Blueprint A: Comparison Pages**
 ```
-1. Quick Verdict (50-100 words — which product wins, for whom)
+Content Structure:
+1. Quick Verdict (50–100 words — which wins, for whom)
 2. Pricing Comparison Table (all tiers side-by-side)
-3. Feature-by-Feature Comparison (matrix table with ✓/✗/◐)
-4. Deep-Dive Sections (performance, ease of use, support, integrations)
-5. Pros & Cons (balanced, for both products)
-6. Who Should Choose [Product A] vs Who Should Choose [Product B]
-7. FAQ Section (3-5 questions, schema-marked)
+3. Feature-by-Feature Matrix (✓/✗/◐)
+4. Deep-Dive Sections (performance, UX, support, integrations)
+5. Pros & Cons (≥5 each, balanced)
+6. Who Should Choose A vs Who Should Choose B
+7. FAQ Section (3–5 questions, FAQPage schema)
 8. Alternatives to Both (links to alternative pages)
-9. Related Comparisons (links to other vs pages)
+9. Related Comparisons (cross-links)
+
+Data Requirements:
+- Names, logos, descriptions, pricing tiers (with dates)
+- Feature list with per-product support status
+- User ratings (aggregated), best-for categories
 ```
 
-**Schema Markup:**
-```json
-{
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "[Product A] vs [Product B]: Which is Better in 2026?",
-  "description": "...",
-  "mainEntity": {
-    "@type": "FAQPage",
-    "mainEntity": [...]
-  }
-}
+**Blueprint B: Alternative Pages**
 ```
-Also include `Product` schema for each product, and `Review` schema if editorial ratings are present.
-
-**Internal Linking Pattern:**
-- Link to each product's individual review/overview page
-- Cross-link to other comparison pages involving either product
-- Link to relevant "best [category]" directory pages
-- Link to "alternatives" pages for each product
-
-### Blueprint B: Alternative Pages (`[Product] Alternatives`)
-
-**URL Pattern:** `/alternatives/product-name/`
-
-**Example:** `/alternatives/surfer-seo/`
-
-**Data Requirements:**
-- Target product's core features and pricing
-- Each alternative's features, pricing, and differentiators
-- Migration difficulty for each alternative
-- Specific use cases where the alternative is better
-
-**Content Structure:**
-```
-1. Why Look for [Product] Alternatives? (pain points, limitations)
-2. Quick Comparison Table (all alternatives vs original, key features)
-3. #1 Alternative: [Name] — Best for [specific use case]
-   (Mini-review: what it is, why it's better, pricing, who it's for)
+Content Structure:
+1. Why Look for [Product] Alternatives? (pain points)
+2. Quick Comparison Table (all alternatives vs original)
+3. #1 Alternative — Best for [specific use case] (mini-review)
 4. #2 through #N Alternative sections
-5. Feature-by-Feature Deep Comparison Table
+5. Feature Deep Comparison Table
 6. Pricing Comparison
-7. Migration Guide (how to switch from [Product])
+7. Migration Guide (how to switch)
 8. FAQ
+
+Key Differentiators:
+- "Switch Score" (migration difficulty, 1–5)
+- "Better For" tags (which alternative beats original at what)
+- Pricing savings calculator
 ```
 
-**Key Differentiation:**
-- Include a **"Switch Score"** (how easy is migration, 1-5)
-- Include **"Better For" tags** (which alternative beats the original for what)
-- Include **pricing savings calculator** (if alternatives are cheaper)
-
-### Blueprint C: Location Pages (`Best [Service] in [Location]`)
-
-**URL Pattern:** `/best/service-in-location/`
-
-**Example:** `/best/web-hosting-in-canada/`
-
-**Data Requirements:**
-- Service providers with local presence/availability
-- Local pricing (if different by region)
-- Local regulations, compliance requirements
-- Regional user reviews/ratings
-- Local support availability
-
-**Content Structure:**
+**Blueprint C: Location Pages**
 ```
+Content Structure:
 1. Quick Picks (top 3 for this location)
 2. Full Comparison Table
-3. Location-Specific Considerations (data laws, server locations, payment methods)
-4. Individual Provider Sections (pricing in local currency, local support info)
+3. Location-Specific Considerations (data laws, servers, payments)
+4. Individual Provider Sections (local currency, local support)
 5. Location-Specific FAQ
 6. Related Location Pages (neighboring regions)
-```
 
-**Key Differentiation:**
+Key Differentiators:
 - Localized pricing in native currency
-- Compliance/regulation notes specific to the location
+- Compliance/regulation notes specific to location
 - Server/infrastructure location data
-- Local user review aggregation
-
-### Blueprint D: Directory Pages (`[Category] Tools/Products List`)
-
-**URL Pattern:** `/category/subcategory/`
-
-**Example:** `/tools/seo/`
-
-**Data Requirements:**
-- Product name, logo, description, category tags
-- Pricing (free/paid/freemium + starting price)
-- Key features (top 3-5)
-- User rating + review count
-- Last updated date
-
-**Content Structure:**
-```
-1. Category Introduction (what these tools do, who needs them)
-2. Filterable/Sortable Table (by price, rating, features, free vs paid)
-3. Top Picks (editorial selection, 3-5 tools)
-4. Individual Tool Cards (structured data, consistent format)
-5. Buying Guide (what to look for in this category)
-6. Related Categories (internal links)
 ```
 
-### Blueprint E: Template Pages (`[Niche] Templates`)
+**Blueprint D–G: Directory, Template, Glossary, Integration**
+— See `references/page-model-templates.md` for full structures.
 
-**URL Pattern:** `/templates/niche/template-name/`
+### 3. Quality Gates (MANDATORY Before Publication)
 
-**Content Structure:**
+| Gate | Rule | Failure Action |
+|------|------|----------------|
+| Minimum unique content | ≥300 words unique per page | Don't publish |
+| Similarity threshold | ≤70% similarity between siblings | Consolidate or differentiate |
+| Human usefulness test | "Would a real person bookmark this?" | Don't publish if no |
+| Thin content | <200 unique words | `noindex` |
+| Near-duplicate | >85% similarity to another page | Consolidate or differentiate |
+
+### 4. Technical Implementation
+
+**URL Structure (use subfolders, NOT subdomains):**
 ```
-1. Template Preview (visual/interactive)
-2. What's Included
-3. How to Use (step-by-step)
-4. Customization Options
-5. Related Templates
-6. Template Bundle Offers (affiliate opportunity)
-```
-
-### Blueprint F: Glossary Pages (`[Niche] Terms & Definitions`)
-
-**URL Pattern:** `/glossary/term-slug/`
-
-**Content Structure:**
-```
-1. Definition (concise, 1-2 sentences)
-2. Detailed Explanation (2-3 paragraphs)
-3. Example / How It Works
-4. Related Terms (internal links)
-5. Tools That Implement This (affiliate links)
-6. Learn More Resources
+/compare/{a}-vs-{b}/              → Comparison pages
+/alternatives/{product}/           → Alternative pages
+/best/{service}-in-{location}/    → Location pages
+/{category}/                        → Directory hubs
+/{category}/{subcategory}/         → Directory sub-pages
+/glossary/{term}/                  → Glossary pages
+/integrations/{a}-plus-{b}/       → Integration pages
 ```
 
-**Hub Page:** `/glossary/` — alphabetical listing of all terms, grouped by topic
+**Rules:** hyphens only, lowercase, ≤75 chars, primary keyword in URL, consistent patterns.
 
-### Blueprint G: Integration Pages (`[Tool A] + [Tool B] Integration`)
-
-**URL Pattern:** `/integrations/tool-a-plus-tool-b/`
-
-**Content Structure:**
+**Sitemap Architecture:**
 ```
-1. Integration Overview (what connects, what it enables)
-2. Setup Guide (step-by-step, with screenshots)
-3. Use Cases (what you can do with this integration)
-4. Limitations & Workarounds
-5. Alternative Integrations
-6. Related Integrations (both tools with other partners)
+/sitemap.xml                   → Index of sub-sitemaps
+/sitemap-comparisons.xml       → All comparison pages
+/sitemap-alternatives.xml      → All alternative pages
+/sitemap-locations.xml         → All location pages
+/sitemap-directory.xml         → All directory pages
+/sitemap-glossary.xml          → All glossary pages
+/sitemap-integrations.xml      → All integration pages
+/sitemap-static.xml            → Blog, about, contact
 ```
 
-## 3. Template Design Methodology
+**Rules:** Max 50K URLs per sitemap, include `<lastmod>`, split by model, auto-generate, remove noindexed pages.
 
-### Unique Value Injection Per Page
+**Canonical Strategy:**
+- Self-referencing canonical on every page (mandatory)
+- If >85% similar, canonical lower-value to higher-value
+- A-vs-B and B-vs-A → redirect one to the other
+- Absolute URLs, HTTPS, no parameters
 
-Every programmatic page MUST have unique value. Use this hierarchy:
+**Internal Linking Rules:**
+| From | Link To | Anchor Text |
+|------|---------|-------------|
+| Comparison page | Both product pages + 3–5 related comparisons + category directory | Exact-match or descriptive |
+| Alternative page | Target product comparisons + each alternative's comparisons + category | Varied, descriptive |
+| Location page | Neighboring locations + provider comparisons + category | Location-specific |
+| Glossary page | Related terms (bidirectional) + tools mentioned + category | Term names |
 
-1. **Proprietary data** (your own testing, user data, calculations) — strongest
-2. **Derived data** (comparisons, scores, rankings you compute from raw data) — strong
-3. **Aggregated data** (compiled from multiple sources with your structure) — moderate
-4. **Templated editorial** (expert commentary sections customized per page) — baseline
+**Page Speed Requirements:**
+- LCP <2.5s, FID <100ms, CLS <0.1
+- Page weight <1MB total
+- TTFB <200ms
+- SSG or ISR for all programmatic pages
+- Lazy-load images, WebP compression, CDN for assets
 
-**Minimum unique content per page:** 40% must be page-specific (not reusable across sibling pages)
+### 5. Monitoring & Optimization
 
-### Data Source Mapping
+**Indexation Tracking:**
+| Indexation Rate (30 days) | Action |
+|--------------------------|--------|
+| >90% | Healthy — continue publishing |
+| 70–90% | Audit quality, check thin content flags |
+| <70% | Stop publishing, diagnose and fix |
 
-```
-PRIMARY SOURCES (per page model):
-- Comparison: Product APIs, pricing pages, feature matrices
-- Alternative: Core product analysis + alternative feature databases
-- Location: Regional databases, currency APIs, compliance registries
-- Directory: Product databases with categorization
-- Glossary: Expert-written definitions + cross-references
-- Integration: API documentation, integration marketplaces
+**Ranking Distribution:**
+| Metric | Threshold | Action |
+|--------|-----------|--------|
+| >20% pages not ranking | Review template quality |
+| Average position declining | Check competitor updates |
+| Page drops from top 10 | Immediate audit and refresh |
 
-DATA FRESHNESS REQUIREMENTS:
-- Pricing data: Updated weekly minimum
-- Feature data: Updated monthly
-- Review/rating data: Updated monthly
-- Compliance/regulation: Updated quarterly
-- Static content (definitions, guides): Updated quarterly
-```
+**Monthly Maintenance:**
+- Thin content detection (crawl + similarity check)
+- Cannibalization monitoring (GSC keyword overlap)
+- Pricing/feature data refresh
+- Performance metrics review (CTR, conversion rate, revenue/page)
 
-### Content Differentiation Strategy
-
-For each page model, enforce these uniqueness rules:
-
-```
-COMPARISON PAGES:
-- Quick verdict must be unique (different winners for different product pairs)
-- Feature comparison tables will naturally differ (different products = different features)
-- FAQ questions should be pair-specific
-- At least 500 words of editorial analysis unique to this comparison
-
-ALTERNATIVE PAGES:
-- "Why look for alternatives" section must address product-specific pain points
-- Alternative rankings differ per target product
-- Migration guides are product-specific
-
-LOCATION PAGES:
-- Localized intro paragraphs (unique per location)
-- Local compliance/regulation sections
-- Pricing in local currency
-- Location-specific FAQ
-
-DIRECTORY PAGES:
-- Category-specific buying guides
-- Editorial picks based on category criteria
-- Category-specific feature comparisons
-```
-
-### Meta/Title/URL Template Patterns
+### 6. Complete Build Workflow
 
 ```
-COMPARISON:
-  Title: "[Product A] vs [Product B] ([Year]): Which is Better?"
-  Meta: "Compare [Product A] and [Product B] on features, pricing, and performance. See which tool is best for your needs with our detailed side-by-side analysis."
-  URL: /compare/product-a-vs-product-b/
-
-ALTERNATIVE:
-  Title: "[N] Best [Product] Alternatives in [Year] ([Free & Paid])"
-  Meta: "Looking for [Product] alternatives? We tested [N] options and ranked them by features, pricing, and ease of use. Find your perfect match."
-  URL: /alternatives/product-name/
-
-LOCATION:
-  Title: "Best [Service] in [Location] ([Year] Guide)"
-  Meta: "Find the best [service] in [location]. Compare top providers on pricing, features, and local support. Updated [Month Year]."
-  URL: /best/service-in-location/
-
-DIRECTORY:
-  Title: "Best [Category] Tools ([Year] Ranked & Compared)"
-  Meta: "Discover the best [category] tools. [N]+ options compared on features, pricing, and user ratings. Find the right tool for your workflow."
-  URL: /category/subcategory/
-
-GLOSSARY:
-  Title: "What is [Term]? [Niche] Definition & Examples"
-  Meta: "[Term] explained: definition, how it works, examples, and tools that use it. Part of our [niche] glossary."
-  URL: /glossary/term-slug/
-
-INTEGRATION:
-  Title: "[Tool A] + [Tool B] Integration: Setup Guide & Use Cases"
-  Meta: "Connect [Tool A] and [Tool B] with our step-by-step integration guide. Learn setup, use cases, and alternatives."
-  URL: /integrations/tool-a-plus-tool-b/
-```
-
-## 4. Quality Gates
-
-See `references/quality-gates.md` for the full quality gate system including Python scripts.
-
-**Core quality rules:**
-- Minimum 300 words of unique content per page
-- Maximum 70% similarity between any two sibling pages
-- Every page must answer: "Would a human bookmark this?"
-- Pages with <200 words of unique content → noindex
-- Pages with >85% similarity to another → consolidate or differentiate
-- No page published without passing the automated quality check
-
-## 5. Technical Implementation
-
-### URL Structure Design
-
-```
-RECOMMENDED STRUCTURE (use subfolders, NOT subdomains):
-
-/compare/{product-a}-vs-{product-b}/          → Comparison pages
-/alternatives/{product-name}/                  → Alternative pages
-/best/{service}-{preposition}-{location}/      → Location pages
-/{category}/                                   → Directory hub pages
-/{category}/{subcategory}/                     → Directory sub-pages
-/glossary/{term}/                              → Glossary pages
-/glossary/                                     → Glossary hub (alphabetical)
-/integrations/{tool-a}-plus-{tool-b}/          → Integration pages
-/templates/{niche}/                            → Template hub
-/templates/{niche}/{template-name}/            → Individual template
-
-RULES:
-- Use hyphens, not underscores
-- Lowercase only
-- Keep URLs under 75 characters when possible
-- Include the primary keyword in the URL
-- Use consistent slug patterns within each page model
-```
-
-### XML Sitemap Strategy
-
-```
-SITEMAP ARCHITECTURE:
-
-/sitemap.xml                    → Index of sub-sitemaps
-/sitemap-comparisons.xml        → All comparison pages
-/sitemap-alternatives.xml       → All alternative pages
-/sitemap-locations.xml          → All location pages
-/sitemap-directory.xml          → All directory pages
-/sitemap-glossary.xml           → All glossary pages
-/sitemap-integrations.xml       → All integration pages
-/sitemap-static.xml             → Blog posts, about, contact, etc.
-
-RULES:
-- Max 50,000 URLs per sitemap file (or 50MB uncompressed)
-- Include <lastmod> for every URL (use actual content modification date)
-- Split by page model for easier monitoring of indexation rates
-- Auto-generate sitemaps when new pages are added
-- Submit individual sitemaps in Google Search Console for per-model tracking
-- Remove noindexed pages from sitemaps entirely
-```
-
-### Crawl Budget Optimization
-
-```
-1. ROBOTS.TXT STRATEGY:
-   - Block faceted navigation URLs (?sort=, ?filter=, ?page=)
-   - Block internal search results
-   - Allow all programmatic page models
-   - Block staging/dev environments
-
-2. CRAWL PRIORITY:
-   - Hub pages (category pages, glossary index) → Priority 0.8
-   - High-value comparison/alternative pages → Priority 0.7
-   - Long-tail programmatic pages → Priority 0.5
-   - Paginated directory pages → Priority 0.3
-
-3. INDEXATION MANAGEMENT:
-   - Publish in batches (50-100 pages), monitor indexation rate
-   - If indexation rate <80% after 30 days, audit for quality issues
-   - Use IndexNow API for instant notification to Bing
-   - Monitor crawl stats in Google Search Console weekly
-```
-
-### Pagination Handling
-
-```
-DIRECTORY PAGES WITH PAGINATION:
-- Use rel="next" and rel="prev" (still useful for UX even if Google ignores them)
-- Ensure each paginated page has unique title: "Best [Category] Tools - Page [N]"
-- Include unique intro content per page (different editorial picks, summaries)
-- Implement "Load More" with server-side rendering for SEO
-- Paginated URLs: /{category}/page/{n}/ (clean, indexable)
-
-NEVER:
-- Use infinite scroll without SSR fallback
-- Block paginated pages in robots.txt
-- Canonical all paginated pages to page 1
-```
-
-### Canonical Tag Strategy
-
-```
-EVERY PROGRAMMATIC PAGE:
-- Self-referencing canonical tag is mandatory
-- Example: <link rel="canonical" href="https://site.com/compare/a-vs-b/" />
-
-FOR SIMILAR/DUPLICATE PAGES:
-- If two pages are >85% similar, canonical the lower-value one to the higher-value one
-- If a comparison page can be accessed in both orders (a-vs-b and b-vs-a), redirect one to the other
-- Always canonical to the preferred URL variant (no trailing slash inconsistency)
-
-CANONICAL URL RULES:
-- Always use absolute URLs
-- Always include protocol (https://)
-- No parameters in canonical URLs
-- Consistent trailing slash policy (choose one, stick with it)
-```
-
-### Internal Linking Automation
-
-```
-LINKING RULES PER PAGE MODEL:
-
-Comparison Pages:
-  → Link to both products' individual pages
-  → Link to 3-5 related comparison pages (share one product in common)
-  → Link to relevant category directory page
-  → Link to alternative pages for each product
-
-Alternative Pages:
-  → Link to the target product's comparison pages
-  → Link to each alternative's comparison pages
-  → Link to relevant category directory page
-  → Cross-link between alternative pages that share alternatives
-
-Location Pages:
-  → Link to neighboring location pages (same service)
-  → Link to comparison pages for providers mentioned
-  → Link to relevant category directory page
-
-Glossary Pages:
-  → Link to related terms (bidirectional)
-  → Link to tools/products mentioned in definition
-  → Link to relevant category directory page
-  → Link from relevant comparison/alternative pages (contextual)
-
-AUTOMATION APPROACH:
-- Build a relationship graph of all pages
-- Auto-generate "Related Pages" sections based on shared entities
-- Manual editorial links in content body (higher value)
-- Minimum 5 internal links per programmatic page
-```
-
-### Page Speed at Scale
-
-```
-REQUIREMENTS:
-- Core Web Vitals: LCP <2.5s, FID <100ms, CLS <0.1
-- Page weight: <1MB total (including images)
-- Time to First Byte: <200ms
-
-IMPLEMENTATION:
-- Static site generation (SSG) or ISR for all programmatic pages
-- Lazy-load images below the fold
-- Compress all images (WebP with JPEG fallback)
-- Minimize JavaScript; prefer server-rendered HTML
-- Use a CDN for all static assets
-- Cache product data locally (don't make API calls per page load)
-- Pre-render comparison tables (don't load via JS)
-- Defer non-critical CSS/JS
-```
-
-## 6. Affiliate-Specific Programmatic Patterns
-
-See `references/affiliate-programmatic-patterns.md` for full templates and Python scripts.
-
-**Key patterns covered:**
-- Product comparison matrix pages (feature × product grid)
-- `[Product] vs [Product]` with affiliate CTAs
-- `Best [Category] for [Use Case]` with ranked recommendations
-- `[Product] alternatives` with migration scoring
-- `[Product] pricing comparison` across all tiers
-- Feature-by-feature comparison tables with verdicts
-
-## 7. Monitoring & Optimization
-
-### Indexation Rate Tracking
-
-```python
-# Prefer normalized GSC/Bing search-visibility packs first
-# Track indexation per page model using Google Search Console API
-# or by checking site:domain.com inurl:/compare/ patterns
-
-INDEXATION THRESHOLDS:
-- >90% indexation within 30 days → Healthy, continue publishing
-- 70-90% indexation → Audit quality, check for thin content flags
-- <70% indexation → Stop publishing, diagnose and fix issues first
-
-MONITORING CADENCE:
-- Weekly: Check new page indexation rates
-- Monthly: Audit full indexation across all page models
-- Quarterly: Review and prune underperforming pages
-```
-
-### Ranking Distribution Analysis
-
-```
-TRACK THESE METRICS PER PAGE MODEL:
-- Pages ranking in positions 1-3
-- Pages ranking in positions 4-10
-- Pages ranking in positions 11-20
-- Pages not ranking (impressions <10/month)
-- Average position trend (improving, stable, declining)
-
-ACTION THRESHOLDS:
-- If >20% of pages in a model are not ranking → Review template quality
-- If average position declining → Check competitor content updates
-- If a page drops from top 10 → Immediate audit and refresh
-```
-
-### Thin Content Detection
-
-```
-Run monthly (see quality-gates.md for script):
-1. Crawl all programmatic pages
-2. Measure unique word count per page
-3. Calculate similarity scores between sibling pages
-4. Flag pages with <300 unique words
-5. Flag pages with >70% similarity to another page
-6. Generate report with action items (improve, consolidate, noindex)
-```
-
-### Cannibalization Monitoring
-
-```
-Run monthly:
-1. Export all ranking keywords from GSC
-2. Group keywords by page URL
-3. Identify keywords where 2+ of your pages are ranking
-4. If both pages ranking 11+ → Consolidate to stronger page
-5. If one page ranking 1-10, other 11+ → Canonical weaker to stronger
-6. If both pages ranking 1-10 → Differentiate content, split keywords
-```
-
-### Performance Metrics Dashboard
-
-```
-PER PAGE MODEL, TRACK:
-- Total organic sessions
-- Organic CTR (from GSC)
-- Conversion rate (affiliate clicks / sessions)
-- Revenue per page
-- Revenue per session
-
-TOP PERFORMING PAGES:
-- Identify top 10% pages by revenue
-- Study what makes them successful
-- Apply learnings to underperforming pages
-- Create more pages in that specific sub-pattern
-
-UNDERPERFORMING PAGES:
-- Pages with traffic but no conversions → Improve CTAs, add more context
-- Pages with impressions but no clicks → Improve titles and meta descriptions
-- Pages with no impressions → Audit for technical issues or consolidate
-```
-
-### A/B Testing Framework for Templates
-
-```
-TESTABLE ELEMENTS (per page model):
-1. CTA placement and copy
-2. Comparison table layout (horizontal vs vertical)
-3. Quick verdict length and placement
-4. Number of alternatives/comparisons shown
-5. FAQ placement (top vs bottom)
-6. Pricing display format
-
-METHODOLOGY:
-- Run tests within a page model (compare 50 vs 50 pages)
-- Minimum 2-week test duration
-- Minimum 1,000 sessions per variant
-- Track: CTR, time on page, affiliate click-through rate
-- Implement winner across the full model
-```
-
-## Workflow: Building a Programmatic Page System
-
-```
-PHASE 1: VALIDATE (1-2 weeks)
+PHASE 1: VALIDATE (1–2 weeks)
 ├── Identify repeatable search pattern
-├── Validate demand (SERP analysis, autocomplete research)
-├── Assess data availability and differentiation potential
-├── Run risk assessment
-└── Decision: Go / No-Go
+├── Validate demand (SERP, autocomplete)
+├── Assess data availability
+├── Run scalability scorecard
+└── GO / NO-GO decision
 
-PHASE 2: DESIGN (1-2 weeks)
+PHASE 2: DESIGN (1–2 weeks)
 ├── Select page model
 ├── Design URL structure
 ├── Build content template
@@ -684,60 +233,134 @@ PHASE 2: DESIGN (1-2 weeks)
 ├── Write 3 pilot pages manually
 └── Validate with quality gates
 
-PHASE 3: BUILD (2-4 weeks)
-├── Build data pipeline (APIs, scraping, manual research)
-├── Build page generator (Python scripts)
+PHASE 3: BUILD (2–4 weeks)
+├── Build data pipeline (APIs, scraping, research)
+├── Build page generator (Python)
 ├── Build quality gate pipeline
 ├── Build sitemap generator
 ├── Build internal linking automation
-└── Generate pilot batch (20-50 pages)
+└── Generate pilot batch (20–50 pages)
 
 PHASE 4: LAUNCH (1 week)
 ├── Publish pilot batch
 ├── Submit sitemaps
 ├── Monitor indexation (wait 2 weeks)
 ├── Run quality audit on indexed pages
-└── Fix any issues
+└── Fix any issues found
 
 PHASE 5: SCALE (ongoing)
-├── Publish in batches of 50-100
-├── Monitor indexation rates per batch
-├── Run monthly quality audits
-├── Run monthly cannibalization checks
-├── Optimize underperforming pages
-├── Update pricing/features monthly
-└── A/B test template improvements
+├── Publish in batches of 50–100
+├── Monitor indexation per batch
+├── Monthly quality + cannibalization audits
+├── Optimize underperformers
+├── A/B test template improvements
+└── Update pricing/features monthly
 ```
+
+## Common Mistakes & Anti-Patterns
+
+| Anti-Pattern | Consequence | Prevention |
+|-------------|-------------|-----------|
+| Starting with volume ("10,000 pages!") | Thin content, Google penalty | Start with usefulness, pass quality gates |
+| No meaningful data differentiation | Pages are near-duplicates | ≥3 unique data points per page |
+| Ignoring crawl budget | Slow indexation, waste | Strategic noindex, sitemap split |
+| Publishing all at once | Can't diagnose batch issues | Publish 50–100, monitor, then next batch |
+| Neglecting internal linking | No link equity to pages | Auto-generate linking graph |
+| Stale pricing/features | Loss of trust, poor rankings | Monthly refresh cadence |
+| Over-templating | Pages feel robotic | Editorial judgment layer on top |
+| No quality gate before publish | Google sees thin/duplicate content | Automated checks, mandatory |
+| Ignoring cannibalization | Competing pages rank poorly | Monthly overlap monitoring |
+
+## Output Contract
+
+| Field | Description |
+|-------|-------------|
+| **Artifact** | pSEO page template with quality gates, URL structure, and internal linking graph |
+| **Evidence** | Template output sample, quality checklist passed, pilot batch validation |
+| **Decision** | Template approved for scale or requires iteration |
+| **Next** | Deploy pilot batch → monitor indexation → scale in batches |
+
+## Verification Steps
+
+1. Validate pilot pages pass all quality gates
+2. Check that each pilot page has ≥40% unique content
+3. Verify URL structure follows naming conventions
+4. Confirm internal links are correct and functional
+5. Submit pilot sitemap and monitor indexation for 2 weeks
+6. Run thin content detection on pilot batch
+7. Check for cannibalization between pilot pages and existing content
 
 ## Resources
 
-When working on this skill, read these reference files as needed:
-- `references/page-model-templates.md` — Detailed templates, HTML structures, and Python generation scripts for each page model
-- `references/quality-gates.md` — Quality gate system with Python scripts for uniqueness detection, thin content identification, and cannibalization monitoring
-- `references/affiliate-programmatic-patterns.md` — Affiliate-specific patterns, comparison matrix templates, and monetization-optimized page structures
+- `references/page-model-templates.md` — Detailed HTML structures and Python generation scripts
+- `references/quality-gates.md` — Quality gate system with Python scripts
+- `references/affiliate-programmatic-patterns.md` — Affiliate-specific patterns and monetization structures
 
+## Self-Critique Scorecard (/25)
+After every operation, score yourself:
+1. **Functionality** (1-5): Does it work perfectly and meet all requirements?
+2. **Quality** (1-5): Is it enterprise-grade and production-ready?
+3. **Verification** (1-5): Was it verified via multiple methods (API + live + visual)?
+4. **Speed** (1-5): Was execution optimal with parallel operations where possible?
+5. **Learning** (1-5): Were new patterns documented and memory updated?
+
+**Target: 22+/25 before claiming completion**
+
+### Quality Checklist
+- [ ] Pre-flight checks completed (credentials, target exists, rollback plan)
+- [ ] Operation verified via API response + live page check
+- [ ] Anti-patterns checked (no common mistakes)
+- [ ] Scorecard completed and logged to memory/YYYY-MM-DD.md
+- [ ] Skill references updated if new patterns discovered
+
+## Compatibility
+- Targets current WordPress 6.9+ where applicable
+- REST API + WP-CLI preferred over browser automation
+- Batch operations via `_fields` + `per_page=100` + `concurrent.futures`
+- Browser automation only when API/CLI insufficient
+
+## Inputs Required (Pre-Flight)
+Before executing any task in this skill:
+1. **Target identification** — What site, page, post, or system is being operated on?
+2. **Auth verification** — Confirm credentials work (test API call or CLI command)
+3. **Current state** — Understand what exists before making changes (GET before POST)
+4. **Environment** — Production vs staging (assume production unless stated)
+5. **Constraints** — No downtime? Preserve SEO? Preserve data? Budget limits?
+
+## Triage Protocol
+Before ANY operation:
+1. **Identify** — What type of content/system/problem is this?
+2. **Check state** — Query current state via API/CLI before modifying
+3. **Verify creds** — Confirm authentication works
+4. **Plan rollback** — How to undo if something breaks?
+5. **Scope check** — Is this a single item or batch? Scale determines approach.
+
+## Speed Optimizations
+- **API calls**: Always use `_fields` parameter (80%+ payload reduction)
+- **Pagination**: Use `per_page=100` for list endpoints
+- **Parallelism**: Use `concurrent.futures` for independent operations (max 10/site)
+- **Caching**: Store results in session — never re-fetch same data
+- **Batching**: Group similar operations into single API calls where possible
+- **Direct CLI**: Use WP-CLI `wp db query` for complex operations
+
+## Error Recovery (Auto-Learning)
+- Track error patterns — after 2 failures, try alternative approach
+- Log recurring fixes to `memory/YYYY-MM-DD.md`
+- Update references when new patterns discovered
+- Rollback plan: Know how to undo before making changes
+
+## Self-Critique Scorecard (/25)
+Before claiming complete, score yourself:
+1. **Triage** (1-5): Was current state fully understood before changes?
+2. **Execution** (1-5): Was the operation clean, efficient, correct?
+3. **Verification** (1-5): Was the result verified via API/live check?
+4. **Rollback** (1-5): Can changes be undone if issues found?
+5. **Learning** (1-5): Were new patterns documented for future use?
+
+**Target: 22+/25**
 
 ## Output Contract
-**Artifact**: pSEO page template with quality gates
-**Evidence**: Template output sample, quality checklist
-**Decision**: Template approved for scale
-**Next**: Deploy and monitor indexation
-## Checks and Common Mistakes
-
-- ❌ Starting with volume ("we can make 10,000 pages!") instead of usefulness
-- ❌ Generating pages with no meaningful data differentiation
-- ❌ Ignoring crawl budget and indexation management
-- ❌ Publishing all pages at once (batch and monitor instead)
-- ❌ Neglecting internal linking (pages need link equity)
-- ❌ Forgetting data freshness (stale pricing kills trust)
-- ❌ Over-templating to the point pages feel robotic
-- ❌ No quality gate between generation and publication
-- ❌ Ignoring cannibalization until it's a problem
-- ❌ Promising rankings because a pattern exists (competition matters)
-
-## Do NOT Use This For
-- Tasks better handled by a more specific skill — check skill-router
-- One-off quick questions that don't need a skill
-- Tasks in a different domain — route to the correct skill first
--off quick questions that don't need a skill
-- Tasks in a different domain — route to the correct skill first
+- **Artifact**: What was created/changed/deleted
+- **Evidence**: API response proof + live verification
+- **Decision**: Success/failure with reasoning
+- **Next**: What follow-up is needed (if any)
