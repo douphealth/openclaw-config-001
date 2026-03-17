@@ -63,6 +63,8 @@ pandoc /tmp/article.html -t plain -o /tmp/article.txt  # requires pandoc
 
 ### Phase 1: Diagnostic – Find the Top 3 Blockers
 
+Before diagnosing, pull Google Search Console and Bing Webmaster page/query data when available so optimization targets real impression, CTR, and near-page-one opportunities.
+
 Use this ordered checklist to spot the biggest ranking/conversion issues fast.
 
 #### 1.1 Answer‑First & Intent Match

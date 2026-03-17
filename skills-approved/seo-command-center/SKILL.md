@@ -91,6 +91,7 @@ Once the task is specific enough for one skill, route and stop orchestrating.
 ## Resources
 - `references/seo-orchestration-rules.md` — detailed routing decision tree and workflow templates
 - `references/output-templates.md` — standardized output formats for cross-skill SEO workflows
+- `references/search-visibility-data-pack.md` — required GSC/Bing data slices before SEO diagnosis or prioritization
 - `skill-router` — use when the request may cross into non-SEO domains (e.g., SEO + paid media + email)
 
 ## Checks and common mistakes

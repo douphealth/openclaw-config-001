@@ -74,18 +74,20 @@ Gather raw topic candidates from multiple sources:
 
 **Output:** List of 20-50 customer-language phrases describing problems, goals, and desired outcomes.
 
-#### Source 2: Search Demand
+#### Source 2: Search Demand + Search Console Truth Set
 ```bash
 # Use available keyword tools or scrape related searches
 # Core seed: primary product/service keywords
 # Expand: related questions, comparisons, alternatives
+# Pull Google Search Console + Bing Webmaster query/page exports when available
 ```
 - Start with 5-10 core seed keywords
 - Expand with "how to", "best", "vs", "alternative to", "template", "checklist" modifiers
 - Extract People Also Ask questions from SERP
+- Pull GSC and Bing Webmaster queries/pages to see what the site already partially owns
 - Note search volumes and keyword difficulty
 
-**Output:** 100-300 raw keyword candidates with volume and difficulty data.
+**Output:** 100-300 raw keyword candidates with volume/difficulty data plus real GSC/Bing query-page evidence where available.
 
 #### Source 3: Competitor Content Audit
 ```bash

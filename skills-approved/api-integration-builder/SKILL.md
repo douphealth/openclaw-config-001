@@ -61,6 +61,7 @@ Create or update a reference when the integration is non-trivial:
 
 ## Resources
 - `scripts/check-api.sh` when present for probing auth/status/rate limits
+- `references/google-search-console-bing-webmaster-playbook.md` when wiring SEO/content skills to real search-visibility data
 - `references/` for per-service API notes you create or update
 
 ## Checks and common mistakes

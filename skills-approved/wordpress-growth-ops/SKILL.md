@@ -59,6 +59,8 @@ wp rewrite flush --dry-run --path=<path>  # check permalink structure
 
 ### Phase 1: Map the Money Path
 
+Before tracing the path, pull Google Search Console and Bing Webmaster data when available so traffic-entry and indexation decisions use real search data, not guesses.
+
 Identify the PRIMARY money path and trace every hop:
 
 | Hop | What to check | WP-CLI / REST probe |

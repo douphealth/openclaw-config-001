@@ -78,6 +78,7 @@ Read when needed:
 - `references/technical-checklist.md`
 - `references/cannibalization-detection.md`
 - `references/competitive-analysis-framework.md`
+- `..\seo-command-center\references\search-visibility-data-pack.md` — required GSC/Bing data slices before indexation/ranking conclusions
 
 Use `schema-ops` validation tooling when schema findings need proof.
 
