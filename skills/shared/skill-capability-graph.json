@@ -1,0 +1,77 @@
+{
+  "version": "2026-03-19",
+  "meta_skills": {
+    "skill-router": {
+      "role": "routing",
+      "produces": ["skill-selection", "workflow-choice"],
+      "next": ["using-superpowers", "task-intake-spec-writer", "parallel-execution-director", "site-audit-director"]
+    },
+    "using-superpowers": {
+      "role": "meta-execution-discipline",
+      "produces": ["execution-mode", "control-layer"],
+      "next": ["task-intake-spec-writer", "parallel-execution-director", "failure-recovery-director"]
+    },
+    "task-intake-spec-writer": {
+      "role": "specification",
+      "produces": ["execution-brief"],
+      "next": ["parallel-execution-director", "site-audit-director", "batch-mutation-controller", "failure-recovery-director"]
+    },
+    "parallel-execution-director": {
+      "role": "orchestration",
+      "produces": ["worker-plan", "synthesized-results"],
+      "next": ["batch-mutation-controller", "site-audit-director", "content-integrity-cleanup", "failure-recovery-director"]
+    },
+    "failure-recovery-director": {
+      "role": "recovery",
+      "produces": ["recovery-plan", "containment-decision"],
+      "next": ["content-integrity-cleanup", "batch-mutation-controller", "wp-error-recovery"]
+    },
+    "execution-state-ledger": {
+      "role": "state-persistence",
+      "produces": ["job-ledger", "checkpoints", "resume-state"],
+      "next": ["parallel-execution-director", "failure-recovery-director"]
+    },
+    "site-audit-director": {
+      "role": "audit-synthesis",
+      "produces": ["prioritized-fix-queue", "audit-report"],
+      "next": ["seo-command-center", "batch-mutation-controller", "content-integrity-cleanup"]
+    },
+    "batch-mutation-controller": {
+      "role": "safe-batch-writes",
+      "produces": ["wave-log", "batch-verification"],
+      "next": ["execution-state-ledger", "failure-recovery-director"]
+    },
+    "content-integrity-cleanup": {
+      "role": "content-repair",
+      "produces": ["cleanup-report", "before-after-counts"],
+      "next": ["auto-verification", "failure-recovery-director"]
+    }
+  },
+  "domain_skills": {
+    "seo-command-center": {
+      "role": "seo-orchestrator",
+      "depends_on": ["seo-audit-playbook", "seo-intelligence", "keyword-research-mastery", "schema-ops", "ai-visibility"],
+      "produces": ["seo-plan", "priority-actions"]
+    },
+    "wordpress-growth-ops": {
+      "role": "wp-execution",
+      "depends_on": ["wp-rest-api-mastery", "auto-verification", "batch-mutation-controller"],
+      "produces": ["wp-changes", "verified-live-state"]
+    },
+    "revenue-site-execution": {
+      "role": "commercial-site-ops",
+      "depends_on": ["offer-positioning", "service-funnel-architecture", "money-path-verification", "wordpress-growth-ops"],
+      "produces": ["revenue-improvement-plan", "implemented-fixes"]
+    },
+    "editorial-post-enhancement": {
+      "role": "content-upgrade",
+      "depends_on": ["copy-editing-sweeps", "schema-ops", "ai-visibility"],
+      "produces": ["enhanced-article", "on-page-upgrades"]
+    },
+    "wp-rest-api-mastery": {
+      "role": "wp-data-plane",
+      "produces": ["read-write-wp-state"],
+      "next": ["wordpress-growth-ops", "content-integrity-cleanup", "batch-mutation-controller"]
+    }
+  }
+}

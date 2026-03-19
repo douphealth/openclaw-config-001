@@ -1,0 +1,65 @@
+{
+  "version": "2026-03-19",
+  "routing_order": [
+    "risk_control",
+    "recovery",
+    "orchestration",
+    "audit",
+    "domain_specialist"
+  ],
+  "rules": [
+    {
+      "name": "ambiguous_high_risk_multistep",
+      "if_any_keywords": ["best strategy", "most efficient", "enterprise", "serious", "high quality", "autonomous"],
+      "if_conditions": ["ambiguous", "multi_step", "production_risk"],
+      "activate": ["using-superpowers", "task-intake-spec-writer"],
+      "priority": 100
+    },
+    {
+      "name": "failure_or_instability",
+      "if_any_keywords": ["broken", "distorted", "duplicated", "timeout", "unstable", "rollback", "restore", "corrupted"],
+      "if_conditions": ["infra_unstable", "partial_failure", "state_corruption"],
+      "activate": ["failure-recovery-director"],
+      "priority": 95
+    },
+    {
+      "name": "content_integrity_breakage",
+      "if_any_keywords": ["related posts repeated", "does not show correctly", "duplicate faq", "duplicate embeds", "broken html", "2 h1", "distorted"],
+      "activate": ["content-integrity-cleanup"],
+      "priority": 92
+    },
+    {
+      "name": "full_site_audit",
+      "if_any_keywords": ["audit scan", "full audit", "seo audit", "gsc", "bing", "keyword research"],
+      "activate": ["site-audit-director"],
+      "priority": 90
+    },
+    {
+      "name": "parallelizable_independent_work",
+      "if_any_keywords": ["parallel", "all posts", "across all", "sitewide", "batch audit"],
+      "if_conditions": ["independent_subtasks"],
+      "activate": ["parallel-execution-director"],
+      "priority": 85
+    },
+    {
+      "name": "many_similar_writes",
+      "if_any_keywords": ["fix all", "update all", "bulk", "all articles", "all pages"],
+      "if_conditions": ["batch_writes"],
+      "activate": ["batch-mutation-controller"],
+      "priority": 84
+    },
+    {
+      "name": "stateful_long_running_job",
+      "if_conditions": ["long_running", "multi_wave", "resume_needed"],
+      "activate": ["execution-state-ledger"],
+      "priority": 80
+    }
+  ],
+  "site_hints": {
+    "plantastichaven.com": ["failure-recovery-director", "content-integrity-cleanup", "batch-mutation-controller"],
+    "micegoneguide.com": ["content-integrity-cleanup", "wp-rest-api-mastery", "auto-verification"],
+    "affiliatemarketingforsuccess.com": ["revenue-site-execution", "email-automation-debugging"],
+    "gearuptofit.com": ["wordpress-growth-ops", "editorial-post-enhancement"],
+    "mysticaldigits.com": ["wp-error-recovery", "seo-audit-playbook"]
+  }
+}

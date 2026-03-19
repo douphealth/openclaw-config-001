@@ -1,0 +1,276 @@
+{
+  "affiliatemarketingforsuccess.com": {
+    "site": "affiliatemarketingforsuccess.com",
+    "role": "High-priority service + email monetization site.",
+    "monetization_path": [
+      "affiliate revenue audit / monetization service",
+      "lead magnet + deterministic welcome flow",
+      "later affiliate monetization"
+    ],
+    "default_swarm_pattern": [
+      "tech-debugger -> Brevo / FluentCRM / plugin path",
+      "content-operator -> audit offer pages",
+      "publisher-operator -> publish monetization pages",
+      "verifier -> signup -> email -> CTA path"
+    ],
+    "highest_value_tasks": [
+      "Deterministic signup -> welcome email proof",
+      "Service positioning pages",
+      "CTA clarity and offer packaging",
+      "Lead capture path validation"
+    ],
+    "avoid": [
+      "getting distracted by Woo/store work unless it directly affects the money path"
+    ],
+    "verify_first": [
+      "form submission",
+      "contact creation",
+      "automated first email",
+      "sender/domain authentication state",
+      "service CTA path"
+    ],
+    "recovery_pack": null,
+    "backups": []
+  },
+  "efficientgptprompts.com": {
+    "site": "efficientgptprompts.com",
+    "role": "High-priority digital product + consulting funnel.",
+    "monetization_path": [
+      "digital product sales",
+      "consulting upsell",
+      "lead magnet -> email capture"
+    ],
+    "default_swarm_pattern": [
+      "tech-debugger -> commerce / checkout / delivery",
+      "content-operator -> sales copy and product support copy",
+      "media-operator -> visual polish only where conversion-relevant",
+      "verifier -> cart / checkout / delivery / payment visibility"
+    ],
+    "highest_value_tasks": [
+      "End-to-end purchase proof",
+      "Delivery/access flow for the product",
+      "Product page clarity and trust",
+      "Checkout/payment readiness",
+      "Homepage CTA discipline"
+    ],
+    "avoid": [
+      "pushing complex marketing HTML into WooCommerce product descriptions when it breaks rendering",
+      "spending time on non-converting blog polish before store proof exists"
+    ],
+    "verify_first": [
+      "add to cart",
+      "checkout",
+      "payment method availability",
+      "order creation",
+      "delivery flow"
+    ],
+    "recovery_pack": null,
+    "backups": []
+  },
+  "frenchyfab.com": {
+    "site": "frenchyfab.com",
+    "role": "Low-priority unclear-direction property.",
+    "monetization_path": [
+      "unknown until positioning is clarified"
+    ],
+    "default_swarm_pattern": [
+      "research-operator -> business model clarification",
+      "director decides whether to invest further"
+    ],
+    "highest_value_tasks": [
+      "Clarify offer and audience before doing execution work"
+    ],
+    "avoid": [
+      "random content production without a monetization thesis"
+    ],
+    "verify_first": [],
+    "recovery_pack": null,
+    "backups": []
+  },
+  "gearuptofit.com": {
+    "site": "gearuptofit.com",
+    "role": "Low-priority affiliate/content property.",
+    "monetization_path": [
+      "long-tail content",
+      "affiliate reviews/comparisons",
+      "lead magnets later"
+    ],
+    "default_swarm_pattern": [
+      "research-operator -> keyword/intent map",
+      "content-operator -> affiliate content batches",
+      "verifier -> render + links"
+    ],
+    "highest_value_tasks": [
+      "Only work when top-priority sites are stable",
+      "Focus on high-intent comparison content if touched"
+    ],
+    "avoid": [
+      "treating it as an urgent cash engine"
+    ],
+    "verify_first": [],
+    "recovery_pack": null,
+    "backups": []
+  },
+  "gearuptogrow.com": {
+    "site": "gearuptogrow.com",
+    "role": "High-priority service-monetization site.",
+    "monetization_path": [
+      "growth audit / conversion triage",
+      "sprint offer",
+      "B2B service funnel"
+    ],
+    "default_swarm_pattern": [
+      "research-operator -> offer + audience gaps",
+      "content-operator -> homepage/service page copy",
+      "publisher-operator -> publish funnel pages",
+      "verifier -> CTA + form + booking path"
+    ],
+    "highest_value_tasks": [
+      "Homepage repositioning around a paid offer",
+      "Service page / triage page",
+      "Booking / payment path",
+      "Supporting authority content only after service funnel exists"
+    ],
+    "avoid": [
+      "spending too much time polishing generic blog content before the offer exists"
+    ],
+    "verify_first": [
+      "homepage CTA path",
+      "service inquiry / booking path",
+      "payment or lead capture path"
+    ],
+    "recovery_pack": null,
+    "backups": []
+  },
+  "micegoneguide.com": {
+    "site": "micegoneguide.com",
+    "role": "Secondary lead-gen / affiliate property.",
+    "monetization_path": [
+      "local-intent lead-gen",
+      "product affiliate content",
+      "problem/solution pages"
+    ],
+    "default_swarm_pattern": [
+      "research-operator -> local + buyer intent mapping",
+      "content-operator -> focused problem pages",
+      "verifier -> links/forms/render"
+    ],
+    "highest_value_tasks": [
+      "Lead-gen page strategy if activated",
+      "High-intent pest problem pages"
+    ],
+    "avoid": [
+      "spending urgent sprint time here before top 3 money sites are working"
+    ],
+    "verify_first": [],
+    "recovery_pack": "ops/site-recovery-packs/micegoneguide.com.md",
+    "backups": []
+  },
+  "mysticaldigits.com": {
+    "site": "mysticaldigits.com",
+    "role": "Secondary / optional monetization property.",
+    "monetization_path": [
+      "direct paid reports/readings if intentionally pursued",
+      "niche lead capture"
+    ],
+    "default_swarm_pattern": [
+      "research-operator -> offer angle validation",
+      "content-operator -> direct-response pages only if chosen",
+      "verifier -> lead/payment path"
+    ],
+    "highest_value_tasks": [
+      "Do not spend heavy execution here unless a direct offer is chosen",
+      "If worked, focus on monetizable offer pages, not broad content"
+    ],
+    "avoid": [],
+    "verify_first": [],
+    "recovery_pack": null,
+    "backups": []
+  },
+  "openclaw-skillshub.com": {
+    "site": "openclaw-skillshub.com",
+    "role": "Repo-managed app / distribution property tied to the OpenClaw ecosystem.",
+    "monetization_path": [
+      "distribution hub",
+      "authority / acquisition layer",
+      "productized skill marketplace or lead capture"
+    ],
+    "default_swarm_pattern": [
+      "research-operator -> positioning + product/distribution model",
+      "ACP coding session -> code, build, deployment, app changes",
+      "verifier -> live app path / CTA / signup checks"
+    ],
+    "highest_value_tasks": [
+      "Inspect repo and deployment model",
+      "Clarify commercial goal",
+      "Improve strongest CTA path around discovery, signup, or marketplace action",
+      "Treat changes as code/app work, not CMS work"
+    ],
+    "avoid": [
+      "WordPress assumptions",
+      "wp-admin / REST workflows",
+      "broad content production without a defined conversion event"
+    ],
+    "verify_first": [],
+    "recovery_pack": null,
+    "backups": []
+  },
+  "outdoormisting.com": {
+    "site": "outdoormisting.com",
+    "role": "Likely niche commercial / product-led site. Access and monetization path still need validation.",
+    "monetization_path": [
+      "product-led landing pages",
+      "buyer guides / comparisons",
+      "quote or inquiry path if service-based"
+    ],
+    "default_swarm_pattern": [
+      "research-operator -> site/business model validation",
+      "publisher-operator or tech-debugger only after access is confirmed",
+      "verifier -> conversion path"
+    ],
+    "highest_value_tasks": [
+      "Validate access",
+      "Identify whether this is ecommerce, lead-gen, or affiliate",
+      "Build around the shortest conversion path"
+    ],
+    "avoid": [
+      "large execution before access + business model are validated"
+    ],
+    "verify_first": [],
+    "recovery_pack": null,
+    "backups": []
+  },
+  "plantastichaven.com": {
+    "site": "plantastichaven.com",
+    "role": "Longer-term content and affiliate asset.",
+    "monetization_path": [
+      "SEO content cluster quality",
+      "internal linking",
+      "affiliate-intent article upgrades",
+      "digital guide later"
+    ],
+    "default_swarm_pattern": [
+      "content-operator -> rewrite batches",
+      "media-operator -> images/video/alt text",
+      "publisher-operator -> REST publishing",
+      "verifier -> live page QA"
+    ],
+    "highest_value_tasks": [
+      "Upgrade high-intent informational content",
+      "Add internal links systematically",
+      "Improve media, references, FAQs, comparison sections",
+      "Maintain article consistency in batches"
+    ],
+    "avoid": [
+      "over-prioritizing during emergency cash windows"
+    ],
+    "verify_first": [
+      "live render",
+      "internal links",
+      "media/video presence",
+      "references if requested"
+    ],
+    "recovery_pack": "ops/site-recovery-packs/plantastichaven.com.md",
+    "backups": []
+  }
+}
