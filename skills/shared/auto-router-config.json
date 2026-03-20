@@ -53,6 +53,12 @@
       "if_conditions": ["long_running", "multi_wave", "resume_needed"],
       "activate": ["execution-state-ledger"],
       "priority": 80
+    },
+    {
+      "name": "geo_aeo_ai_visibility",
+      "if_any_keywords": ["geo", "aeo", "ai visibility", "ai citation", "answer engine", "perplexity", "chatgpt search", "copilot", "ai overview"],
+      "activate": ["ai-visibility", "seo-intelligence", "seo-command-center"],
+      "priority": 82
     }
   ],
   "site_hints": {

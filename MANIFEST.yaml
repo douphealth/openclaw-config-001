@@ -3,7 +3,7 @@ repo: douphealth/openclaw-config-001
 mode: production-curated
 updated: 2026-03-14
 previous_version: 2
-changelog: "Major upgrade: 10 thin skills → 36 enterprise-grade skills with boundaries, output contracts, cross-references, workflow macros, quality scoring, and auto-verification"
+changelog: "Major upgrade: 10 thin skills → 36 enterprise-grade skills with boundaries, output contracts, cross-references, workflow macros, quality scoring, auto-verification, and shared SEO/AEO/GEO superpowers layer"
 
 production_skills:
   # === CONTENT & COPY ===

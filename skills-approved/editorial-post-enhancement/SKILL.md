@@ -382,6 +382,12 @@ Before claiming complete, score yourself:
 
 **Target: 22+/25**
 
+## SOTA Editorial Upgrade Layer
+- Apply `../../skills/shared/references/seo-aeo-geo-superpowers.md` before and after enhancement work.
+- Use `../../skills/shared/references/serp-ai-research-protocol.md` to justify new sections, source choices, and SERP-targeting decisions.
+- Score important posts with `../../skills/shared/references/ai-citation-scorecard.md` and do not call them premium if they remain weakly citable.
+- Prefer improvements that increase both ranking strength and extractability: direct answers, fresher stats, FAQs, comparison tables, trust signals, and entity clarity.
+
 ## Output Contract
 - **Artifact**: Enhanced post with Hormozi/Ferriss voice, semantic keywords, beautiful HTML, images, internal links, schema, optimized meta
 - **Evidence**: Quality score ≥22/25, all ranking blockers fixed, live verification

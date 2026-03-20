@@ -140,6 +140,12 @@ Rate each competitor:
 - [ ] Anti-patterns avoided
 - [ ] Score logged to memory
 
+## SOTA Competitor Upgrade Layer
+- Use `../../skills/shared/references/serp-ai-research-protocol.md` to compare not only rankings, but also extractability, FAQ coverage, freshness, entity richness, and citation-worthiness.
+- Add AI-answer prompt variants to competitor analysis, not just keyword overlap.
+- Capture whether competitors win because of authority, structure, source quality, freshness, or answer-format alignment.
+- Flag where competitors are structurally weak for GEO/AEO even if they rank today.
+
 ## Output Contract
 **Artifact**: Competitor analysis report with gap analysis and action plan
 **Evidence**: SERP screenshots, keyword data, content samples

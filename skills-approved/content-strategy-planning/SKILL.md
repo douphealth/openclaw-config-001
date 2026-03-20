@@ -121,6 +121,12 @@ All content should be written in the Hormozi/Ferriss style:
 - Every section ends with "Here's how to do this:"
 - NO abstract generalizations without practical follow-up
 
+## SOTA Strategy Upgrade Layer
+- Use `../../skills/shared/references/seo-aeo-geo-superpowers.md` so strategy includes both search demand and AI prompt demand.
+- For each major topic cluster, specify whether it serves SEO, AEO, GEO, conversion support, authority building, or multiple goals.
+- Prioritize clusters not only by traffic potential, but also by citation-worthiness, prompt importance, and business proximity.
+- Recommend content formats that match likely winning answer structures: definition, how-to, comparison, FAQ, glossary, review, tool, or entity-led explainer.
+
 ## Output Contract
 **Artifact**: Content strategy document with topic clusters, calendar, and measurement plan
 **Evidence**: Keyword research data, competitor gap analysis, topic cluster map

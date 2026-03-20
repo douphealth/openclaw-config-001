@@ -33,6 +33,12 @@ Track, measure, and improve brand/product visibility in AI-generated search answ
 3. **Competitor list** (who appears in AI answers currently)
 4. **Existing schema** (check via schema validator)
 
+## SOTA AEO Analytics Upgrade Layer
+- Use `../../skills/shared/references/seo-aeo-geo-superpowers.md` as the shared framework.
+- Track visibility over time, not as a one-off sample.
+- Measure at minimum: Mention Rate, Citation Rate, Primary Citation Rate, AI Share of Voice, and Tier-1 Prompt Coverage.
+- Connect every citation gap back to a concrete content/system fix: new page, refresh, FAQ, definition block, entity reinforcement, or trust upgrade.
+
 ## AI Search Landscape (2026)
 
 | Platform | Citation Method | Optimization Focus | Data Source |

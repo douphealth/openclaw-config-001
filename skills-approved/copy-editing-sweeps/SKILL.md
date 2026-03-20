@@ -198,6 +198,12 @@ Rate each dimension 1-5 after the final pass:
 - [ ] Proof elements placed near conversions
 - [ ] Score logged to memory
 
+## SOTA Editing Upgrade Layer
+- When editing search-facing or revenue-facing pages, preserve and strengthen extractability: direct answers, scannable headings, specific proof, and quotable lines.
+- Remove fluff that weakens both conversion and citation-worthiness.
+- If a page is intended to rank or be cited, prefer edits that improve factual density, trust, and answer clarity — not just style.
+- Use `../../skills/shared/references/ai-citation-scorecard.md` when the copy is part of a GEO/AEO-critical asset.
+
 ## Output Contract
 **Artifact**: Edited copy with tracked changes and improvement rationale
 **Evidence**: Before/after examples, quality score, pass-by-pass notes

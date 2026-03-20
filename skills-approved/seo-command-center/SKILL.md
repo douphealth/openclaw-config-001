@@ -48,6 +48,13 @@ Master SEO skill for work that spans multiple areas:
 - **NEVER report "SEO complete"** without crawling the site
 - **NEVER mix opinion with diagnosis**
 
+## SOTA SEO / AEO / GEO Upgrade Layer
+- Apply `../../skills/shared/references/seo-aeo-geo-superpowers.md` as the default quality bar.
+- For strategic topics, require both search demand evidence and an AI prompt universe before prioritizing work.
+- Route major recommendations through `../../skills/shared/references/serp-ai-research-protocol.md` so they reflect observed SERP/citation patterns.
+- Use `../../skills/shared/references/ai-citation-scorecard.md` when deciding whether a page is truly AI-citation-ready.
+- Treat Ahrefs-style workflows as optional enrichment, not the sole source of truth.
+
 ## OUTPUT TEMPLATE
 
 ```

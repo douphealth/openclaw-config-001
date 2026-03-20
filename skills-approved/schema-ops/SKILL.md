@@ -32,6 +32,12 @@ Page needs schema markup
     └── YES → Use @id references to avoid duplication
 ```
 
+## SOTA Schema / Extractability Upgrade Layer
+- Schema recommendations should support not only rich results, but also clearer entity and answer extraction for AI systems.
+- Favor schema that reinforces page reality, named entities, authorship, organization identity, FAQ coverage, and content relationships.
+- Coordinate with `../../skills/shared/references/seo-aeo-geo-superpowers.md` so schema is part of a broader citation-readiness system rather than a standalone tactic.
+- Never use schema to paper over weak or non-visible page content.
+
 ## When to Use
 
 - Schema markup, JSON-LD, structured data, rich snippets

@@ -20,6 +20,12 @@ Pull real search data from Google Search Console and Bing Webmaster Tools to dia
 
 **Do NOT use for:** On-page content editing (→ `editorial-post-enhancement`), WordPress operations (→ `wp-rest-api-mastery`), site-wide SEO audit (→ `seo-audit-playbook`).
 
+## SOTA Intelligence Upgrade Layer
+- Pair query/page data with `../../skills/shared/references/seo-aeo-geo-superpowers.md`.
+- Turn high-impression queries into prompt clusters, FAQ opportunities, answer-block opportunities, and AI-citation targets.
+- For low-CTR or near-page-1 pages, distinguish whether the needed fix is CTR/snippet, content depth, extractability, entity trust, or intent alignment.
+- Use `../../skills/shared/references/ai-citation-scorecard.md` when a page needs deeper rewrite prioritization.
+
 ## Triage Protocol
 Before ANY SEO intelligence task:
 1. **Identify data source** — GSC API, Bing WMT API, or both?

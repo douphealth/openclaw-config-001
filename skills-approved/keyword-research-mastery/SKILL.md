@@ -125,6 +125,12 @@ def expand_from_gsc(queries, min_impressions=10):
     return list(set(expanded))
 ```
 
+## SOTA Query Discovery Upgrade Layer
+- Expand beyond keywords into an AI prompt universe using `../../skills/shared/references/seo-aeo-geo-superpowers.md`.
+- Classify opportunities across problem-aware, solution-aware, comparison, best-of, how-to, evaluation, and persona/vertical prompts.
+- Prioritize opportunities with the shared prompt score formula, not search volume alone.
+- For high-value clusters, note the likely winning format: article, comparison, FAQ, glossary, tool, local page, or entity-led explainer.
+
 ## Phase 3: Search Intent Classification
 
 ### 4 Intent Types + Sub-Categories

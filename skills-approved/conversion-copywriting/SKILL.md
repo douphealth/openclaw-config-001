@@ -113,6 +113,12 @@ Headline → Subheadline → CTA → Proof → Problem → Solution → Benefits
 - ❌ Corporate sludge: "leverage synergies to optimize outcomes"
 - ❌ Copy that could fit 50 other products (too generic)
 
+## SOTA Conversion + GEO Upgrade Layer
+- High-value marketing pages should be clear enough for both humans and AI systems to understand who the offer is for, what it does, and why it is credible.
+- Use `../../skills/shared/references/seo-aeo-geo-superpowers.md` when page copy also needs search/AI discoverability support.
+- Prefer specific, citable claims with named proof, not generic hype.
+- Where relevant, add compact direct-answer / FAQ / comparison-ready copy so key commercial pages can support AI-assisted buyer journeys.
+
 ## Output Contract
 **Artifact**: Conversion copy for target page(s) with headline options, body copy, and CTA variations
 **Evidence**: Before/after comparison, persuasion framework used

@@ -41,5 +41,12 @@ jobs:
           done
           echo "All approved skills present"
 
+      - name: Audit SEO superpowers coverage
+        shell: pwsh
+        run: |
+          $json = ./scripts/audit-seo-superpowers.ps1 | Out-String | ConvertFrom-Json
+          if ($json.withSotaLayer -lt 10) { throw "SEO superpowers audit below expected coverage" }
+          Write-Host "SEO superpowers coverage OK: $($json.withSotaLayer)/$($json.checked)"
+
       - name: Validate complete
         run: echo "repo structure validated OK"
