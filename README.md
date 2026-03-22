@@ -8,6 +8,7 @@ This repository is the non-secret source of truth for:
 - Runtime configuration templates
 - Operations and recovery runbooks
 - Release bundles and validation scripts
+- Approved frontend premium delivery cluster documentation (`docs/frontend-cluster.md`)
 
 ## Fast paths
 - Validate: `make validate`
@@ -28,6 +29,7 @@ This repository is the non-secret source of truth for:
 - `SECURITY.md`
 - `MANIFEST.yaml`
 - `CHANGELOG.md`
+- `docs/memory-operations.md`
 
 ## Skill Architecture (v3.2)
 All 36 skills hardened with enterprise standards:
@@ -71,4 +73,6 @@ See `config/README.md` for full documentation.
 - **v3.2** (2026-03-17): Skill hardening pass — added concrete examples, verification hooks, and reference files to all 36 skills. Enabled memory search. Net -830 lines with higher quality. 6 new reference files added.
 - **v3.1** (2026-03-16): Enterprise-grade workspace configuration — config templates, setup scripts
 - **v3** (2026-03-14): Major upgrade — 10 thin skills → 36 enterprise-grade with boundaries, output contracts, cross-references, workflow macros, quality scoring, auto-verification
+- **v2** (2026-03-06): Initial production curation — 10 skills in skills-approved/
+h boundaries, output contracts, cross-references, workflow macros, quality scoring, auto-verification
 - **v2** (2026-03-06): Initial production curation — 10 skills in skills-approved/
