@@ -56,6 +56,7 @@ Dispatch or run these layers:
 4. **Indexation / decay** — declining pages, page-2 opportunities, CTR failures (`seo-intelligence`)
 5. **Entity / GEO / AI visibility** — FAQ, comparison intent, answerability (`ai-visibility`, `schema-ops`)
 6. **Cluster / internal linking** — topical authority, orphan risk, cannibalization (`content-strategy-planning`, `seo-competitor-analysis`)
+7. **Money-page strength** — best pages, comparisons, reviews, monetization/EEAT/internal-link readiness (`seo-competitor-analysis`, `editorial-post-enhancement`)
 
 ## Director Workflow
 
@@ -111,6 +112,15 @@ Prioritize items with the highest combined score.
 - ❌ calling something “technical SEO” without evidence
 - ❌ giving 50 recommendations with no order of attack
 - ❌ auditing without a decisive next move
+- ❌ producing an audit queue that is too generic to execute immediately
+
+## Self-Correction Loop
+Before finalizing an audit, ask:
+1. Is the queue ranked well enough that execution can start immediately?
+2. Did money-page, EEAT, or internal-link opportunities get underweighted?
+3. Is this really an audit output, or does it still need synthesis?
+4. Did a weaker recommendation survive because it sounded good rather than because evidence supported it?
+5. What should become a reusable audit trigger or standard after this run?
 
 ## Self-Critique Scorecard (/25)
 1. **Coverage** (1-5): Were all meaningful audit layers included?

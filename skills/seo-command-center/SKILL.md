@@ -11,6 +11,16 @@ Orchestrate cross-cutting SEO work by routing requests to the right specialist s
 Orchestrates cross-cutting SEO work by routing to specialized skills.
 
 
+## Shared Doctrine References
+- `skills/shared/seo-aeo-geo-superpowers.md`
+- `skills/shared/seo-aeo-geo-checklist.md`
+- `skills/shared/seo-aeo-geo-research-workflow.md`
+- `skills/shared/seo-aeo-geo-scorecard.md`
+- `skills/shared/seo-feed-contracts.md`
+- `skills/shared/seo-winner-analysis.md`
+- `skills/shared/seo-citation-patterns.md`
+- `skills/shared/affiliate-monetization-doctrine.md`
+
 ## Enterprise Protocols (MANDATORY)
 
 Before executing, read `skills/shared/enterprise-protocol.md` and follow:
@@ -75,6 +85,9 @@ Master SEO skill for work that spans multiple areas:
 - **ALWAYS check for cannibalization** before content recommendations
 - **ALWAYS provide evidence** for findings
 - **ALWAYS include actionable fix recommendations**
+- **ALWAYS prefer answer-first, quotable, citation-ready structures** for AEO/GEO-sensitive work
+- **ALWAYS push toward one clear winner URL per intent cluster** when overlap exists
+- **ALWAYS require the post-keyword competitive blueprint** for serious new keyword/page recommendations: filtered SERP competitors, overlap subtopics, and backlink overlap targets
 - **NEVER report "SEO complete"** without crawling the site
 - **NEVER mix opinion with diagnosis**
 
@@ -124,6 +137,15 @@ This month: [medium priority]
 - ❌ Mixing opinion with diagnosis in the health score — separate factual findings from strategic recommendations
 - ❌ Orphaning tasks with no follow-up plan — every action item needs an owner and a deadline
 - ❌ Ignoring cannibalization checks before content recommendations — the #1 way to create new problems
+- ❌ Continuing a weak SEO workflow after evidence shows the wrong specialist was chosen
+
+## Self-Correction Loop
+After routing or running a multi-skill SEO workflow, ask:
+1. Did the chosen specialist actually match the problem?
+2. Did evidence contradict the initial hypothesis?
+3. Did this task need competitor-overlap/backlink-overlap logic but not get it?
+4. Should the workflow escalate to `site-audit-director`, `verification-runner`, or a specialist skill?
+5. What routing improvement should be recorded for next time?
 
 ## Self-Critique Scorecard (/25)
 Before claiming complete, score yourself:

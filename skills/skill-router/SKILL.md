@@ -93,7 +93,7 @@ Default execution mode:
 | "Parallel audit / parallel batch execution" | `parallel-execution-director` |
 | "Turn vague requests into an execution brief" | `task-intake-spec-writer` |
 | "Recover from failures / unstable systems / partial corruption" | `failure-recovery-director` |
-| "Run a full audit and output a prioritized action queue" | `site-audit-director` |
+| "Fragile custom page / repeated visual regressions / shell rewrite needed" | `browser-visual-ops` + `verification-runner` || "Run a full audit and output a prioritized action queue" | `site-audit-director` |
 | "Safely mutate many records in controlled waves" | `batch-mutation-controller` |
 | "Clean duplicate/broken content structures" | `content-integrity-cleanup` |
 | "Improve automatic skill activation / trigger policy" | `skill-trigger-engine` |
@@ -106,6 +106,7 @@ Default execution mode:
 | "Host/publish files" | `here-now` |
 | "Edit/improve existing copy" | `copy-editing-sweeps` |
 | "Full SEO operations" | `seo-command-center` |
+| "Screenshots / visual QA / browser automation / DOM inspect" | `browser-visual-ops` |
 
 ## 2. Route by Site (All Managed Sites)
 
@@ -184,6 +185,13 @@ seo-audit-playbook → content-strategy-planning → conversion-copywriting → 
 ## API-First Routing Rule
 
 When a routed skill can complete work through APIs or structured file operations, prefer that route over browser/manual flows and apply `skills/api-efficiency-protocol.md`.
+
+## Visual Verification Rule
+
+For any request involving visual layout, styling, screenshots, "looks broken", mobile/desktop QA, or UI flows:
+1. route to `browser-visual-ops` first or immediately after the edit skill
+2. capture desktop + mobile artifacts before claiming success
+3. if screenshots contradict source-level assumptions, trust the screenshots
 
 ## 5. Token Optimization
 

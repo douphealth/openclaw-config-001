@@ -1,0 +1,9 @@
+{
+  "name": "browser-visual-ops",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "playwright": "^1.54.2"
+  }
+}
