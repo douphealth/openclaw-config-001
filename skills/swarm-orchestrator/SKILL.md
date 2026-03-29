@@ -10,6 +10,10 @@ Coordinate complex work through a director/worker/verifier model so throughput i
 
 Enterprise orchestration system for coordinating complex work through a director/worker/verifier pattern so execution scales without losing QA.
 
+For long unattended workloads, this skill should assume fresh-run restarts are normal and design work packages so they can resume from task state, outputs, and ledgers instead of depending on one giant context window.
+
+Adopt strong orchestration patterns inspired by modern workflow systems: deterministic role separation, pipeline-style execution stages, verification gates, retry discipline, and resumable worker waves instead of fragile one-shot runs.
+
 ## Decision Tree: Swarm or Single Thread?
 
 ```
@@ -41,6 +45,11 @@ Task received
 For serious work, also follow:
 - `skills/shared/openclaw-superpowers.md`
 - `skills/shared/superpower-checklist.md`
+- `skills/shared/worker-ownership-standard.md`
+- `skills/shared/deterministic-workflow-standard.md`
+- `skills/shared/role-phase-execution-model.md`
+- `skills/shared/response-excellence-standard.md`
+- `skills/shared/skill-efficiency-standard.md`
 
 Default execution mode:
 1. clarify/spec first if ambiguous
@@ -115,6 +124,13 @@ VERIFICATION: [how completion will be verified]
 
 ### 3. Execution Patterns
 
+Prefer explicit stage flows such as:
+- plan → setup → implement → verify → test → review
+- triage → investigate → fix → verify
+- scan → prioritize → setup → fix → verify → test
+
+Use the lightest workflow that preserves quality, but keep the stage order deterministic.
+
 **Pattern A: Parallel Dispatch (independent tasks)**
 ```
 Director → Worker 1 (task A)
@@ -157,6 +173,8 @@ Define these BEFORE launching workers:
 | **Failure threshold** | How many failed workers = abort |
 | **Timeout** | Max wait time before escalating |
 | **Verification method** | How the verifier will check work |
+| **Task-state marker** | How the unit is labeled externally (`not started` / `in progress` / `blocked` / `done`) |
+| **Restart rule** | How a fresh rerun determines whether to skip, resume, or retry the unit |
 
 ### 5. Director Output Format
 
@@ -169,6 +187,7 @@ Always return this structure:
 - Task: [what was being done]
 - Decomposition: [how it was split]
 - Workers: [count and assignments]
+- Restart model: [direct / resumable / looped / persistent]
 
 ### Workers Launched
 | Worker | Task | Status | Duration |
@@ -176,6 +195,13 @@ Always return this structure:
 | W1 | [task] | ✅ Complete | 2m |
 | W2 | [task] | ✅ Complete | 3m |
 | W3 | [task] | ❌ Failed | 1m |
+
+### Task State
+- Done: [units]
+- In progress: [units]
+- Blocked: [units]
+- Next pending: [units]
+- Iteration/wave: [n]
 
 ### Blockers
 - [Any blockers encountered and how resolved]

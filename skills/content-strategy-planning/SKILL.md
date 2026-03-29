@@ -8,6 +8,13 @@ description: Enterprise content strategy, topic cluster design, and editorial pl
 ## Purpose
 Design content systems that drive traffic, leads, and authority through structured topic clusters, not random publishing.
 
+This skill should generate implementation-grade editorial queues: what to publish first, why it matters, what depends on what, what proof marks success, and how the backlog can be continued across fresh runs without re-planning from scratch.
+
+
+## Shared Doctrine References
+- `skills/shared/seo-aeo-geo-superpowers.md`
+- `skills/shared/seo-aeo-geo-checklist.md`
+- `skills/shared/seo-aeo-geo-research-workflow.md`
 
 ## Enterprise Protocols (MANDATORY)
 
@@ -25,6 +32,11 @@ Before executing, read `skills/shared/enterprise-protocol.md` and follow:
 For complex or high-risk work, also follow:
 - `skills/shared/openclaw-superpowers.md`
 - `skills/shared/superpower-checklist.md`
+- `skills/shared/execution-queue-standard.md`
+- `skills/shared/response-excellence-standard.md`
+- `skills/shared/skill-efficiency-standard.md`
+- `skills/shared/premium-human-content-standard.md`
+- `skills/shared/flagship-article-rebuild-standard.md`
 
 Default execution mode:
 1. clarify/spec first if ambiguous
@@ -162,10 +174,10 @@ Before claiming complete, score yourself:
 **Target: 22+/25**
 
 ## Output Contract
-**Artifact**: Content strategy document with topic clusters, calendar, and measurement plan
+**Artifact**: Content strategy document with topic clusters, calendar, measurement plan, and prioritized execution queue
 **Evidence**: Keyword research data, competitor gap analysis, topic cluster map
 **Decision**: Editorial calendar approved for publishing
-**Next**: Begin writing pillar content, then highest-priority cluster articles
+**Next**: Begin with the highest-priority cluster/pillar work and track queue state explicitly
 
 ## Performance Optimizations
 

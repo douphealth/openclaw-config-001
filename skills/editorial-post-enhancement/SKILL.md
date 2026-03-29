@@ -8,7 +8,15 @@ description: Enterprise blog post audit and enhancement. Use when upgrading a pu
 ## Purpose
 Upgrade an existing article into a stronger ranking and user-experience asset without breaking WordPress rendering, existing metadata, internal links, schema layers, or site templates. This skill covers editorial improvement plus production-safe publishing discipline.
 
+For serious content programs, this skill should not just improve copy. It should sequence the work intelligently: audit first, identify the highest-value weaknesses, prepare a coherent replacement, validate the result, and leave enough state that the next run can continue through the backlog without rethinking the entire editorial strategy.
+
 ## Shared Doctrine References
+- `skills/shared/seo-aeo-geo-superpowers.md`
+- `skills/shared/seo-aeo-geo-checklist.md`
+- `skills/shared/seo-aeo-geo-research-workflow.md`
+- `skills/shared/seo-aeo-geo-scorecard.md`
+- `skills/shared/premium-human-content-standard.md`
+- `skills/shared/flagship-article-rebuild-standard.md`
 - `skills/shared/wordpress/verification-ladder.md`
 - `skills/shared/wordpress/cache-plugin-gotchas-matrix.md`
 - `skills/shared/wordpress/rollback-recovery-protocol.md`
@@ -31,6 +39,10 @@ Before executing, read `skills/shared/enterprise-protocol.md` and follow:
 For complex or high-risk work, also follow:
 - `skills/shared/openclaw-superpowers.md`
 - `skills/shared/superpower-checklist.md`
+- `skills/shared/autonomous-task-state-standard.md`
+- `skills/shared/validation-gate-standard.md`
+- `skills/shared/response-excellence-standard.md`
+- `skills/shared/skill-efficiency-standard.md`
 
 Default execution mode:
 1. clarify/spec first if ambiguous
@@ -67,7 +79,7 @@ Default execution mode:
 
 ## Core Framework
 ### 1. Audit before touching content
-Check for weak headline structure, thin sections, stale entities, weak internal links, poor FAQ coverage, image gaps, and fragile WordPress markup.
+Check for weak headline structure, thin sections, stale entities, weak internal links, poor FAQ coverage, image gaps, fragile WordPress markup, slug/topic mismatch, CTA overload, low content-to-noise ratio, and whether the article is so weak that it needs a flagship rebuild rather than a refresh.
 
 ### 2. Preserve publish-safe structure
 - Keep Gutenberg block comments intact
@@ -77,12 +89,22 @@ Check for weak headline structure, thin sections, stale entities, weak internal 
 
 ### 3. Upgrade the content
 Typical enhancement layers:
-- stronger intro / TL;DR
+- stronger intro / TL;DR / quick-answer block near the top
 - cleaner H2/H3 structure
 - missing topic depth and entity coverage
 - internal links distributed through the full article
 - tables, FAQs, examples, and useful media
 - stronger meta assets if this skill owns them for the task
+- PAA-style question coverage for the target query family
+- clearer quotable answer blocks for AI extraction
+- fewer low-value visual interruptions and cleaner HTML flow
+- stronger excerpt quality for search and AI surfaces
+- snippet-length FAQ expansion, not one-line throwaway answers
+- bolding of key entities on first meaningful use when it improves scanability
+- cluster-correct related guides instead of loose adjacent-topic links
+- explicit review of CTA overload and content-to-noise ratio
+- References section with high-quality clickable resources where appropriate
+- stronger premium HTML composition using safe modern callouts, summary cards, and better section rhythm
 
 ### 4. Handle WordPress publishing rigor
 - Confirm whether Yoast/Rank Math/custom meta already controls title, description, schema, or breadcrumbs
@@ -97,6 +119,7 @@ For live posts, verify:
 - meta/schema ownership boundaries
 - mobile readability
 - no broken shortcode/block output after publish
+- whether visible title/excerpt/content improvements also propagate to the live search-facing layer or remain blocked behind a separate SEO-meta owner
 
 ### 6. Batch refresh pattern
 For multiple posts:
@@ -104,6 +127,7 @@ For multiple posts:
 - group by template/rendering type
 - batch similar fixes
 - verify samples from each pattern before rolling wider
+- maintain per-post status markers and publish-validation rules so a fresh rerun can continue the queue cleanly
 
 ## Performance Optimizations
 ### Speed Multipliers
@@ -118,6 +142,14 @@ For multiple posts:
 **Evidence**: Before/after summary plus rendered-output verification
 **Decision**: Publish-ready / needs schema help / needs deeper WP implementation support
 **Next**: Publish or hand off to `schema-ops`, `wp-rest-api-mastery`, or `auto-verification` as needed
+
+For premium article work, include or explicitly decide:
+- title tag
+- meta description
+- slug recommendation
+- schema recommendations
+- internal linking opportunities
+- cluster-post opportunities where relevant
 
 ## Anti-Patterns
 - ❌ Rewriting directly in production without capturing the original content

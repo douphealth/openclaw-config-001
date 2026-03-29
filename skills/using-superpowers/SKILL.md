@@ -22,13 +22,21 @@ Force OpenClaw into a higher-quality operating mode for serious work. This skill
 For serious work, also follow:
 - `skills/shared/openclaw-superpowers.md`
 - `skills/shared/superpower-checklist.md`
+- `skills/shared/worker-ownership-standard.md`
+- `skills/shared/restartable-job-template.md`
+- `skills/shared/role-phase-execution-model.md`
+- `skills/shared/repo-adoption-checklist.md`
+- `skills/shared/response-excellence-standard.md`
+- `skills/shared/skill-efficiency-standard.md`
 
 Default execution mode:
 1. clarify/spec first if ambiguous
 2. write a short plan before large execution
-3. dispatch parallel workers for independent subtasks when safe
-4. review output for spec compliance and quality
-5. verify in reality before claiming complete
+3. choose the strongest execution shape: direct, specialist chain, director-worker-verifier, or persistent long-run loop
+4. dispatch parallel workers for independent subtasks when safe
+5. make long-running work restartable with external state, checkpoints, and validation gates
+6. review output for spec compliance and quality
+7. verify in reality before claiming complete
 
 ## When to Use
 - The request is ambiguous, high-stakes, or cross-functional
@@ -68,6 +76,8 @@ Create a short plan with:
 - safe parallelizable work
 - rollback/backup points
 - verification checkpoints
+- whether the job should be restartable across fresh runs
+- what task-state markers and output locations will carry continuity
 
 ### 3. Dispatch Intelligently
 Use parallel workers only where independence is real.
@@ -79,11 +89,21 @@ Safe to parallelize:
 - diffing
 - verification on separate targets
 - independent site/post batches
+- specialist roles such as researcher / implementer / verifier
 
 Unsafe to parallelize blindly:
 - overlapping writes to same object
 - mutations that depend on prior unstable state
 - destructive actions without isolation
+
+### 4. Make It Restartable
+When the work may run for many minutes, hours, or days:
+- externalize the task list
+- use explicit status markers (`not started` / `in progress` / `blocked` / `done`)
+- store outputs in predictable paths
+- define stop conditions and max-iteration guards
+- require validation before marking a task complete
+- assume a fresh run should be able to continue from files and ledgers alone
 
 ### 4. Two-Stage Review
 Before completion:

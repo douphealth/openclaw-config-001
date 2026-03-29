@@ -6,9 +6,9 @@ description: Use FIRST when unsure which skill to use, when a task spans multipl
 # Skill Router
 
 ## Purpose
-Route work to the most specific useful skill, avoid overlap, and minimize token waste from loading the wrong playbook.
+Route work to the most specific useful skill, avoid overlap, minimize token waste, and choose the strongest execution shape for the task.
 
-Intelligent routing layer that maps tasks to optimal skills, prevents overlap confusion, and enables multi-skill workflows with minimal token waste.
+Intelligent routing layer that maps tasks to optimal skills, prevents overlap confusion, enables multi-skill workflows with minimal token waste, and decides when specialist workers should be spawned for higher quality, speed, or endurance.
 
 ## Decision Tree: How to Route?
 
@@ -39,13 +39,36 @@ Task or request received
 For serious work, also follow:
 - `skills/shared/openclaw-superpowers.md`
 - `skills/shared/superpower-checklist.md`
+- `skills/shared/worker-ownership-standard.md`
+- `skills/shared/deterministic-workflow-standard.md`
+- `skills/shared/role-phase-execution-model.md`
+- `skills/shared/repo-adoption-checklist.md`
+- `skills/shared/response-excellence-standard.md`
+- `skills/shared/skill-efficiency-standard.md`
 
 Default execution mode:
 1. clarify/spec first if ambiguous
 2. write a short plan before large execution
-3. dispatch parallel workers for independent subtasks when safe
-4. review output for spec compliance and quality
-5. verify in reality before claiming complete
+3. decide whether the task should remain direct or be decomposed into specialist workers
+4. dispatch parallel workers for independent subtasks when safe
+5. make long-running work resumable with checkpoints/state when needed
+6. review output for spec compliance and quality
+7. verify in reality before claiming complete
+
+## Autonomous Routing Rule
+For meaningful tasks, do not default to single-threaded monolithic execution by habit.
+
+If any of these are true, strongly prefer specialist-worker orchestration:
+- the work spans multiple systems, files, or skills
+- the work mixes research + execution + verification
+- the work may take more than a few minutes
+- the work touches production or user-facing assets
+- quality materially benefits from separate researcher / implementer / verifier roles
+- the user explicitly wants maximum autonomy, quality, or speed
+
+Default bias:
+- tiny + obvious task -> direct execution
+- meaningful + multi-step task -> route, decompose, and use specialist workers
 
 ## When to Use
 
@@ -93,7 +116,7 @@ Default execution mode:
 | "Parallel audit / parallel batch execution" | `parallel-execution-director` |
 | "Turn vague requests into an execution brief" | `task-intake-spec-writer` |
 | "Recover from failures / unstable systems / partial corruption" | `failure-recovery-director` |
-| "Run a full audit and output a prioritized action queue" | `site-audit-director` |
+| "Fragile custom page / repeated visual regressions / shell rewrite needed" | `browser-visual-ops` + `verification-runner` || "Run a full audit and output a prioritized action queue" | `site-audit-director` |
 | "Safely mutate many records in controlled waves" | `batch-mutation-controller` |
 | "Clean duplicate/broken content structures" | `content-integrity-cleanup` |
 | "Improve automatic skill activation / trigger policy" | `skill-trigger-engine` |
@@ -102,10 +125,14 @@ Default execution mode:
 | "Bootstrap a serious job with brief + ledger" | `job-bootstrapper` |
 | "Run a sitewide cleanup campaign" | `site-cleanup-operator` |
 | "Manage memory/notes" | `memory-operations` |
+| "Run premium review / QA / release gate on meaningful work" | `premium-review-director` → `premium-qa-orchestrator` → `premium-release-gate` |
+| "Promote reusable patterns after serious work" | `memory-operations` + `ops/macros/self-improvement-promotion.md` |
+| "Adopt ideas from external repos/frameworks surgically" | `repo-integration-architect` |
 | "Create/edit skills" | `skill-authoring-standard` |
 | "Host/publish files" | `here-now` |
 | "Edit/improve existing copy" | `copy-editing-sweeps` |
 | "Full SEO operations" | `seo-command-center` |
+| "Screenshots / visual QA / browser automation / DOM inspect" | `browser-visual-ops` |
 
 ## 2. Route by Site (All Managed Sites)
 
@@ -145,7 +172,12 @@ email-marketing-engine → lifecycle-email-sequences → tracking-measurement
 
 ### Site Launch
 ```
-launch-readiness-audit → money-path-verification → tracking-measurement → notification-engine
+launch-readiness-audit → money-path-verification → tracking-measurement → notification-engine → premium-qa-orchestrator → premium-release-gate
+```
+
+### Premium Delivery
+```
+premium-review-director → premium-qa-orchestrator → premium-release-gate
 ```
 
 ### Content Refresh
@@ -184,6 +216,13 @@ seo-audit-playbook → content-strategy-planning → conversion-copywriting → 
 ## API-First Routing Rule
 
 When a routed skill can complete work through APIs or structured file operations, prefer that route over browser/manual flows and apply `skills/api-efficiency-protocol.md`.
+
+## Visual Verification Rule
+
+For any request involving visual layout, styling, screenshots, "looks broken", mobile/desktop QA, or UI flows:
+1. route to `browser-visual-ops` first or immediately after the edit skill
+2. capture desktop + mobile artifacts before claiming success
+3. if screenshots contradict source-level assumptions, trust the screenshots
 
 ## 5. Token Optimization
 
@@ -238,12 +277,22 @@ No skill matches the task
 | Missing site context | Suboptimal skill combos | Check "Route by Site" table first |
 | Loading multiple skills upfront | Token waste, context confusion | Load sequentially, one at a time |
 
+## Execution Shape Decision
+After routing, decide one of these explicitly:
+1. **Direct** — one clear skill, low risk, short runtime
+2. **Sequential specialist chain** — multiple skills, but little benefit from concurrency
+3. **Director-worker-verifier** — complex or high-value work where separation improves quality
+4. **Persistent long-run** — resumable work that may run for hours/days with state and retries
+
+Pick the lightest shape that still preserves quality, but do not under-decompose serious tasks.
+
 ## Verification Steps
 
 1. Confirm the routed skill's description matches the task
 2. Check that no more specific skill exists for the task
 3. If multi-skill workflow, confirm the order is logical
-4. After skill work completes, update `memory/` if learnings worth keeping
+4. Confirm whether worker decomposition would improve speed, quality, or robustness
+5. After skill work completes, update `memory/` if learnings worth keeping
 
 
 ## Self-Critique Scorecard (/25)
@@ -342,6 +391,9 @@ Task completed
 | 100+ posts | concurrent.futures + subagents | 8x |
 | Multi-site ops | One worker per site | 10x |
 | Research + execute | Subagent for research, main for execution | 3x |
+| Research + implement + verify | Director-worker-verifier | 4x |
+| Long-running audit/repair | Persistent thread/session + checkpoints | durability > raw speed |
+| Production content/system upgrade | Research worker + mutation worker + verifier worker | higher quality, lower rollback risk |
 
 ---
 *Last updated: 2026-03-18 | 42 skills routed | 10 workflows defined*
