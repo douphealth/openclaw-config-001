@@ -241,13 +241,13 @@ policies:
 
 requirements:
   every_skill_must_have:
-    - SKILL.md with frontmatter
-    - "## Do NOT Use This For" boundary section
-    - "## Output Contract" section
+    - "SKILL.md with frontmatter"
+    - "## Do NOT Use This For boundary section"
+    - "## Output Contract section"
   recommended:
-    - scripts/ directory for repeatable work
-    - references/ directory for detailed patterns
-    - Cross-references (→) to related skills
+    - "scripts/ directory for repeatable work"
+    - "references/ directory for detailed patterns"
+    - "Cross-references (→) to related skills"
 
 routing:
   active_path: skills-approved/

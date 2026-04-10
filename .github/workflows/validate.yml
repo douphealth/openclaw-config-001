@@ -12,34 +12,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Check required files
-        run: |
-          for f in README.md RECOVERY.md OPERATIONS.md SECURITY.md MANIFEST.yaml Makefile; do
-            test -f "$f" || { echo "MISSING: $f"; exit 1; }
-          done
-          echo "All required files present"
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
 
-      - name: Check required dirs
-        run: |
-          for d in scripts docs skills-approved skills-archive; do
-            test -d "$d" || { echo "MISSING DIR: $d"; exit 1; }
-          done
-          echo "All required dirs present"
+      - name: Install validation dependency
+        run: python -m pip install --quiet pyyaml
 
-      - name: Check no secrets leaked
-        run: |
-          if grep -RInE '(OPENAI_API_KEY=sk-|BEGIN PRIVATE KEY|xoxb-[A-Za-z0-9])' . --exclude-dir=.git --exclude=.env.example; then
-            echo "SECRET DETECTED - failing"
-            exit 1
-          fi
-          echo "No secrets detected"
-
-      - name: Check approved skills exist
-        run: |
-          for s in openai-codex-orchestrator blog-master wordpress seo-research-master technical-seo-checker keyword-intelligence-os wp-reliability-ops git-sync grounding-compliance-os automation-ops; do
-            test -d "skills-approved/$s" || { echo "MISSING: $s"; exit 1; }
-          done
-          echo "All approved skills present"
+      - name: Run repository validation
+        run: bash scripts/validate.sh
 
       - name: Audit SEO superpowers coverage
         shell: pwsh
